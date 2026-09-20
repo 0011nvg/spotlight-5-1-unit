@@ -1,39 +1,30 @@
-# SCHOOL MISSION — руководство преподавателя
+# Flight School — Spotlight 5 Module 1
 
-## Для кого курс
+## Format
+1 student + 1 tutor. A1 → A1+. Full Core Route is designed as two 55–65 minute sessions. Natural break: after Section 4 — Reading Radar.
 
-5 класс, примерный уровень A1. Формат — индивидуальное занятие с преподавателем. Один урок рассчитан примерно на 35–45 минут; открытые задания можно расширять устно.
+## Communicative outcome
+The learner can introduce themselves, talk about school subjects/objects and timetable, understand short school messages, write a short profile, and maintain a short supported conversation using Module 1 language.
 
-## Маршрут курса
+## Language
+- school subjects and school objects
+- days of the week
+- numbers 11–20
+- greetings and introductions
+- a / an
+- personal pronouns
+- verb to be: affirmative, negative, questions, short answers
+- capital letters
+- pronunciation focus: /eɪ/, /æ/, /θ/
 
-1. **1A School Mission Control** — школьные предметы, дни недели, школьные принадлежности, `a/an`, собственное расписание.
-2. **1B First-Day Radio Check** — числа 11–20, знакомство, личные местоимения, формы `be`, fact file.
-3. **1C Subject Garage** — любимые предметы, анкета, заглавные буквы, мини-профиль собеседника.
-4. **1D Education Flight Map** — этапы образования в Англии, возраст, аккуратное сравнение систем.
-5. **E1 Greeting Signals** — приветствия и прощания по ситуации, мини-диалоги, `/eɪ/`, `/æ/`, `/θ/`.
-6. **AC1 Collie Team Protocol** — правила совместной работы и вежливый classroom language.
-7. **Mission Checkpoint** — Vocabulary, Grammar, Use in Context, Mixed Challenge и итоговое speaking.
+## Method
+Context → notice → understand → controlled practice → retrieval/play → personalise → communicate → reflect. Vocabulary is recycled through recognition, recall, contextual use and memory. Grammar moves from guided discovery to speaking. Reading/listening use prediction → gist → detail → response. Open writing/speaking is not auto-marked; use the checklist and tutor feedback.
 
-## Как проводить урок
+## Aviation layer
+Aviation is motivational context, not fake ATC training. The lesson explicitly distinguishes general English foundations from specialist aviation phraseology. The ICAO link in the page is optional enrichment only.
 
-Идите по этапам слева направо: Start → Vocab Lab → Context → Grammar/Language Lab → Use It → Challenge. В блоках **Use It** ученик сначала открывает опору, затем старается повторить задание без модели. После ответа задайте один естественный follow-up question.
+## Reset
+Use **New student** in the sticky header. It clears this lesson's locally stored answers, progress, random challenge, transcript state, tutor note and legacy score keys.
 
-Vocabulary Hub подходит для разминки, домашнего повторения и начала следующего урока. Режим **My difficult words** использует текущий Mistake Bank ученика.
-
-## Teacher Mode
-
-Кнопка Teacher на dashboard открывает:
-
-- статус и баллы по урокам;
-- текущий Mistake Bank;
-- правильные ответы к ошибочным заданиям;
-- быстрый переход к любому уроку;
-- защищённый подтверждением Reset Student.
-
-## Reset Student
-
-Перед другим учеником откройте Teacher Mode → Reset Student → подтвердите Reset. Очищаются ответы, баллы, completed lessons, текущий урок, checkpoint и Mistake Bank.
-
-## Открытые ответы
-
-В заданиях Use It возможны разные корректные ответы. Оценивайте: понятность, употребление target language и наличие личной детали. Не исправляйте все ошибки сразу; выберите одну целевую.
+## Audio
+Listening uses the browser's installed English speech voice (preferably en-GB). If Web Speech is unavailable, the tutor can read the provided script; the lesson remains usable.
