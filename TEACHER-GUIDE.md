@@ -28,3 +28,6 @@ Use **New student** in the sticky header. It clears this lesson's locally stored
 
 ## Audio
 Listening uses the browser's installed English speech voice (preferably en-GB). If Web Speech is unavailable, the tutor can read the provided script; the lesson remains usable.
+
+## Russian support layer
+Instructions, hints, strategy notes, feedback and self-study guidance are in Russian so the learner can revise independently. Target vocabulary, grammar examples, listening text, reading text and speaking models remain in English. This keeps the site anchored to Spotlight 5 Module 1 while lowering unnecessary instruction-language difficulty.
