@@ -164,7 +164,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
   <div class="wrap topin">
     <div class="brand">FLIGHT <b>SCHOOL</b> / MODULE 1</div>
     <div class="progressTrack" aria-label="Core lesson progress"><div class="progressFill" id="progressFill"></div></div>
-    <div class="progressText"><span id="progressText">0 / 18</span> cleared</div>
+    <div class="progressText"><span id="progressText">0 / 30</span> cleared</div>
     <button class="iconBtn" id="resetBtn" type="button">New student</button>
   </div>
 </header>
@@ -199,7 +199,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
   <div class="panel">
     <div class="eyebrow">Mission briefing</div>
     <h2>From textbook language to confident use.</h2>
-    <p><b>Core route:</b> about 60–70 minutes with a tutor. <b>Extra Runway:</b> optional practice for a longer lesson or homework.</p>
+    <p><b>Full core route:</b> designed as two 55–65 minute sessions. A natural stop is after Reading Radar (Section 4). <b>Extra Runway:</b> optional practice or homework.</p>
     <p><b>By the end, you can:</b> talk about school subjects and objects; use numbers 11–20 and days; introduce yourself; use <i>a/an</i>, pronouns and <i>to be</i>; understand short school texts and audio; write a clear profile; hold a short conversation without reading a script.</p>
   </div>
   <div class="panel pilotNote">
@@ -695,7 +695,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="feedback" aria-live="polite"></div>
     </article>
 
-    <article class="task yellow" data-task-id="writing-final" data-core="true" data-open="true">
+    <article class="task yellow" data-task-id="writing-final" data-core="true" data-open="true" data-min-words="35">
       <div class="label">Writing • Your cadet profile</div>
       <h3>Write 6–8 sentences</h3>
       <p>Include your <b>name, age, class, favourite subject, one school day, 2–3 school objects</b> and one sentence about your future or interests.</p>
@@ -801,7 +801,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     <div class="eyebrow">Flight log complete</div>
     <h2>CLEAR ENGLISH.<br>STRONG FOUNDATION.</h2>
     <p style="max-width:780px;font-size:1.08rem">The goal is not a perfect first attempt. The goal is to recognise the language, retrieve it, use it with support — and finally use it without the screen.</p>
-    <p><b id="finalProgress">0 of 18 Core checks cleared.</b></p>
+    <p><b id="finalProgress">0 of 30 Core checks cleared.</b></p>
   </div>
 </section>
 </main>
@@ -857,7 +857,16 @@ textarea{width:100%;resize:vertical;min-height:120px}
         task.setAttribute('data-complete','true');
       }
     });
+    document.querySelectorAll('.choice,.token').forEach(function(el){
+      var task=el.closest('.task');if(!task)return;
+      var k='choice:'+task.getAttribute('data-task-id')+':'+norm(el.textContent);
+      if(state.values[k]==='1')el.classList.add('selected');
+    });
     if(state.random) document.getElementById('randomCard').textContent=state.random;
+    if((state.attempts['listening-main']||0)>0){
+      var tr=document.getElementById('transcript1');
+      if(tr){tr.removeAttribute('data-locked');tr.querySelector('summary').textContent='Transcript';}
+    }
     updateWordCount();
     render();
   }
@@ -908,10 +917,17 @@ textarea{width:100%;resize:vertical;min-height:120px}
     else setFeedback(task,'Not yet. You need exactly '+need+' school subjects.',false);
   }
   function clearTask(task){
-    task.querySelectorAll('[data-answer]').forEach(function(el){el.value='';el.classList.remove('answer-good','answer-bad');});
-    task.querySelectorAll('.choice.selected,.token.selected').forEach(function(el){el.classList.remove('selected');});
-    var mem=task.querySelector('[data-memory-answer]');if(mem)mem.value='';
+    task.querySelectorAll('[data-answer]').forEach(function(el){
+      el.value='';el.classList.remove('answer-good','answer-bad');
+      var k=el.getAttribute('data-save');if(k)state.values[k]='';
+    });
+    task.querySelectorAll('.choice.selected,.token.selected').forEach(function(el){
+      el.classList.remove('selected');
+      var k='choice:'+task.getAttribute('data-task-id')+':'+norm(el.textContent);delete state.values[k];
+    });
+    var mem=task.querySelector('[data-memory-answer]');if(mem){mem.value='';var mk=mem.getAttribute('data-save');if(mk)state.values[mk]='';}
     var f=task.querySelector('.feedback');if(f){f.textContent='';f.className='feedback';}
+    save();
   }
   function showHint(task){
     var hint=task.getAttribute('data-hint')||'Look at the model and try one item at a time.';
@@ -922,6 +938,12 @@ textarea{width:100%;resize:vertical;min-height:120px}
     var checks=[].slice.call(task.querySelectorAll('[data-open-check]'));
     var ok=checks.length===0||checks.every(function(c){return c.checked;});
     if(!ok){setFeedback(task,'Use the checklist first. When every point is true, ask your tutor for feedback.',false);return;}
+    var minWords=Number(task.getAttribute('data-min-words')||0);
+    if(minWords){
+      var ta=task.querySelector('textarea');
+      var words=ta?String(ta.value||'').trim().split(/\s+/).filter(Boolean).length:0;
+      if(words<minWords){setFeedback(task,'Write at least '+minWords+' words before the tutor check. You have '+words+'.',false);return;}
+    }
     setFeedback(task,'✓ Ready for tutor feedback. This task is complete — no automatic “correct/incorrect” score.',true);complete(task);
   }
   function speak(text){
@@ -986,6 +1008,8 @@ textarea{width:100%;resize:vertical;min-height:120px}
   }
   function modelToggle(task){
     var f=task.querySelector('.modelFeedback');if(!f)return;
+    var ta=task.querySelector('textarea');
+    if(ta&&String(ta.value||'').trim().length<20){setFeedback(task,'Rewrite the log first, then compare it with the model.',false);return;}
     f.hidden=!f.hidden;
     if(!f.hidden){f.className='feedback ok';complete(task);}
   }
@@ -1021,7 +1045,15 @@ textarea{width:100%;resize:vertical;min-height:120px}
 
   document.addEventListener('click',function(e){
     var btn=e.target.closest('button');if(!btn)return;
-    if(btn.classList.contains('choice')||btn.classList.contains('token')){btn.classList.toggle('selected');return;}
+    if(btn.classList.contains('choice')||btn.classList.contains('token')){
+      btn.classList.toggle('selected');
+      var taskForChoice=btn.closest('.task');
+      if(taskForChoice){
+        var choiceKey='choice:'+taskForChoice.getAttribute('data-task-id')+':'+norm(btn.textContent);
+        state.values[choiceKey]=btn.classList.contains('selected')?'1':'0';save();
+      }
+      return;
+    }
     if(btn.hasAttribute('data-say')){speak(btn.getAttribute('data-say'));return;}
     var action=btn.getAttribute('data-action');if(!action)return;
     var task=btn.closest('.task');
