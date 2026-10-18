@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#F7F4ED">
+<link rel="icon" href="favicon.svg">
 <title>Spotlight 5 · Modules 1 + 2 | Victoria English Studio</title>
-<meta name="description" content="A complete interactive Spotlight 5 Module 1 lesson: school vocabulary, numbers, days, a/an, pronouns, to be, reading, listening, writing and speaking — through a junior flight-school story.">
+<meta name="description" content="Spotlight 5 Modules 1 and 2: Flight School and World Collector. Interactive English lessons with games, reading, speaking, saved progress and tutor support.">
 <style>
 :root{
   --paper:#F7F4ED;--white:#fff;--ink:#111114;--muted:#68665f;
@@ -157,20 +158,28 @@ textarea{width:100%;resize:vertical;min-height:120px}
 }
 @media(max-width:430px){.choiceGrid,.sortCols{grid-template-columns:1fr}.hero h1{font-size:3.55rem}.sectionNo{font-size:3.2rem}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Whole-site audit: readability and small-screen resilience. */
+.task.blue .btn.ghost{color:#fff;border-color:#fff}.task.blue .btn.ghost:hover{background:#2927c9}.task .label{opacity:1}.feedback.ok{color:#124a32}.feedback.no{color:#761b18}.feedback.info{color:#2420a0}.blue .feedback.info{color:#fff}.yellow .micro{color:#48462f}.task.blue .micro{color:#fff}.task.blue .feedback.ok{color:#b9ffd8}.task.blue .feedback.no{color:#ffe1df}.task.blue .modelFeedback{color:#fff}.q input{min-width:0}.q select{width:auto;max-width:100%}.keksStrip img{width:86px;height:86px;object-fit:contain}.topbar a{color:inherit}.task[data-complete="true"]:after{content:'✓ Выполнено';display:block;font-size:.75rem;font-weight:850;margin-top:15px}.memoryTray.hiddenWords{color:var(--ink)}.finalBand .eyebrow{color:var(--yellow)}@media(max-width:720px){.task{min-width:0}.q{overflow-wrap:anywhere}.q input,.q select{max-width:100%}.route{gap:7px}.topin{gap:8px}.capTable{font-size:.85rem}}
+
+.skipLink{position:absolute;top:0;left:0;transform:translateY(-150%);background:#fff;color:#17171c;padding:12px;z-index:100}.skipLink:focus{transform:none}
+
+.task.pink .feedback,.task.pink .micro{color:#17171c}.pilotNote .eyebrow{color:#fff!important}.answer-good{outline-color:#124a32;background:#f1faf3}.answer-bad{outline-color:#761b18;background:#fff3f0}
 </style>
 </head>
 <body>
+<a class="skipLink" href="#module1">Перейти к уроку</a>
 <header class="topbar">
   <div class="wrap topin">
     <div class="brand">FLIGHT <b>SCHOOL</b> / MODULE 1</div>
     <div class="progressTrack" aria-label="Core lesson progress"><div class="progressFill" id="progressFill"></div></div>
-    <div class="progressText"><span id="progressText">0 / 30</span> cleared</div>
+    <div class="progressText"><span id="progressText">0 / 29</span> cleared</div>
     <button class="iconBtn" id="resetBtn" type="button">Новый ученик</button>
   </div>
 </header>
 
-<nav class="wrap" aria-label="Spotlight 5 modules" style="display:flex;gap:10px;flex-wrap:wrap;padding:18px 0"><a class="btn yellow" href="#module1" style="text-decoration:none">01 · Flight School</a><a class="btn blue" href="module2.html?v=5" style="text-decoration:none">02 · World Collector — NEW →</a></nav>
-<section class="wrap" id="module2" style="background:#3D3BFF;color:white;border:2px solid #111;border-radius:24px;padding:clamp(22px,4vw,42px);margin-bottom:20px"><div style="font-size:.75rem;letter-spacing:.15em;font-weight:850;color:#FFD400">NEW CHAPTER / SPOTLIGHT 5 · MODULE 2</div><h2 style="font-size:clamp(2.7rem,7vw,5.6rem);line-height:.95;letter-spacing:-.06em;margin:14px 0">WORLD COLLECTOR.</h2><p style="font-size:1.1rem;max-width:700px">Move objects. Pack a mission bag. Build a collection. Shop with £20.<br>Seven interactive missions — from countries to your final passport.</p><a class="btn yellow" href="module2.html?v=5" style="display:inline-flex;text-decoration:none">Открыть модуль 2 / Enter the mission →</a></section>
+<nav class="wrap" aria-label="Spotlight 5 modules" style="display:flex;gap:10px;flex-wrap:wrap;padding:18px 0"><a class="btn yellow" href="#module1" style="text-decoration:none">01 · Flight School</a><a class="btn blue" href="module2.html?v=6" style="text-decoration:none">02 · World Collector — NEW →</a></nav>
+<section class="wrap" id="module2" style="background:#3D3BFF;color:white;border:2px solid #111;border-radius:24px;padding:clamp(22px,4vw,42px);margin-bottom:20px"><div style="font-size:.75rem;letter-spacing:.15em;font-weight:850;color:#FFD400">NEW CHAPTER / SPOTLIGHT 5 · MODULE 2</div><h2 style="font-size:clamp(2.7rem,7vw,5.6rem);line-height:.95;letter-spacing:-.06em;margin:14px 0">WORLD COLLECTOR.</h2><p style="font-size:1.1rem;max-width:700px">Move objects. Pack a mission bag. Build a collection. Shop with £20.<br>Seven interactive missions — from countries to your final passport.</p><a class="btn yellow" href="module2.html?v=6" style="display:inline-flex;text-decoration:none">Открыть модуль 2 / Enter the mission →</a></section>
 <main id="module1">
 <section class="hero">
   <div class="wrap heroGrid">
@@ -229,7 +238,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
   <a href="#m6" data-stage-link="m6">06<br>Culture Route</a>
   <a href="#m7" data-stage-link="m7">07<br>Flight Log</a>
   <a href="#m8" data-stage-link="m8">08<br>Simulator</a>
-  <a href="#m9" data-stage-link="m9">09<br>Module 2 Lab</a>
+  <a href="module2.html?v=6">02<br>World Collector →</a>
 </nav>
 
 <section class="section" id="m1">
@@ -295,11 +304,11 @@ textarea{width:100%;resize:vertical;min-height:120px}
 
     <article class="task blue" data-task-id="vocab-memory" data-core="true" data-hint="Раздели слова в голове на две группы: школьные предметы и школьные вещи.">
       <div class="label">Игра на память • Black-box memory</div>
-      <h3>10 секунд. Потом вспоминай без подсказки.</h3>
+      <h3>Открой. Запомни. Закрой. Вспомни.</h3>
       <p>Открой «чёрный ящик», посмотри на восемь слов, затем закрой его и напиши <b>любые пять</b> по памяти.</p>
-      <div class="memoryTray" id="memoryTray">maths • atlas • science • ruler • history • notebook • art • timetable</div>
+      <div class="memoryTray hiddenWords" id="memoryTray" aria-hidden="true">maths • atlas • science • ruler • history • notebook • art • timetable</div>
       <div class="taskActions">
-        <button type="button" class="btn yellow" data-action="memory-start">Открыть на 10 секунд</button>
+        <button type="button" class="btn yellow" data-action="memory-toggle">Открыть / закрыть слова</button><button type="button" class="btn yellow" data-action="memory-start">Дополнительно: 10 секунд</button>
       </div>
       <label class="q" style="display:block">Твои пять слов:
         <input style="width:100%;margin-top:7px" data-save="m1-memory" data-memory-answer="maths|atlas|science|ruler|history|notebook|art|timetable" placeholder="word, word, word, word, word" autocomplete="off">
@@ -328,17 +337,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       </div>
       <div class="feedback" aria-live="polite"></div>
       <div class="keksStrip">
-        <svg viewBox="0 0 120 120" role="img" aria-labelledby="keksTitle1">
-          <title id="keksTitle1">Keks, the silver-grey tabby mascot, checking a flight tag</title>
-          <path d="M28 45 18 18 43 32M92 45l10-27-25 14" fill="#A7A6A0" stroke="#111" stroke-width="4" stroke-linejoin="round"/>
-          <ellipse cx="60" cy="63" rx="39" ry="36" fill="#A7A6A0" stroke="#111" stroke-width="4"/>
-          <path d="M45 38 51 25 60 38 69 25 75 38" fill="none" stroke="#3D3A39" stroke-width="5" stroke-linecap="round"/>
-          <path d="M30 55 44 58M30 66 44 65M90 55 76 58M90 66 76 65" stroke="#3D3A39" stroke-width="4" stroke-linecap="round"/>
-          <ellipse cx="47" cy="60" rx="7" ry="8" fill="#C6CF63" stroke="#111" stroke-width="3"/><ellipse cx="73" cy="60" rx="7" ry="8" fill="#C6CF63" stroke="#111" stroke-width="3"/>
-          <path d="M53 75q7 8 14 0" fill="#E9E3D8" stroke="#111" stroke-width="3"/><path d="m60 70 5 4-5 4-5-4z" fill="#A97272" stroke="#111" stroke-width="2"/>
-          <path d="M41 78 18 73M42 84 17 86M79 78l23-5M78 84l25 2" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
-          <path d="M35 96q25 11 50 0l-4 16H39z" fill="#3D3BFF" stroke="#111" stroke-width="3"/>
-        </svg>
+        <img src="assets/keks-travel.webp" width="86" height="86" alt="Кекс — фирменный полосатый кот Виктории с синим платком">
         <div><b>Кекс подсказывает:</b> «Смотри не на букву, а на первый звук слова».<br><span class="micro">Так легче правильно выбирать <i>a/an</i>.</span></div>
       </div>
     </article>
@@ -401,7 +400,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="model">On Monday, I have … &nbsp; / &nbsp; On …, I have …</div>
       <div class="tutorStrip">
         <div><b>УЧИТЕЛЬ СПРОСИТ</b>Which day is your busiest?</div>
-        <div><b>СПРОСИ УЧИТЕЛЯ</b>What was your favourite school day?</div>
+        <div><b>СПРОСИ УЧИТЕЛЯ</b>What is your favourite day of the week?</div>
         <div><b>ДОП. ВЫЗОВ</b>Назови дни недели в обратном порядке — с Sunday.</div>
       </div>
       <div class="checklist">
@@ -446,7 +445,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="q">С <b>you / we / they</b> используй <select data-answer="are" data-save="m3-not3"><option value="">—</option><option>am</option><option>is</option><option>are</option></select>.</div>
       <div class="taskActions"><button type="button" class="btn blue" data-action="check-inputs">Проверить правило</button><button type="button" class="btn ghost" data-action="hint">Подсказка</button></div>
       <div class="feedback" aria-live="polite"></div>
-      <details class="support"><summary>Форма + полезное произношение</summary><div><b>I’m, you’re, he’s, she’s, it’s, we’re, they’re</b> часто используются в обычной речи. В коротком ответе лучше говорить <i>Yes, I am</i>, а не <i>Yes, I’m</i>.</div></details>
+      <details class="support"><summary>Форма + полезное произношение</summary><div><b>I’m, you’re, he’s, she’s, it’s, we’re, they’re</b> часто используются в обычной речи. В утвердительном коротком ответе говори <i>Yes, I am</i>, а не <i>Yes, I’m</i>.</div></details>
     </article>
 
     <article class="task yellow" data-task-id="pronouns" data-core="true" data-hint="Один человек или предмет → he, she или it; два и больше человека → they; Sue and I → we.">
@@ -466,7 +465,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="q">I <select data-answer="am" data-save="m3-b1"><option value="">—</option><option>am</option><option>is</option><option>are</option></select> eleven.</div>
       <div class="q">They <select data-answer="are" data-save="m3-b2"><option value="">—</option><option>am</option><option>is</option><option>are</option></select> in Room 17.</div>
       <div class="q">She <select data-answer="is" data-save="m3-b3"><option value="">—</option><option>am</option><option>is</option><option>are</option></select> my friend.</div>
-      <div class="q">We <select data-answer="aren't|are not" data-save="m3-b4"><option value="">—</option><option>isn't</option><option>aren't</option><option>am not</option></select> in Year 7.</div>
+      <div class="q">We <select data-answer="aren't|are not" data-save="m3-b4"><option value="">—</option><option>isn't</option><option>aren't</option><option>am not</option></select> in Class 7A.</div>
       <div class="q">It <select data-answer="isn't|is not" data-save="m3-b5"><option value="">—</option><option>isn't</option><option>aren't</option><option>am not</option></select> my ruler.</div>
       <div class="taskActions"><button type="button" class="btn blue" data-action="check-inputs">Проверить</button><button type="button" class="btn ghost" data-action="hint">Подсказка</button><button type="button" class="btn ghost" data-action="clear">Попробовать ещё раз</button></div>
       <div class="feedback" aria-live="polite"></div>
@@ -475,7 +474,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     <article class="task pink" data-task-id="be-questions" data-core="true" data-hint="В вопросе am / is / are ставим перед подлежащим. В коротком ответе повторяем ту же форму to be.">
       <div class="label">Вопросы и короткие ответы • Radio questions</div>
       <h3>Составь вопрос и ответ</h3>
-      <div class="q"><select data-answer="Are" data-save="m3-q1"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> you in Year 5? — Yes, I <select data-answer="am" data-save="m3-q2"><option value="">—</option><option>am</option><option>is</option><option>are</option></select>.</div>
+      <div class="q"><select data-answer="Are" data-save="m3-q1"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> you in Class 5B? — Yes, I <select data-answer="am" data-save="m3-q2"><option value="">—</option><option>am</option><option>is</option><option>are</option></select>.</div>
       <div class="q"><select data-answer="Is" data-save="m3-q3"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> she new? — No, she <select data-answer="isn't|is not" data-save="m3-q4"><option value="">—</option><option>isn't</option><option>aren't</option><option>am not</option></select>.</div>
       <div class="q"><select data-answer="Are" data-save="m3-q5"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> they in Room 15? — Yes, they <select data-answer="are" data-save="m3-q6"><option value="">—</option><option>am</option><option>is</option><option>are</option></select>.</div>
       <div class="taskActions"><button type="button" class="btn primary" data-action="check-inputs">Проверить</button><button type="button" class="btn ghost" data-action="hint">Подсказка</button><button type="button" class="btn ghost" data-action="clear">Попробовать ещё раз</button></div>
@@ -486,7 +485,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="label">От тренировки к говорению</div>
       <h3>Интервью с напарником</h3>
       <p>Раунд 1: ответь на вопросы учителя. Раунд 2: задай учителю <b>три</b> своих вопроса. Раунд 3: попробуй без образца.</p>
-      <div class="model">Are you eleven? • Are you in Year 5? • Is English your favourite subject? • Is your school big? • Are your friends in this school?</div>
+      <div class="model">Are you eleven? • Are you in Class 5B? • Is English your favourite subject? • Is your school big? • Are your friends in this school?</div>
       <div class="skillStrip">
         <div><b>ПОЛНЫЙ КОРОТКИЙ ОТВЕТ</b>Yes, I am. / No, I’m not.</div>
         <div><b>ПРОДОЛЖИ РАЗГОВОР</b>What about you?</div>
@@ -540,7 +539,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="tutorStrip">
         <div><b>ТВОЙ ХОД</b>What is the same about you and Leo?</div>
         <div><b>УЧИТЕЛЬ СПРОСИТ</b>Which school subject can help a pilot?</div>
-        <div><b>СПРОСИ УЧИТЕЛЯ</b>What was your favourite subject?</div>
+        <div><b>СПРОСИ УЧИТЕЛЯ</b>What is your favourite subject?</div>
       </div>
     </article>
 
@@ -550,8 +549,8 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <p><b>my name is leo. i am from russia. english is my favourite subject. on monday i have maths and art.</b></p>
       <textarea data-save="m4-caps" placeholder="Rewrite the sentences correctly."></textarea>
       <div class="taskActions"><button type="button" class="btn primary" data-action="model-toggle">Сравнить с образцом</button></div>
-      <div class="feedback modelFeedback" aria-live="polite" hidden>My name is Leo. I am from Russia. English is my favourite subject. On Monday I have maths and art.</div>
-      <table class="capTable">
+      <div class="feedback" aria-live="polite"></div><div class="modelFeedback model" hidden>My name is Leo. I am from Russia. English is my favourite subject. On Monday I have maths and art.</div>
+      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m4-caps-reviewed"> Я сравнил все четыре предложения с образцом и исправил заглавные буквы.</label></div><div class="taskActions"><button type="button" class="btn primary" data-action="complete-open">Самопроверка выполнена</button></div><table class="capTable">
         <tr><th>Capital</th><th>Usually lower-case</th></tr>
         <tr><td>Leo, Russia, English, Monday</td><td>maths, science, art, history</td></tr>
       </table>
@@ -562,7 +561,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="label">Личный ответ • Без готового текста</div>
       <h3>Хотел бы ты ходить в такой flight club?</h3>
       <p>Назови <b>две причины</b>. Можно использовать:</p>
-      <div class="model">Yes, it would. I like … / I want to … / No, it wouldn’t. I prefer …</div>
+      <div class="model">Yes, I’d like to. I like … / I want to … / No, I wouldn’t. I prefer …</div>
       <div class="checklist">
         <label class="checkline"><input type="checkbox" data-open-check data-save="m4-pr1"> Я сказал своё мнение.</label>
         <label class="checkline"><input type="checkbox" data-open-check data-save="m4-pr2"> Я назвал 2 причины.</label>
@@ -652,7 +651,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
   <div class="grid2">
     <article class="task yellow" data-task-id="culture-match" data-core="true" data-hint="Используй схему из этого модуля: primary school, secondary school, sixth form.">
       <div class="label">Культура • Route map</div>
-      <h3>Соедини возраст и ступень школы</h3>
+      <h3>Соедини возраст и ступень школы</h3><div class="model">England: primary school — usually ages 5–11; secondary school — usually ages 11–16. At 16–18, a student may study in a sixth form or college, or take another education or training route.</div><p>Use this simplified route: primary school → secondary school → sixth form.</p>
       <div class="q">Age 9 → <select data-answer="primary school" data-save="m6-c1"><option value="">—</option><option>primary school</option><option>secondary school</option><option>sixth form</option></select></div>
       <div class="q">Age 13 → <select data-answer="secondary school" data-save="m6-c2"><option value="">—</option><option>primary school</option><option>secondary school</option><option>sixth form</option></select></div>
       <div class="q">Age 17 → <select data-answer="sixth form" data-save="m6-c3"><option value="">—</option><option>primary school</option><option>secondary school</option><option>sixth form</option></select></div>
@@ -668,7 +667,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       <div class="tutorStrip">
         <div><b>ТВОЙ ХОД</b>Назови одно сходство и одно отличие.</div>
         <div><b>УЧИТЕЛЬ СПРОСИТ</b>Which system looks clearer to you?</div>
-        <div><b>СПРОСИ УЧИТЕЛЯ</b>What was secondary school like for you?</div>
+        <div><b>СПРОСИ УЧИТЕЛЯ</b>Is your school big?</div>
       </div>
       <div class="checklist">
         <label class="checkline"><input type="checkbox" data-open-check data-save="m6-sp1"> Я назвал сходство.</label>
@@ -717,7 +716,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
         <label class="checkline"><input type="checkbox" data-open-check data-save="m7-w3"> заглавные буквы в имени, дне недели, стране/языке</label>
         <label class="checkline"><input type="checkbox" data-open-check data-save="m7-w4"> минимум 4 слова из Module 1</label>
       </div>
-      <div class="taskActions"><button type="button" class="btn primary" data-action="complete-open">Отдать учителю на проверку</button></div>
+      <div class="taskActions"><button type="button" class="btn primary" data-action="complete-open">Готово к проверке с учителем</button></div>
       <div class="feedback" aria-live="polite"></div>
       <details class="tutorNote"><summary>Комментарий учителя</summary><div><textarea data-save="m7-tutor-note" placeholder="One strength + one next step."></textarea></div></details>
     </article>
@@ -733,10 +732,10 @@ textarea{width:100%;resize:vertical;min-height:120px}
   <div class="grid2">
     <article class="task" data-task-id="final-retrieval" data-core="true" data-hint="Пока не листай наверх. Здесь проверяем, что ты можешь вспомнить без подсказки.">
       <div class="label">Проверка • Вспомни без подсказки</div>
-      <h3>Одну минуту — без подсказок</h3>
+      <h3>Вспомни без подсказок — в своём темпе</h3>
       <div class="q">l r r u e → <input data-answer="ruler" data-save="m8-r1"></div>
       <div class="q">a l t a s → <input data-answer="atlas" data-save="m8-r2"></div>
-      <div class="q">s c i e n c e → <input data-answer="science" data-save="m8-r3"></div>
+      <div class="q">e c s i n c e → <input data-answer="science" data-save="m8-r3"></div>
       <div class="q">17 → <input data-answer="seventeen" data-save="m8-r4"></div>
       <div class="q">День после Wednesday → <input data-answer="Thursday" data-save="m8-r5"></div>
       <div class="taskActions"><button type="button" class="btn primary" data-action="check-inputs">Проверить память</button><button type="button" class="btn ghost" data-action="hint">Подсказка</button><button type="button" class="btn ghost" data-action="clear">Попробовать ещё раз</button></div>
@@ -746,9 +745,9 @@ textarea{width:100%;resize:vertical;min-height:120px}
     <article class="task yellow" data-task-id="final-grammar" data-core="true" data-hint="Вопрос: форма to be идёт первой. Короткий ответ: повтори ту же форму. a/an: слушай первый звук следующего слова.">
       <div class="label">Проверка • Грамматика</div>
       <h3>Смешанная тренировка</h3>
-      <div class="q"><select data-answer="Are" data-save="m8-g1"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> you in Year 5?</div>
+      <div class="q"><select data-answer="Are" data-save="m8-g1"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> you in Class 5B?</div>
       <div class="q">Yes, I <select data-answer="am" data-save="m8-g2"><option value="">—</option><option>am</option><option>is</option><option>are</option></select>.</div>
-      <div class="q">They <select data-answer="aren't|are not" data-save="m8-g3"><option value="">—</option><option>isn't</option><option>aren't</option></select> in Year 7.</div>
+      <div class="q">They <select data-answer="aren't|are not" data-save="m8-g3"><option value="">—</option><option>isn't</option><option>aren't</option></select> in Class 7A.</div>
       <div class="q">It’s <select data-answer="an" data-save="m8-g4"><option value="">—</option><option>a</option><option>an</option></select> atlas.</div>
       <div class="q"><select data-answer="Is" data-save="m8-g5"><option value="">—</option><option>Am</option><option>Is</option><option>Are</option></select> English your favourite subject?</div>
       <div class="taskActions"><button type="button" class="btn primary" data-action="check-inputs">Проверить</button><button type="button" class="btn ghost" data-action="hint">Подсказка</button><button type="button" class="btn ghost" data-action="clear">Попробовать ещё раз</button></div>
@@ -807,166 +806,13 @@ textarea{width:100%;resize:vertical;min-height:120px}
 </div>
 
 
-<section class="section" id="m9">
-  <div class="sectionHead">
-    <div class="sectionNo">09</div>
-    <div><h2>MODULE 2 LAB</h2><p>I’m from… • My things • My collection • UK souvenirs • English-speaking countries</p></div>
-    <span class="routeTag">Spotlight pages 36–44</span>
-  </div>
-
-  <div class="panel" style="margin-bottom:18px">
-    <div class="eyebrow">WORD VAULT • отдельная рубрика со словами</div>
-    <h2>Module 2 Vocabulary Bank</h2>
-    <p>Сначала узнай слова, потом закрой перевод и попробуй вспомнить их сам. В конце используй их в мини-диалогах.</p>
-    <div class="grid2">
-      <details class="support" open><summary>Countries & nationalities</summary><div><b>Russia — Russian • the UK — British • the USA — American • Canada — Canadian • Australia — Australian • New Zealand — New Zealander • France — French • Japan — Japanese</b></div></details>
-      <details class="support"><summary>Personal things</summary><div><b>skateboard • helmet • basketball • gloves • trainers • cap • guitar • digital camera • scarf • watch • handbag • teddy bear • bicycle • ruler • book • notebook • pencil • pencil case • sharpener • atlas • notepad</b></div></details>
-      <details class="support"><summary>Collections & souvenirs</summary><div><b>stamps • coins • hats • books • mug • scarf • stuffed toy • toy bus • pin • key ring • umbrella • T-shirt • thermos flask • bell</b></div></details>
-      <details class="support"><summary>Useful language</summary><div><b>Where are you from? • What nationality are you? • I’m from… • I’m… • Have you got…? • Yes, I have. / No, I haven’t. • How much is it? • Here you are.</b></div></details>
-    </div>
-  </div>
-
-  <div class="grid2">
-    <article class="task" data-task-id="m2-nationalities" data-core="true" data-hint="Look at the country first. Nationalities usually begin with a capital letter.">
-      <div class="label">Recognise → Recall • Countries</div><h3>Passport control</h3>
-      <p>Type the nationality.</p>
-      <div class="q">Russia → <input data-answer="Russian" data-save="m9-n1"></div>
-      <div class="q">the UK → <input data-answer="British" data-save="m9-n2"></div>
-      <div class="q">the USA → <input data-answer="American" data-save="m9-n3"></div>
-      <div class="q">Canada → <input data-answer="Canadian" data-save="m9-n4"></div>
-      <div class="q">France → <input data-answer="French" data-save="m9-n5"></div>
-      <div class="q">Japan → <input data-answer="Japanese" data-save="m9-n6"></div>
-      <div class="taskActions"><button class="btn primary" data-action="check-inputs">Check</button><button class="btn ghost" data-action="hint">Need a hint?</button><button class="btn ghost" data-action="clear">Try again</button></div><div class="feedback" aria-live="polite"></div>
-    </article>
-
-    <article class="task yellow" data-task-id="m2-nationality-patterns" data-core="true" data-open="true">
-      <div class="label">Notice • Word formation</div><h3>Nationality detective</h3>
-      <p>Group the words by ending: <b>-an / -ish / -ian / -er / -ese / other</b>. Say the groups aloud: American, Russian, Canadian, British, Australian, New Zealander, French, Japanese.</p>
-      <div class="callout"><b>Notice:</b> we use <i>-an, -ish, -ian, -ese</i> and other forms to make adjectives for nationalities.</div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-pat1"> I sorted all eight nationalities.</label><label class="checkline"><input type="checkbox" data-open-check data-save="m9-pat2"> I added one more nationality with my tutor.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Done</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task blue" data-task-id="m2-people" data-core="true" data-open="true">
-      <div class="label">Use • Speaking</div><h3>Who are they?</h3>
-      <p>Ask and answer about the people from the textbook: <b>Avril Lavigne — Canadian; Batman — American; Asterix — French; Emma Watson — British; Yu-Gi-Oh — Japanese.</b></p>
-      <div class="model">A: Where’s Avril Lavigne from?<br>B: She’s from Canada. She’s Canadian.</div>
-      <div class="tutorStrip"><div><b>STUDENT TURN</b>Choose 3 people and ask.</div><div><b>TUTOR FOLLOW-UP</b>Where are you from? What languages can you speak?</div><div><b>EXTRA CHALLENGE</b>Add one famous person.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-peop1"> I asked and answered 3 questions.</label></div>
-      <div class="taskActions"><button class="btn yellow" data-action="complete-open">Speaking done</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task" data-task-id="m2-things" data-core="true" data-hint="Think about what you can carry, wear, ride or use.">
-      <div class="label">Recall • My things</div><h3>What have they got?</h3>
-      <p>Complete with the exact item.</p>
-      <div class="q">A thing you wear on your head when cycling: <input data-answer="helmet|a helmet" data-save="m9-t1"></div>
-      <div class="q">A thing you can ride with two wheels: <input data-answer="bicycle|a bicycle|bike|a bike" data-save="m9-t2"></div>
-      <div class="q">A thing that tells the time: <input data-answer="watch|a watch" data-save="m9-t3"></div>
-      <div class="q">A thing you use to take photos: <input data-answer="digital camera|camera|a digital camera|a camera" data-save="m9-t4"></div>
-      <div class="taskActions"><button class="btn primary" data-action="check-inputs">Check</button><button class="btn ghost" data-action="hint">Hint</button><button class="btn ghost" data-action="clear">Try again</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task wide soft" data-task-id="m2-spidey-reading" data-core="true" data-open="true">
-      <div class="label">Reading • prediction → gist → detail → evidence</div><h3>Amazing Spidey!</h3>
-      <p><b>Peter Parker is a quiet teenager. He lives in a small house in New York City with his Aunt Mary. Peter hasn’t got many friends. His best friend, Mary Jane, lives next door. One day, a spider bites Peter in a science lab. Now he’s got special powers! He is strong and fast and he can climb walls, just like a spider! People love him, but his enemy, the evil Green Goblin, is after him. Can Spider-Man stop him? Watch this brilliant film to find out!</b></p>
-      <div class="grid2">
-        <div class="callout"><b>Find the evidence:</b><br>1 Where’s Spider-Man from?<br>2 Who’s his best friend?<br>3 What can Spider-Man do?<br>4 Who is against him?</div>
-        <div><label>Write 3–5 keywords, not full sentences.</label><textarea data-save="m9-spidey-notes" placeholder="New York City • Mary Jane • ..."></textarea></div>
-      </div>
-      <div class="tutorStrip"><div><b>STUDENT TURN</b>Retell Peter’s story from your notes.</div><div><b>ASK YOUR TUTOR</b>Do you like superhero films? Why?</div><div><b>EXTRA</b>Explain “special powers” in your own words.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-sp1"> I found answers to all 4 questions.</label><label class="checkline"><input type="checkbox" data-open-check data-save="m9-sp2"> I retold the story without reading it word for word.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Reading cleared</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task" data-task-id="m2-havegot" data-core="true" data-hint="Use have with I/you/we/they and has with he/she/it. Negative: haven’t / hasn’t.">
-      <div class="label">Grammar • Guided discovery</div><h3>Have got / has got</h3>
-      <p>Complete the forms.</p>
-      <div class="q">I / you / we / they ___ got. <input data-answer="have" data-save="m9-h1"></div>
-      <div class="q">He / she / it ___ got. <input data-answer="has" data-save="m9-h2"></div>
-      <div class="q">We ___ got a camera. (negative) <input data-answer="haven't|have not" data-save="m9-h3"></div>
-      <div class="q">Jane ___ got a ruler. (question) <input data-answer="has" data-save="m9-h4"> Jane got a ruler?</div>
-      <div class="taskActions"><button class="btn primary" data-action="check-inputs">Check</button><button class="btn ghost" data-action="hint">Need a hint?</button><button class="btn ghost" data-action="clear">Try again</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task pink" data-task-id="m2-thisthat" data-core="true" data-open="true">
-      <div class="label">Grammar • Meaning</div><h3>This / These — That / Those</h3>
-      <p><b>this / these</b> = things near us. <b>that / those</b> = things far away. <b>this / that</b> = singular; <b>these / those</b> = plural.</p>
-      <div class="model">This is a cap. • These are footballs. • That is a bicycle. • Those are gloves.</div>
-      <div class="tutorStrip"><div><b>STUDENT TURN</b>Point to 4 real things and make sentences.</div><div><b>TUTOR FOLLOW-UP</b>Move one object farther away. What changes?</div><div><b>CHALLENGE</b>Use all four forms.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-dem1"> I used this, these, that and those correctly.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Done</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task wide" data-task-id="m2-tom-reading" data-core="true" data-open="true">
-      <div class="label">Reading • My collection</div><h3>I ♥ stamps</h3>
-      <p><b>Hi, my name’s Tom. I’m eleven years old and I’m from London. I’ve got a great stamp collection! My album has got sixty-eight stamps in it. My stamps are from Japan, France, Australia, Canada and New Zealand. I like stamps because they have nice pictures. I’m proud of my collection. Stamp collecting is easy and fun. It makes me happy.</b></p>
-      <div class="grid2"><div class="callout"><b>Complete:</b><br>1 Tom is ___ years old.<br>2 Tom is from ___.<br>3 There are ___ stamps in Tom’s collection.</div><div><b>Language hunt:</b> Find all short forms: <i>name’s, I’m, I’ve…</i>. Then say the long forms.</div></div>
-      <div class="tutorStrip"><div><b>PERSONALISE</b>What collections have you got?</div><div><b>MODEL</b>I’ve got a stamp collection. What about you?</div><div><b>FOLLOW-UP</b>Why do people collect things?</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-tom1"> I completed 1–3.</label><label class="checkline"><input type="checkbox" data-open-check data-save="m9-tom2"> I found the short forms.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Text complete</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task yellow" data-task-id="m2-numbers" data-core="true" data-hint="Watch the hundreds: 223 = two hundred and twenty-three.">
-      <div class="label">Numbers 21–1000 • Recall</div><h3>Collection counter</h3>
-      <div class="q">21 → <input data-answer="twenty-one|twenty one" data-save="m9-num1"></div>
-      <div class="q">50 → <input data-answer="fifty" data-save="m9-num2"></div>
-      <div class="q">80 → <input data-answer="eighty" data-save="m9-num3"></div>
-      <div class="q">100 → <input data-answer="one hundred|a hundred" data-save="m9-num4"></div>
-      <div class="q">223 → <input data-answer="two hundred and twenty-three|two hundred and twenty three" data-save="m9-num5"></div>
-      <div class="q">1000 → <input data-answer="one thousand|a thousand" data-save="m9-num6"></div>
-      <div class="taskActions"><button class="btn primary" data-action="check-inputs">Check</button><button class="btn ghost" data-action="hint">Hint</button><button class="btn ghost" data-action="clear">Try again</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task blue" data-task-id="m2-souvenirs" data-core="true" data-open="true">
-      <div class="label">Culture Corner • UK</div><h3>Holidays in the UK</h3>
-      <p>Match the souvenir to the country/nationality, then explain the clue.</p>
-      <p><b>hat — Ireland / Irish • scarf — Scotland / Scottish • mug — Wales / Welsh • toy buses — England / English • pin — the UK / British</b></p>
-      <div class="callout">The hat has got shamrocks on it. The scarf is a tartan scarf from Scotland. The mug has got a Welsh dragon on it. The toy buses are double-decker buses. The pin has got a Union Jack on it.</div>
-      <div class="tutorStrip"><div><b>STUDENT TURN</b>Use the map to tell your tutor what souvenirs you can buy.</div><div><b>ASK YOUR TUTOR</b>Which souvenir would you buy?</div><div><b>PROJECT</b>Find 3 souvenirs from your country and label them.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-souv1"> I matched all 5 souvenirs.</label></div>
-      <div class="taskActions"><button class="btn yellow" data-action="complete-open">Culture cleared</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task" data-task-id="m2-shop" data-core="true" data-open="true">
-      <div class="label">English in Use • Buying a souvenir</div><h3>Souvenir shop role-play</h3>
-      <div class="model"><b>Shop assistant:</b> Good afternoon. How can I help you?<br><b>Marta:</b> Good afternoon. I want to buy a souvenir.<br><b>Shop assistant:</b> How about this key ring?<br><b>Marta:</b> That’s a good idea. How much is it?<br><b>Shop assistant:</b> It’s £4.00.<br><b>Marta:</b> Can I have two, please?<br><b>Shop assistant:</b> Sure. That’s £8.00.<br><b>Marta:</b> Here you are.</div>
-      <p><b>Shop stock:</b> key ring £4 • doll £6 • umbrella £12 • T-shirt £8 • thermos flask £13 • bell £6 • teddy bear £4 • scarf £8.</p>
-      <div class="tutorStrip"><div><b>ROUND 1</b>Student = customer.</div><div><b>SWITCH ROLES</b>Tutor = customer.</div><div><b>EXTRA CHALLENGE</b>Buy two different things and calculate the total.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-shop1"> I used “How much is it?” and “Can I have…?”</label><label class="checkline"><input type="checkbox" data-open-check data-save="m9-shop2"> We switched roles.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Role-play complete</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task wide soft" data-task-id="m2-geography" data-core="true" data-open="true">
-      <div class="label">Extensive Reading • Geography</div><h3>English-speaking countries</h3>
-      <p>Use the map information from the textbook: <b>the UK — London — Europe; the USA — Washington, D.C. — North America; Australia — Canberra — Australia; South Africa — Cape Town — Africa; Canada — Ottawa — North America.</b></p>
-      <div class="model">A: Where’s Lyn from? B: She’s from South Africa. A: What nationality is she? B: She’s South African. A: What’s the capital of South Africa? B: Cape Town.</div>
-      <div class="tutorStrip"><div><b>STUDENT TURN</b>Ask about Tom/Australia, Mary/the UK, Bill/the USA, Sue/Canada.</div><div><b>REALITY CHECK</b>Find Russia on a map. What’s its capital?</div><div><b>PROJECT</b>Choose 3 more countries and make a mini quiz.</div></div>
-      <div class="checklist"><label class="checkline"><input type="checkbox" data-open-check data-save="m9-geo1"> I asked and answered about all 4 people.</label></div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">Geography cleared</button></div><div class="feedback"></div>
-    </article>
-
-    <article class="task wide pink" data-task-id="m2-progress" data-core="true" data-open="true">
-      <div class="label">Boss task • Progress Check 2</div><h3>Module 2 checkpoint</h3>
-      <p>Without opening the Word Vault, do these five mini-missions:</p>
-      <div class="pilotPassport"><div class="stamp">10 THINGS</div><div class="stamp">5 NATIONALITIES</div><div class="stamp">6 NUMBERS</div><div class="stamp">HAVE GOT</div><div class="stamp">SHOP TALK</div></div>
-      <div class="checklist">
-        <label class="checkline"><input type="checkbox" data-open-check data-save="m9-b1"> I named 10 personal things.</label>
-        <label class="checkline"><input type="checkbox" data-open-check data-save="m9-b2"> I said 5 country + nationality pairs.</label>
-        <label class="checkline"><input type="checkbox" data-open-check data-save="m9-b3"> I said 6 numbers between 21 and 1000.</label>
-        <label class="checkline"><input type="checkbox" data-open-check data-save="m9-b4"> I made one positive, one negative and one question with have got.</label>
-        <label class="checkline"><input type="checkbox" data-open-check data-save="m9-b5"> I completed a 30-second souvenir-shop dialogue.</label>
-      </div>
-      <div class="taskActions"><button class="btn primary" data-action="complete-open">MODULE 2 CLEARED</button></div><div class="feedback"></div>
-    </article>
-  </div>
-</section>
-
+<section class="wrap panel" style="margin:0 auto 48px" aria-label="Next module"><div class="eyebrow">NEXT CHAPTER</div><h2>Ready for World Collector?</h2><p>Модуль 2: страны, вещи, коллекции и магазин сувениров — в отдельном интерактивном маршруте.</p><a class="btn blue" href="module2.html?v=6" style="display:inline-flex;text-decoration:none">Открыть модуль 2 →</a></section>
 <section class="finalBand">
   <div class="wrap">
-    <div class="eyebrow">Module 1 пройден</div>
+    <div class="eyebrow">Module 1 / итог маршрута</div>
     <h2>CLEAR ENGLISH.<br>STRONG FOUNDATION.</h2>
     <p style="max-width:780px;font-size:1.08rem">Цель — не сделать всё идеально с первого раза. Сначала узнай язык, потом вспомни его сам, потренируй с подсказкой — и в конце попробуй использовать без экрана.</p>
-    <p><b id="finalProgress">0 из 30 заданий основного маршрута выполнено.</b></p>
+    <p><b id="finalProgress">0 из 29 заданий основного маршрута выполнено.</b></p>
   </div>
 </section>
 </main>
@@ -999,7 +845,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       }
     }catch(e){}
   }
-  function save(){localStorage.setItem(KEY,JSON.stringify(state));}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){document.getElementById('progressText').title='Браузер не разрешил сохранение. Можно продолжать в этой вкладке.';}}
   function norm(v){return String(v==null?'':v).trim().toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ');}
   function accepted(el){
     var raw=el.getAttribute('data-answer')||'';
@@ -1083,25 +929,26 @@ textarea{width:100%;resize:vertical;min-height:120px}
   }
   function clearTask(task){
     task.querySelectorAll('[data-answer]').forEach(function(el){
-      el.value='';el.classList.remove('answer-good','answer-bad');
+      el.value='';el.classList.remove('answer-good','answer-bad');el.removeAttribute('aria-invalid');
       var k=el.getAttribute('data-save');if(k)state.values[k]='';
     });
     task.querySelectorAll('.choice.selected,.token.selected').forEach(function(el){
-      el.classList.remove('selected');
+      el.classList.remove('selected');el.setAttribute('aria-pressed','false');
       var k='choice:'+task.getAttribute('data-task-id')+':'+norm(el.textContent);delete state.values[k];
     });
     var mem=task.querySelector('[data-memory-answer]');if(mem){mem.value='';var mk=mem.getAttribute('data-save');if(mk)state.values[mk]='';}
-    var f=task.querySelector('.feedback');if(f){f.textContent='';f.className='feedback';}
+    var f=task.querySelector('.feedback');if(f){f.textContent='';f.className='feedback';}if(mem){clearInterval(timers.memory);var tray=document.getElementById('memoryTray');tray.classList.add('hiddenWords');tray.setAttribute('aria-hidden','true');}
     save();
   }
   function showHint(task){
     var hint=task.getAttribute('data-hint')||'Look at the model and try one item at a time.';
-    setFeedback(task,'Подсказка: '+hint,false);
+    setFeedback(task,'Подсказка: '+hint,false);task.querySelector('.feedback').className='feedback info';
     state.hints[task.getAttribute('data-task-id')]=true;save();
   }
   function completeOpen(task){
     var checks=[].slice.call(task.querySelectorAll('[data-open-check]'));
     var ok=checks.length===0||checks.every(function(c){return c.checked;});
+    if(task.getAttribute('data-task-id')==='random-challenge'&&!state.random){setFeedback(task,'Сначала нажми DRAW и выполни задание.',false);return;}
     if(!ok){setFeedback(task,'Сначала пройди чек-лист. Когда все пункты выполнены, попроси учителя проверить.',false);return;}
     var minWords=Number(task.getAttribute('data-min-words')||0);
     if(minWords){
@@ -1118,7 +965,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     var voices=window.speechSynthesis.getVoices();
     var v=voices.find(function(x){return /^en-GB/i.test(x.lang);})||voices.find(function(x){return /^en/i.test(x.lang);});
     if(v)u.voice=v;
-    window.speechSynthesis.speak(u);
+    u.onerror=function(){alert('Озвучка не запустилась. Используйте чтение преподавателем.');};window.speechSynthesis.speak(u);
   }
   function checkMemory(task){
     var el=task.querySelector('[data-memory-answer]');
@@ -1127,18 +974,20 @@ textarea{width:100%;resize:vertical;min-height:120px}
     var unique=[];
     typed.forEach(function(w){if(unique.indexOf(w)<0)unique.push(w);});
     var right=unique.filter(function(w){return bank.indexOf(w)>-1;}).length;
+    if(!document.getElementById('memoryTray').classList.contains('hiddenWords')){setFeedback(task,'Сначала закрой слова, затем проверь, что ты запомнил.',false);return;}
     if(right>=5){setFeedback(task,'✓ '+right+' правильных слов по памяти. Задание выполнено.',true);complete(task);}
     else setFeedback(task,right+' правильно. Постарайся вспомнить пять разных слов.',false);
   }
   function memoryStart(){
+    clearInterval(timers.memory);
     var tray=document.getElementById('memoryTray');
-    tray.classList.remove('hiddenWords');
+    tray.classList.remove('hiddenWords');tray.setAttribute('aria-hidden','false');
     var n=10;
     var original=tray.textContent;
     tray.textContent=original;
-    var iv=setInterval(function(){
+    timers.memory=setInterval(function(){
       n--;
-      if(n<=0){clearInterval(iv);tray.textContent=original;tray.classList.add('hiddenWords');}
+      if(n<=0){clearInterval(timers.memory);tray.textContent=original;tray.classList.add('hiddenWords');tray.setAttribute('aria-hidden','true');}
     },1000);
   }
   function randomCard(){
@@ -1176,7 +1025,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     var ta=task.querySelector('textarea');
     if(ta&&String(ta.value||'').trim().length<20){setFeedback(task,'Сначала перепиши текст сам, потом сравни с образцом.',false);return;}
     f.hidden=!f.hidden;
-    if(!f.hidden){f.className='feedback ok';complete(task);}
+    if(!f.hidden){f.className='modelFeedback model';}
   }
   function render(){
     var done=coreTasks.filter(function(id){return !!state.done[id];}).length;
@@ -1192,8 +1041,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
       m5:['listening-main','greetings','pronunciation','radio-speaking'],
       m6:['culture-match','culture-speak'],
       m7:['writing-plan','writing-final'],
-      m8:['final-retrieval','final-grammar','random-challenge','final-speaking'],
-      m9:['m2-nationalities','m2-nationality-patterns','m2-people','m2-things','m2-spidey-reading','m2-havegot','m2-thisthat','m2-tom-reading','m2-numbers','m2-souvenirs','m2-shop','m2-geography','m2-progress']
+      m8:['final-retrieval','final-grammar','random-challenge','final-speaking']
     };
     Object.keys(stageMap).forEach(function(stage){
       var ids=stageMap[stage],all=ids.every(function(id){return state.done[id];});
@@ -1212,7 +1060,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
   document.addEventListener('click',function(e){
     var btn=e.target.closest('button');if(!btn)return;
     if(btn.classList.contains('choice')||btn.classList.contains('token')){
-      btn.classList.toggle('selected');
+      btn.classList.toggle('selected');btn.setAttribute('aria-pressed',String(btn.classList.contains('selected')));
       var taskForChoice=btn.closest('.task');
       if(taskForChoice){
         var choiceKey='choice:'+taskForChoice.getAttribute('data-task-id')+':'+norm(btn.textContent);
@@ -1229,6 +1077,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     else if(action==='clear')clearTask(task);
     else if(action==='complete-open')completeOpen(task);
     else if(action==='memory-start')memoryStart();
+    else if(action==='memory-toggle'){clearInterval(timers.memory);var tray=document.getElementById('memoryTray');tray.classList.toggle('hiddenWords');tray.setAttribute('aria-hidden',tray.classList.contains('hiddenWords')?'true':'false');}
     else if(action==='check-memory')checkMemory(task);
     else if(action==='random-card')randomCard();
     else if(action==='timer-start')timerStart(btn);
@@ -1244,42 +1093,20 @@ textarea{width:100%;resize:vertical;min-height:120px}
     if(!confirm('Начать с новым учеником? Все ответы, прогресс, заметки и случайные задания на этом устройстве будут очищены.'))return;
     Object.keys(timers).forEach(function(k){clearInterval(timers[k]);});
     if('speechSynthesis' in window)window.speechSynthesis.cancel();
-    Object.keys(localStorage).forEach(function(k){if(k.indexOf('victoria_spotlight5_')===0||k==='pq-world-v3')localStorage.removeItem(k);});localStorage.removeItem(KEY);LEGACY.forEach(function(k){localStorage.removeItem(k);});
+    try{Object.keys(localStorage).forEach(function(k){if(k.indexOf('victoria_spotlight5_')===0||k==='pq-world-v3')localStorage.removeItem(k);});localStorage.removeItem(KEY);LEGACY.forEach(function(k){localStorage.removeItem(k);});}catch(e){}
     location.reload();
   });
 
-  load();bindSave();restore();
+  document.querySelectorAll('.task').forEach(function(task){
+ var actions=task.querySelector('.taskActions');
+ if(actions&&task.querySelector('[data-action="check-inputs"]')&&!task.querySelector('[data-action="clear"]')){var b=document.createElement('button');b.type='button';b.className='btn ghost';b.setAttribute('data-action','clear');b.textContent='Попробовать ещё раз';actions.appendChild(b);}
+ task.querySelectorAll('input,select,textarea').forEach(function(el,i){if(el.type==='checkbox'||el.getAttribute('aria-label')||el.closest('label'))return;var q=el.closest('.q');el.setAttribute('aria-label',(q?q.textContent:task.querySelector('h3').textContent).trim().replace(/\s+/g,' ')+' · поле '+(i+1));});
+ });
+ document.querySelectorAll('.choice,.token').forEach(function(b){b.setAttribute('aria-pressed','false');});
+ load();bindSave();restore();
+ document.querySelectorAll('.choice,.token').forEach(function(b){b.setAttribute('aria-pressed',String(b.classList.contains('selected')));});
 })();
 </script>
 
-<style>
-#heroExpansion{background:#F7F4ED;color:#16161c;padding:50px max(18px,calc((100vw - 1060px)/2));font-family:system-ui,sans-serif}
-#heroExpansion *{box-sizing:border-box}#heroExpansion h2{font-size:clamp(2rem,5vw,4rem);line-height:1.02;margin:12px 0}#heroExpansion h3{font-size:1.4rem;margin:0 0 12px}
-#heroExpansion .heroIntro{background:#3D3BFF;color:white;padding:32px;border:3px solid #16161c;border-radius:20px;box-shadow:8px 8px 0 #FFD400}
-#heroExpansion .heroGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:26px}
-#heroExpansion .heroCard{background:white;border:2px solid #16161c;border-radius:16px;padding:24px;box-shadow:4px 4px 0 #16161c}
-#heroExpansion button{background:#FFD400;color:#111;border:2px solid #111;border-radius:9px;padding:12px 15px;font-weight:750;cursor:pointer;min-height:44px;margin:5px 5px 5px 0}
-#heroExpansion button:focus-visible,#heroExpansion input:focus-visible{outline:4px solid #3D3BFF;outline-offset:3px}
-#heroExpansion input,#heroExpansion textarea,#heroExpansion select{width:100%;padding:12px;border:2px solid #555;border-radius:9px;font:inherit;margin:8px 0;max-width:100%}
-#heroExpansion .heroFeedback{min-height:24px;font-weight:700}#heroExpansion .heroTag{font-size:.8rem;font-weight:800;letter-spacing:.08em;color:#3D3BFF}
-#heroExpansion .heroReading{line-height:1.7;background:#F7F4ED;padding:15px;border-left:5px solid #FF4FA3}
-#heroExpansion .heroProgress{height:14px;background:#ddd;border:2px solid #111;border-radius:15px;overflow:hidden;margin-top:16px}
-#heroExpansion .heroProgress>div{height:100%;width:0;background:#FFD400;transition:width .2s}
-@media(prefers-reduced-motion:reduce){#heroExpansion .heroProgress>div{transition:none}}
-</style>
-<section id="heroExpansion"><div class="heroIntro"><div class="heroTag" style="color:#FFD400">MODULE 2A · THE WORLD TOUR</div><h2>🌍 PASSPORT QUEST</h2><p>8 countries · 5 mini-games · One world passport. Solve, spell, match and speak!</p><p id="pqScore">0 / 5 games completed</p><div class="heroProgress"><div id="heroBar"></div></div><button id="pqReset">New Student · Reset games</button></div><div class="heroGrid">
-<article class="heroCard"><div class="heroTag">01 · FLAG DETECTIVE</div><h3>🚩 Guess the country</h3><p id="pqFlag" style="font-size:5rem;text-align:center">🇯🇵</p><div id="pqFlagOptions"></div><p id="pqFlagMsg" class="heroFeedback" aria-live="polite"></p><button id="pqFlagHint">Hint</button><button id="pqFlagNext">Another flag</button></article>
-<article class="heroCard"><div class="heroTag">02 · MISSING LETTERS</div><h3>🔤 Fix the nationality</h3><p id="pqCountry"></p><p id="pqMask" style="font-size:1.5rem;letter-spacing:.12em;font-weight:900"></p><input id="pqLetters" placeholder="Type the missing letters" aria-label="Missing letters"><button id="pqCheck">Check</button><button id="pqHint">Hint</button><button id="pqNext">Another word</button><p id="pqLetterMsg" class="heroFeedback" aria-live="polite"></p></article>
-<article class="heroCard"><div class="heroTag">03 · MEMORY</div><h3>🧠 Find the pairs</h3><p>Match countries and nationalities. Turn over two cards.</p><div id="pqMemory" style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:5px"></div><p id="pqMemoryMsg" class="heroFeedback" aria-live="polite"></p><button id="pqShuffle">Shuffle again</button></article>
-<article class="heroCard"><div class="heroTag">04 · WORD FACTORY</div><h3>🧪 Sort the endings</h3><p id="pqWord" style="font-size:1.6rem;font-weight:800"></p><div id="pqEndings"></div><p id="pqSortMsg" class="heroFeedback" aria-live="polite"></p><button id="pqSortHint">Hint</button><button id="pqSortNext">Another nationality</button></article>
-<article class="heroCard"><div class="heroTag">05 · FINAL MISSION</div><h3>🎤 Secret traveller</h3><p>Build a passport and introduce your traveller to your tutor.</p><select id="pqSelect" aria-label="Choose a country"></select><input id="pqName" placeholder="Traveller name" aria-label="Traveller name"><p class="heroReading" id="pqSentence"></p><button id="pqPresent">I've presented it!</button><p id="pqPresentMsg" class="heroFeedback" aria-live="polite"></p><p><b>Ask your tutor:</b> Where are you from? What languages can you speak?</p></article>
-<article class="heroCard"><div class="heroTag">EXTRA CHALLENGE</div><h3>⚡ Speed round (no timer!)</h3><p>Can you say all eight nationalities from memory? Switch roles: your tutor says a country, you say the nationality. Then swap!</p><details><summary>Need a hint?</summary>Russia · the UK · the USA · Canada · Australia · New Zealand · France · Japan</details></article></div></section><script>
-(()=>{const D=[["Russia","Russian","🇷🇺"],["the UK","British","🇬🇧"],["the USA","American","🇺🇸"],["Canada","Canadian","🇨🇦"],["Australia","Australian","🇦🇺"],["New Zealand","New Zealander","🇳🇿"],["France","French","🇫🇷"],["Japan","Japanese","🇯🇵"]],$=id=>document.getElementById(id),K='pq-world-v3';let s={done:[]};try{s={...s,...JSON.parse(localStorage.getItem(K)||'{}')}}catch(e){}const save=()=>{localStorage.setItem(K,JSON.stringify(s));$('pqScore').textContent=s.done.length+' / 5 games completed';$('heroBar').style.width=(s.done.length*20)+'%'},win=n=>{if(!s.done.includes(n))s.done.push(n);save()},pick=n=>Math.floor(Math.random()*n),shuffle=a=>a.slice().sort(()=>Math.random()-.5),msg=(id,v)=>$(id).textContent=v;
-let fi=pick(8),fc=0;function flag(){const c=D[fi],opts=shuffle([c,...shuffle(D.filter((x,i)=>i!==fi)).slice(0,3)]);msg('pqFlag',c[2]);$('pqFlagOptions').replaceChildren();opts.forEach(x=>{let b=document.createElement('button');b.textContent=x[0];b.onclick=()=>{if(x===c){fc++;msg('pqFlagMsg','✓ '+c[1]+'! '+fc+'/4');if(fc>=4)win(0);fi=(fi+1)%8;setTimeout(flag,450)}else msg('pqFlagMsg','Try again! Look carefully at the flag.')};$('pqFlagOptions').append(b)})}$('pqFlagHint').onclick=()=>msg('pqFlagMsg','Starts with '+D[fi][0].replace('the ','')[0]);$('pqFlagNext').onclick=()=>{fi=(fi+1)%8;flag()};flag();
-let li=pick(8),lc=0,answer='';function letters(){let w=D[li][1],positions=[...w].map((c,i)=>/[a-z]/i.test(c)&&i%3===1?i:-1).filter(i=>i>=0);answer=positions.map(i=>w[i]).join('');msg('pqCountry',D[li][2]+' '+D[li][0]+' → ?');msg('pqMask',[...w].map((c,i)=>positions.includes(i)?'_':c).join(' '));$('pqLetters').value='';msg('pqLetterMsg','')}$('pqCheck').onclick=()=>{if($('pqLetters').value.trim().replace(/\s/g,'').toLowerCase()===answer.toLowerCase()){lc++;msg('pqLetterMsg','✓ '+D[li][1]+' · '+lc+'/5');if(lc>=5)win(1);li=(li+1)%8;setTimeout(letters,650)}else msg('pqLetterMsg','Not yet. Check the spelling and try again.')};$('pqHint').onclick=()=>msg('pqLetterMsg','You need '+answer.length+' letters. First letter: '+answer[0]);$('pqNext').onclick=()=>{li=(li+1)%8;letters()};letters();
-let first=null,locked=false,matches=0;function memory(){let cards=shuffle(shuffle(D).slice(0,4).flatMap((x,i)=>[{i,t:x[0]},{i,t:x[1]}]));first=null;locked=false;matches=0;$('pqMemory').replaceChildren();cards.forEach(x=>{let b=document.createElement('button');b.textContent='?';b.style.cssText='margin:0;padding:12px 2px;min-width:0;overflow-wrap:anywhere;background:#3D3BFF;color:white';b.setAttribute('aria-label','Reveal a memory card');b.onclick=()=>{if(locked||b.dataset.done||first?.b===b)return;b.textContent=x.t;b.style.background='#FFD400';b.style.color='#111';if(!first){first={...x,b};return}if(first.i===x.i){b.dataset.done='1';first.b.dataset.done='1';first=null;matches++;msg('pqMemoryMsg','✓ '+matches+'/4 pairs');if(matches===4){win(2);msg('pqMemoryMsg','🏆 All pairs found!')}}else{locked=true;let previous=first.b;first=null;setTimeout(()=>{for(let a of [b,previous]){a.textContent='?';a.style.background='#3D3BFF';a.style.color='white'}locked=false},900)}};$('pqMemory').append(b)})}$('pqShuffle').onclick=memory;memory();
-let si=pick(8),sc=0;const ending=w=>w==='British'?'ish':w==='French'?'other':w==='New Zealander'?'er':w==='Japanese'?'ese':w==='Australian'||w==='Russian'||w==='Canadian'?'ian':'an';function sort(){msg('pqWord',D[si][1]);$('pqEndings').replaceChildren();['an','ish','ian','er','ese','other'].forEach(v=>{let b=document.createElement('button');b.textContent=v==='other'?'other':'-'+v;b.onclick=()=>{if(v===ending(D[si][1])){sc++;msg('pqSortMsg','✓ '+sc+'/5 correct');if(sc>=5)win(3);si=(si+1)%8;setTimeout(sort,500)}else msg('pqSortMsg','Look at the ending. Try again!')};$('pqEndings').append(b)})}$('pqSortHint').onclick=()=>msg('pqSortMsg','Look at the last letters of '+D[si][1]);$('pqSortNext').onclick=()=>{si=(si+1)%8;sort()};sort();
-D.forEach((x,i)=>{let o=document.createElement('option');o.value=i;o.textContent=x[2]+' '+x[0];$('pqSelect').append(o)});function sentence(){let c=D[+$('pqSelect').value];msg('pqSentence',"Hello! I'm "+($('pqName').value.trim()||'Alex')+". I'm from "+c[0]+". I'm "+c[1]+". I can speak English. Where are you from?")}$('pqSelect').onchange=sentence;$('pqName').oninput=sentence;sentence();$('pqPresent').onclick=()=>{if(!$('pqName').value.trim()){msg('pqPresentMsg','First, write your traveller’s name.');return}win(4);msg('pqPresentMsg','✓ Well done! Ask your tutor for feedback.')};$('pqReset').onclick=()=>{if(confirm('Reset Passport Quest for a new student?')){localStorage.removeItem(K);location.reload()}};save()})();
-</script>
 </body>
 </html>

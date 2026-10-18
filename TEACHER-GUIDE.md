@@ -31,3 +31,13 @@ Listening uses the browser's installed English speech voice (preferably en-GB). 
 
 ## Russian support layer
 Instructions, hints, strategy notes, feedback and self-study guidance are in Russian so the learner can revise independently. Target vocabulary, grammar examples, listening text, reading text and speaking models remain in English. This keeps the site anchored to Spotlight 5 Module 1 while lowering unnecessary instruction-language difficulty.
+
+## Whole-site audit · 18 October 2026
+
+The old Module 2 Lab and Passport Quest duplicates have been removed from the main page. Module 1 now has 29 core tasks; Module 2 has 34 stages in module2.html. Old stored Module 2 task IDs no longer affect Module 1 progress.
+
+Corrected the “Would you like…?” response model, supplied the England school-route context before assessment, and clarified that sixth form is one option after age 16. Official references: https://getintoteaching.education.gov.uk/life-as-a-teacher/age-groups-and-specialisms/age-groups-you-could-teach and https://www.gov.uk/know-when-you-can-leave-school (checked 18 October 2026).
+
+The memory game starts closed, supports a self-paced reveal/hide mode, prevents completion while the words remain visible and clears any previous countdown before restarting. The capitals model remains intact after an early comparison attempt; completion requires a separate review checklist. Selection controls have pressed states; answer fields have accessible names and invalid states that clear on retry. Button and feedback contrast on coloured panels was corrected. The approved Keks asset replaces the earlier generic SVG.
+
+Programmatic checks cover 17 closed Module 1 task sets, selection/memory/timers, open-task review, writing length, model preservation, field labels and cross-module reset. All 16 closed Module 2 task sets and all 34 stages were exercised, including answer reveal after two attempts, 1,000, over-budget baskets, persistence, retries and blocked storage. This is not a browser rendering or device-audio verification. Browser visual QA was unavailable in this environment.

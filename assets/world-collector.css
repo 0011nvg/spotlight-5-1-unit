@@ -5,3 +5,5 @@
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 #lesson{scroll-margin-top:104px}.wordlist button{flex-direction:column;justify-content:center}.hero-art{transform:none}.hero-art img{mix-blend-mode:normal}.passport svg{max-width:100px}.inventory button.selected:after{content:' ✓'}.tiles button.selected:after{content:' ✓'}.answer-row input.correct,.answer-row select.correct{background:#f0faf4}.answer-row input.incorrect,.answer-row select.incorrect{background:#fff3f0}.route-card{overflow-wrap:anywhere}.scene h3{max-width:100%}.mission strong{overflow-wrap:anywhere}
+
+.passport .eyebrow{color:#fff}.wordlist button.active{border-width:3px}.stage-head{overflow-wrap:anywhere}
