@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#F7F4ED">
-<title>Flight School: Module 1 | Spotlight 5 — самостоятельное повторение</title>
+<title>Spotlight 5 · Modules 1 + 2 | Victoria English Studio</title>
 <meta name="description" content="A complete interactive Spotlight 5 Module 1 lesson: school vocabulary, numbers, days, a/an, pronouns, to be, reading, listening, writing and speaking — through a junior flight-school story.">
 <style>
 :root{
@@ -169,7 +169,9 @@ textarea{width:100%;resize:vertical;min-height:120px}
   </div>
 </header>
 
-<main>
+<nav class="wrap" aria-label="Spotlight 5 modules" style="display:flex;gap:10px;flex-wrap:wrap;padding:18px 0"><a class="btn yellow" href="#module1" style="text-decoration:none">01 · Flight School</a><a class="btn blue" href="module2.html?v=5" style="text-decoration:none">02 · World Collector — NEW →</a></nav>
+<section class="wrap" id="module2" style="background:#3D3BFF;color:white;border:2px solid #111;border-radius:24px;padding:clamp(22px,4vw,42px);margin-bottom:20px"><div style="font-size:.75rem;letter-spacing:.15em;font-weight:850;color:#FFD400">NEW CHAPTER / SPOTLIGHT 5 · MODULE 2</div><h2 style="font-size:clamp(2.7rem,7vw,5.6rem);line-height:.95;letter-spacing:-.06em;margin:14px 0">WORLD COLLECTOR.</h2><p style="font-size:1.1rem;max-width:700px">Move objects. Pack a mission bag. Build a collection. Shop with £20.<br>Seven interactive missions — from countries to your final passport.</p><a class="btn yellow" href="module2.html?v=5" style="display:inline-flex;text-decoration:none">Открыть модуль 2 / Enter the mission →</a></section>
+<main id="module1">
 <section class="hero">
   <div class="wrap heroGrid">
     <div>
@@ -1242,7 +1244,7 @@ textarea{width:100%;resize:vertical;min-height:120px}
     if(!confirm('Начать с новым учеником? Все ответы, прогресс, заметки и случайные задания на этом устройстве будут очищены.'))return;
     Object.keys(timers).forEach(function(k){clearInterval(timers[k]);});
     if('speechSynthesis' in window)window.speechSynthesis.cancel();
-    localStorage.removeItem(KEY);LEGACY.forEach(function(k){localStorage.removeItem(k);});
+    Object.keys(localStorage).forEach(function(k){if(k.indexOf('victoria_spotlight5_')===0||k==='pq-world-v3')localStorage.removeItem(k);});localStorage.removeItem(KEY);LEGACY.forEach(function(k){localStorage.removeItem(k);});
     location.reload();
   });
 
