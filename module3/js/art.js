@@ -185,6 +185,7 @@
   };
 
   MEA.artKit = { S, grid, add: (o) => Object.assign(ART, o), raw: (n) => (ART[n] ? ART[n]() : '') };
+  MEA.keks = (cls) => '<img class="keks ' + (cls || '') + '" src="img/keks.webp" width="640" height="427" alt="Keks, a striped tabby cat with a blue scarf, a suitcase and a map">';
   MEA.art = function (name, cls) {
     const f = ART[name];
     return '<div class="art ' + (cls || '') + '">' + (f ? f() : '') + '</div>';

@@ -97,7 +97,7 @@
       const s = STAMPS[item.stamp];
       inner = '<div class="cel-stamp">' + stampSvg(item.stamp, Date.now()) + '</div><h3>' + (item.stamp === '3a' ? "You've unlocked a new destination!" : 'New stamp in your passport!') + '</h3><p>' + esc(s.title) + ' · ' + esc(s.line) + '</p>';
     } else inner = '<div class="cel-badge">' + badgeHtml(item.badge, true) + '</div><h3>New badge, Malik!</h3><p>' + esc(item.badge.desc) + '</p>';
-    ov.innerHTML = '<div class="cel-card">' + inner + '<div class="cel-chars">' + MEA.art('cat', 'char') + MEA.art('dog', 'char') + '</div><button type="button" class="btn-primary">Awesome!</button></div>';
+    ov.innerHTML = '<div class="cel-card">' + inner + '<div class="cel-chars">' + MEA.keks('cel-keks') + '<p class="keks-says"><b>Keks:</b> ' + (item.stamp ? 'Pack your bag, we fly on!' : 'Purr-fect, Malik!') + '</p></div><button type="button" class="btn-primary">Awesome!</button></div>';
     document.body.appendChild(ov);
     const btn = $('button', ov); btn.focus();
     btn.addEventListener('click', () => { ov.remove(); done && done(); });
@@ -159,11 +159,13 @@
     main().innerHTML =
       '<section class="hero"><div class="hero-txt"><p class="eyebrow">Learn English. Explore the World.</p><h1>Welcome aboard, Malik!</h1><p class="lead">' +
       (started ? (st.done ? 'Your next flight is ready. Let\'s continue where you stopped.' : 'You\'ve unlocked a new destination: lesson ' + lesson.code + '!') : 'Ready for your first adventure? Today we fly to lesson ' + lesson.code + ': ' + esc(lesson.title) + '.') + '</p></div>' +
-      '<div class="hero-chars">' + MEA.art('cat', 'char') + '<div class="bubble">' + (started ? "Let's go, Malik!" : "Hi! I'm Biscuit, your navigator.") + '</div>' + MEA.art('dog', 'char') + '</div></section>' +
+      '<div class="hero-chars">' + MEA.keks('hero-keks') + '<div class="bubble">' + (started ? "Let's fly on, Malik!" : "Hi, Malik! I'm Keks. Let's travel!") + '</div><div class="crew">' + MEA.art('cat', 'char') + MEA.art('dog', 'char') + '</div></div></section>' +
       '<section class="pass" aria-label="Next lesson"><div class="pass-main"><div class="pass-row"><div><small>FLIGHT</small><b>' + lesson.code + '</b></div><div><small>DESTINATION</small><b>' + esc(lesson.destination.name) + '</b></div><div><small>STATUS</small><b class="status">' + (st.done ? (st.done === st.total ? 'LANDED' : 'IN FLIGHT') : 'BOARDING') + '</b></div></div>' +
       '<h2>Lesson ' + lesson.code + ': ' + esc(lesson.title) + '</h2><p class="muted">' + esc(lesson.subtitle) + ' · Spotlight 5, ' + esc(lesson.pages) + '</p>' +
       '<div class="pbar"><i style="width:' + st.pct + '%"></i></div><p class="muted small">' + st.done + ' of ' + st.total + ' exercises done</p></div>' +
       '<div class="pass-stub"><small>NEXT</small><b>' + esc(nx.ex.title) + '</b><small>' + esc(nx.st.title) + '</small><button type="button" class="btn-primary" id="continue">' + MEA.icon('right') + '<span>' + (started ? 'Continue Learning' : 'Start the adventure') + '</span></button></div></section>' +
+      '<section class="card"><div class="row-card"><h3>' + MEA.icon('map') + ' Module 3 · My home, my castle</h3><a class="btn-ghost sm" href="#map">' + MEA.icon('map') + '<span>Travel map</span></a></div><div class="lgrid">' +
+      MEA.lessons.map((l) => { const s2 = lessonStats(l); const stp = S.data.stamps[l.id]; return '<button type="button" class="lcard' + (l === lesson ? ' cur' : '') + '" data-lesson="' + l.id + '"><span class="lcode">' + l.code + '</span><b>' + esc(l.title) + '</b><span class="pbar"><i style="width:' + s2.pct + '%"></i></span><small>' + (stp ? 'Landed · stamp ✓' : s2.done + ' / ' + s2.total + ' done') + '</small></button>'; }).join('') + '</div></section>' +
       '<section class="tiles4"><a class="tile-s" href="#profile"><small>Level ' + lv.n + '</small><b>' + lv.rank + '</b><span class="pbar"><i style="width:' + (100 * lv.into / lv.need) + '%"></i></span></a>' +
       '<a class="tile-s" href="#passport"><small>Passport stamps</small><b>' + stamps + ' / ' + Object.keys(STAMPS).length + '</b></a>' +
       '<a class="tile-s" href="#words"><small>Words to Practise</small><b>' + words + '</b></a>' +
@@ -173,6 +175,7 @@
       (!S.data.settings.noticeSeen || !S.available ? '<section class="notice"><p>' + MEA.icon('bulb') + ' <b>Прогресс сохраняется в этом браузере на этом устройстве.</b> Если открыть сайт на другом устройстве или очистить данные браузера, результаты не перенесутся. Сделать копию можно в разделе <a href="#profile">My Cabin</a>.' +
         (!S.available ? ' <b>Сейчас браузер не разрешает сохранение — прогресс пропадёт после закрытия страницы.</b>' : '') + '</p><button type="button" class="btn-ghost sm" id="notice-ok">OK</button></section>' : '');
     $('#continue').addEventListener('click', () => openLesson(lesson.id, nx.ex.id));
+    $$('[data-lesson]').forEach((b) => b.addEventListener('click', () => openLesson(b.dataset.lesson)));
     $$('[data-go]').forEach((b) => b.addEventListener('click', () => openLesson(b.dataset.l || lesson.id, b.dataset.go)));
     const n = $('#notice-ok'); n && n.addEventListener('click', () => { S.data.settings.noticeSeen = true; S.save(); n.closest('.notice').remove(); });
   };
@@ -199,7 +202,7 @@
     main().innerHTML = '<section class="page-head"><h1>Malik\'s Travel Passport</h1></section><section class="passport">' +
       '<div class="pp-page pp-id"><div class="pp-photo">' + MEA.art('cat', 'char') + '</div><dl><dt>Name</dt><dd>MALIK</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
       '<p class="mrz mono">P&lt;ENG&lt;MALIK&lt;&lt;ENGLISH&lt;ADVENTURES&lt;&lt;&lt;&lt;</p></div>' +
-      '<div class="pp-page"><h3>Stamps</h3><div class="stamps">' + Object.keys(STAMPS).map((id) => S.data.stamps[id] ? '<div class="stamp on">' + stampSvg(id, S.data.stamps[id]) + '</div>' : '<div class="stamp"><span>' + STAMPS[id].code + '</span><small>' + esc(STAMPS[id].title) + '</small></div>').join('') + '</div>' +
+      '<div class="pp-page"><div class="pp-keks">' + MEA.keks() + '<small>Travel buddy: KEKS</small></div><h3>Stamps</h3><div class="stamps">' + Object.keys(STAMPS).map((id) => S.data.stamps[id] ? '<div class="stamp on">' + stampSvg(id, S.data.stamps[id]) + '</div>' : '<div class="stamp"><span>' + STAMPS[id].code + '</span><small>' + esc(STAMPS[id].title) + '</small></div>').join('') + '</div>' +
       '<p class="muted small">Штамп «NUM» — 80% в Final Number Challenge. Штампы уроков — 70% и больше в Final Mission урока.</p></div></section>' +
       '<section class="card"><h3>Badges</h3><div class="badges">' + BADGES.map((b) => badgeHtml(b, !!S.data.badges[b.id])).join('') + '</div></section>';
   };

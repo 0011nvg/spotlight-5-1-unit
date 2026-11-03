@@ -652,3 +652,31 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 .plan-room .gap-in { width: auto; flex: 1; min-width: 0; }
 
 .part { display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; color: var(--orange); text-transform: uppercase; margin-bottom: .2rem; }
+
+/* ---------- Keks (Victoria's travel cat) & lesson overview ---------- */
+.keks { display: block; width: 100%; height: auto; }
+.hero-chars { flex-direction: column; align-items: center; }
+.hero-keks { width: min(300px, 80vw); filter: drop-shadow(0 8px 14px rgba(15, 35, 68, .15)); }
+.hero-chars .bubble { top: 6px; left: 8%; transform: none; }
+.crew { display: flex; gap: .4rem; margin-top: -2.2rem; }
+.crew .char { width: 56px; }
+.hero-chars .crew .char:first-child { animation: none; }
+.cel-chars { flex-direction: column; align-items: center; }
+.cel-keks { width: 190px; }
+.keks-says, .sum-keks p { margin: 0; font-size: .92rem; background: #EAF0FF; border-radius: 12px; padding: .3rem .7rem; }
+.sum-keks { display: flex; align-items: center; gap: .6rem; }
+.sum-keks .keks { width: 120px; }
+.pp-keks { float: right; width: 130px; text-align: center; margin: 0 0 .5rem .5rem; }
+.pp-keks small { font-family: var(--mono); font-size: .65rem; color: var(--muted); }
+.lgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .6rem; margin-top: .6rem; }
+.lcard { display: grid; gap: .35rem; text-align: left; padding: .8rem .9rem; border-radius: 14px; border: 2px solid var(--line); background: #fff; }
+.lcard:hover { border-color: var(--blue); }
+.lcard.cur { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(255, 107, 44, .15); }
+.lcode { justify-self: start; font-family: var(--display); font-size: .8rem; background: var(--navy); color: #fff; border-radius: 8px; padding: .1rem .5rem; }
+.lcard small { color: var(--muted); }
+@media (max-width: 860px) { .hero-chars { align-items: flex-start; } .hero-keks { width: 220px; } }
+.hero-chars .bubble { position: static; transform: none; align-self: center; margin-bottom: .3rem; white-space: normal; text-align: center; }
+.cel-badge { animation: none; }
+.cel-badge .badge { padding: .6rem; }
+@media (max-width: 620px) { .lgrid { grid-template-columns: 1fr 1fr; } .lcard { padding: .6rem; } .hero-chars { align-items: center; } .cel-keks { width: 140px; } }
+.hero-chars .bubble { order: -1; }

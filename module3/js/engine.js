@@ -396,7 +396,7 @@
     const mist = (res.mistakes || []).filter((m) => m.answer);
     api.body.innerHTML = '<div class="summary">' +
       '<div class="stars">' + [1, 2, 3].map((i) => '<span class="' + (i <= stars ? 'on' : '') + '">' + MEA.icon('star') + '</span>').join('') + '</div>' +
-      '<h3>' + esc(msg) + '</h3>' +
+      '<h3>' + esc(msg) + '</h3>' + (pct == null || pct >= 70 ? '<div class="sum-keks">' + MEA.keks() + '<p><b>Keks:</b> ' + esc(MEA.util.pick(pct === 100 ? ['Purr-fect!', 'Wow, no mistakes!', 'You are a star pilot!'] : ['Good flight!', 'Meow! Well done!', 'Next stop — new words!'])) + '</p></div>' : '') +
       (pct != null ? (ctx.ex.test ? '<p class="big-score">' + Math.round(res.score * res.total) + '<small> / ' + res.total + '</small></p><p class="muted">My score</p>' : '<p class="big-score">' + pct + '<small>%</small></p><p class="muted">' + res.firstTry + ' of ' + res.total + ' correct on the first try</p>') : '') +
       (res.xp ? '<p class="xp-chip">+' + res.xp + ' XP</p>' : '') +
       (mist.length ? '<div class="mistakes"><h4>Check these answers</h4><ul>' + mist.map((m) => '<li><span class="q">' + esc(m.q) + '</span>' +
