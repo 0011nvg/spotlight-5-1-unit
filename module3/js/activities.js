@@ -241,12 +241,13 @@
   /* ===== Writing (portfolio) ===== */
   W.writing = function (ctx, api) {
     const ex = ctx.ex, S = MEA.Store; const saved = S.data.writing[ctx.key] || '';
-    api.body.innerHTML = '<div class="writing"><div class="w-main">' +
+    api.body.innerHTML = (ex.widget ? '<div class="w-widget" data-widget="' + ex.widget + '"></div>' : '') + '<div class="writing"><div class="w-main">' +
       '<div class="frames"><span>Useful phrases:</span>' + ex.frames.map((f) => '<button type="button" class="frame-b">' + esc(f) + '</button>').join('') + '</div>' +
       '<label for="w-text" class="sr">Your paragraph</label><textarea id="w-text" rows="9" spellcheck="false" placeholder="My home is…">' + esc(saved) + '</textarea>' +
       '<p class="muted"><span class="wc">0</span> words · сохраняется автоматически</p></div>' +
       '<aside class="w-side"><h4>Checklist</h4><ul class="checklist">' + ex.checks.map((c, k) => '<li data-k="' + k + '">' + MEA.icon('check') + '<span>' + esc(c.label) + '</span></li>').join('') + '</ul>' +
       '<details class="model"><summary>See an example</summary><p>' + ex.model + '</p></details></aside></div>';
+    $$('[data-widget]', api.body).forEach((w) => MEA.widgets[w.dataset.widget](w, ctx));
     const ta = $('#w-text', api.body);
     $$('.frame-b', api.body).forEach((b) => b.addEventListener('click', () => { const t = b.textContent.replace(/…$/, ''); ta.value += (ta.value && !/\s$/.test(ta.value) ? ' ' : '') + t; ta.focus(); upd(); }));
     function upd() {

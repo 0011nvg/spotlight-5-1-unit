@@ -33,7 +33,8 @@
     numbers: { title: 'Numbers Airport', code: 'NUM', color: '#2F7BF6', line: 'Numbers 1–100' },
     '3a': { title: 'Home Sweet Home', code: '3A', color: '#E5484D', line: 'Lesson 3A · At home' },
     '3b': { title: 'New Home', code: '3B', color: '#128A5C', line: 'Lesson 3B · Move in!' },
-    '3c': { title: 'Dream Room', code: '3C', color: '#6D4BC4', line: 'Lesson 3C · My bedroom' }
+    '3c': { title: 'Dream Room', code: '3C', color: '#6D4BC4', line: 'Lesson 3C · My bedroom' },
+    '3d': { title: 'Culture Corner', code: 'UK', color: '#B5523B', line: 'Lesson 3D · A typical English house' }
   };
   const best = (k) => (S.result(k) || {}).best || 0;
   const doneK = (k) => (S.result(k) || {}).status === 'done';
@@ -50,6 +51,7 @@
     { id: 'designer', title: 'Interior Designer', desc: 'Finish all Discover exercises in lesson 3B', icon: 'home', test: () => ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'].every((x) => doneK('3b/' + x)) },
     { id: 'tidy', title: 'Tidy-up Hero', desc: '90% or more in Tidy up!', icon: 'home', test: () => best('3c/g1') >= 90 },
     { id: 'author', title: 'Room Author', desc: 'Write your bedroom paragraph', icon: 'clipboard', test: () => doneK('3c/c6') },
+    { id: 'planner', title: 'House Planner', desc: 'Complete the plan of the English house without mistakes', icon: 'map', test: () => best('3d/r5') === 100 },
     { id: 'fixer', title: 'Word Fixer', desc: 'Remove 5 words from Words to Practise', icon: 'retry', test: () => S.data.cleared >= 5 }
   ];
   const level = () => { const xp = S.data.xp; const ranks = ['Cadet', 'Co-pilot', 'Pilot', 'Captain', 'Senior Captain', 'Sky Legend']; const lv = Math.floor(xp / 500); return { n: lv + 1, rank: ranks[Math.min(lv, ranks.length - 1)], into: xp % 500, need: 500 }; };
