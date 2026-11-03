@@ -12,7 +12,7 @@
     { id: '3a', code: '3A', title: 'At home' },
     { id: '3b', code: '3B', title: 'Move in!' },
     { id: '3c', code: '3C', title: 'My bedroom' },
-    { id: '3cc', code: '3', title: 'Culture Corner: A typical English house' }
+    { id: '3d', code: '3D', title: 'Culture Corner: A typical English house' }
   ];
   const lessonById = (id) => MEA.lessons.find((l) => l.id === id);
   function curLesson() {
@@ -32,7 +32,8 @@
   const STAMPS = {
     numbers: { title: 'Numbers Airport', code: 'NUM', color: '#2F7BF6', line: 'Numbers 1–100' },
     '3a': { title: 'Home Sweet Home', code: '3A', color: '#E5484D', line: 'Lesson 3A · At home' },
-    '3b': { title: 'New Home', code: '3B', color: '#128A5C', line: 'Lesson 3B · Move in!' }
+    '3b': { title: 'New Home', code: '3B', color: '#128A5C', line: 'Lesson 3B · Move in!' },
+    '3c': { title: 'Dream Room', code: '3C', color: '#6D4BC4', line: 'Lesson 3C · My bedroom' }
   };
   const best = (k) => (S.result(k) || {}).best || 0;
   const doneK = (k) => (S.result(k) || {}).status === 'done';
@@ -47,6 +48,8 @@
     { id: 'writer', title: 'Writer', desc: 'Finish your portfolio paragraph', icon: 'clipboard', test: () => doneK('3a/c8') },
     { id: 'speller3b', title: 'Spell & Move Champion', desc: '80% or more in the Spell & Move board game', icon: 'star', test: () => best('3b/g3') >= 80 },
     { id: 'designer', title: 'Interior Designer', desc: 'Finish all Discover exercises in lesson 3B', icon: 'home', test: () => ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'].every((x) => doneK('3b/' + x)) },
+    { id: 'tidy', title: 'Tidy-up Hero', desc: '90% or more in Tidy up!', icon: 'home', test: () => best('3c/g1') >= 90 },
+    { id: 'author', title: 'Room Author', desc: 'Write your bedroom paragraph', icon: 'clipboard', test: () => doneK('3c/c6') },
     { id: 'fixer', title: 'Word Fixer', desc: 'Remove 5 words from Words to Practise', icon: 'retry', test: () => S.data.cleared >= 5 }
   ];
   const level = () => { const xp = S.data.xp; const ranks = ['Cadet', 'Co-pilot', 'Pilot', 'Captain', 'Senior Captain', 'Sky Legend']; const lv = Math.floor(xp / 500); return { n: lv + 1, rank: ranks[Math.min(lv, ranks.length - 1)], into: xp % 500, need: 500 }; };

@@ -184,7 +184,7 @@
     slow: '<circle cx="12" cy="12" r="8.5" fill="none"/><path d="M12 7v5l3 2" fill="none"/>'
   };
 
-  MEA.artKit = { S, grid, add: (o) => Object.assign(ART, o) };
+  MEA.artKit = { S, grid, add: (o) => Object.assign(ART, o), raw: (n) => (ART[n] ? ART[n]() : '') };
   MEA.art = function (name, cls) {
     const f = ART[name];
     return '<div class="art ' + (cls || '') + '">' + (f ? f() : '') + '</div>';

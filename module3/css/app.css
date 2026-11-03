@@ -414,7 +414,7 @@ textarea.code { width: 100%; font-family: var(--mono); font-size: .75rem; border
 .match { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .m-col { display: grid; gap: .55rem; align-content: start; }
 .m-card { display: flex; align-items: center; gap: .6rem; padding: .55rem .8rem; min-height: 56px; border-radius: 12px; border: 2px solid var(--line); background: #fff; font-weight: 700; text-align: left; }
-.m-card .m-art { width: 86px; flex: none; }
+.m-card .m-art { width: 110px; flex: none; }
 .m-card:hover:not(:disabled) { border-color: var(--blue); }
 .m-card.is-sel { border-color: var(--blue); background: var(--sky); box-shadow: 0 0 0 3px rgba(47, 111, 228, .15); }
 .m-card.is-done { border-color: var(--good); background: var(--good-bg); color: var(--good); opacity: .8; }
@@ -613,3 +613,20 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 .dialog-txt p { margin: .25rem 0; }
 .dialog-txt b { display: inline-block; min-width: 3.6rem; color: var(--blue); }
 @media (max-width: 620px) { .bsq { width: 76px; height: 76px; } .bsq .art { width: 56px; } .coin { width: 96px; height: 96px; } }
+
+/* ---------- lesson 3C: bedroom scene ---------- */
+.bedroom { position: relative; width: min(560px, 100%); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); line-height: 0; }
+.br-base svg { width: 100%; height: auto; display: block; }
+.br-obj { position: absolute; width: 10%; transform: translate(-50%, -50%); pointer-events: none; }
+.br-obj svg { width: 100%; height: auto; display: block; }
+.br-cat { width: 13%; }
+.br-football { width: 8%; }
+.br-poster { width: 11%; }
+.br-new { animation: pop .4s; }
+.br-spot { position: absolute; width: 9%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%; border: 3px dashed var(--blue); background: rgba(255, 255, 255, .55); padding: 0; min-width: 30px; }
+.br-spot:hover:not(:disabled) { background: rgba(47, 111, 228, .25); }
+.br-spot.is-wrong { border-color: var(--bad); background: rgba(217, 58, 63, .3); }
+.br-spot:disabled { opacity: .35; }
+.place-wrap { display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap; }
+.place-obj { width: 72px; padding: 8px; background: #fff; border: 3px solid var(--orange); border-radius: 16px; animation: bob 2s ease-in-out infinite; }
+.place-obj.gone { visibility: hidden; }
