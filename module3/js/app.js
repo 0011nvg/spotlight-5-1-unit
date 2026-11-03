@@ -15,13 +15,24 @@
     { id: '3cc', code: '3', title: 'Culture Corner: A typical English house' }
   ];
   const lessonById = (id) => MEA.lessons.find((l) => l.id === id);
+  function curLesson() {
+    const last = S.data.last && lessonById(S.data.last.lesson);
+    if (last) {
+      const i = MEA.lessons.indexOf(last), nx = MEA.lessons[i + 1];
+      if (nx && S.data.stamps[last.id] && flat(last).every((x) => doneK(x.key) || x.ex.type === 'report') && !Object.keys(S.data.results).some((k) => k.startsWith(nx.id + '/'))) return nx;
+      return last;
+    }
+    return MEA.lessons.find((l) => !S.data.stamps[l.id]) || MEA.lessons[0];
+  }
+  const learned = (lesson) => lesson.vocab.filter((v) => !S.data.practise[v.key] && (lesson.learnedAfter || ['d6', 'f1']).some((x) => doneK(lesson.id + '/' + x)));
   const flat = (lesson) => lesson.stages.flatMap((st) => st.exercises.map((ex) => ({ st, ex, key: lesson.id + '/' + ex.id })));
   const scored = (ex) => !['rule', 'cards', 'report', 'speak', 'writing'].includes(ex.type);
 
   /* ---------- gamification ---------- */
   const STAMPS = {
     numbers: { title: 'Numbers Airport', code: 'NUM', color: '#2F7BF6', line: 'Numbers 1–100' },
-    '3a': { title: 'Home Sweet Home', code: '3A', color: '#E5484D', line: 'Lesson 3A · At home' }
+    '3a': { title: 'Home Sweet Home', code: '3A', color: '#E5484D', line: 'Lesson 3A · At home' },
+    '3b': { title: 'New Home', code: '3B', color: '#128A5C', line: 'Lesson 3B · Move in!' }
   };
   const best = (k) => (S.result(k) || {}).best || 0;
   const doneK = (k) => (S.result(k) || {}).status === 'done';
@@ -30,10 +41,12 @@
     { id: 'pilot', title: 'Number Pilot', desc: '80% or more in the Final Number Challenge', icon: 'star', test: () => best('3a/n7') >= 80 },
     { id: 'speller', title: 'Spelling Ace', desc: '25 words written right on the first try', icon: 'check', test: () => S.data.stats.typedFirstTry >= 25 },
     { id: 'perfect', title: 'Perfect Flight', desc: '100% in an exercise with 5+ questions', icon: 'star', test: () => !!S.data.badges.perfect },
-    { id: 'explorer', title: 'Home Explorer', desc: 'Finish all Discover exercises', icon: 'home', test: () => ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'].every((x) => doneK('3a/' + x)) },
+    { id: 'explorer', title: 'Home Explorer', desc: 'Finish all Discover exercises in lesson 3A', icon: 'home', test: () => ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'].every((x) => doneK('3a/' + x)) },
     { id: 'lift', title: 'Lift Operator', desc: '90% or more in the lift game', icon: 'right', test: () => best('3a/g3') >= 90 },
     { id: 'reader', title: 'Bookworm', desc: 'Finish all reading tasks', icon: 'book', test: () => ['c1', 'c2', 'c3'].every((x) => doneK('3a/' + x)) },
     { id: 'writer', title: 'Writer', desc: 'Finish your portfolio paragraph', icon: 'clipboard', test: () => doneK('3a/c8') },
+    { id: 'speller3b', title: 'Spell & Move Champion', desc: '80% or more in the Spell & Move board game', icon: 'star', test: () => best('3b/g3') >= 80 },
+    { id: 'designer', title: 'Interior Designer', desc: 'Finish all Discover exercises in lesson 3B', icon: 'home', test: () => ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'].every((x) => doneK('3b/' + x)) },
     { id: 'fixer', title: 'Word Fixer', desc: 'Remove 5 words from Words to Practise', icon: 'retry', test: () => S.data.cleared >= 5 }
   ];
   const level = () => { const xp = S.data.xp; const ranks = ['Cadet', 'Co-pilot', 'Pilot', 'Captain', 'Senior Captain', 'Sky Legend']; const lv = Math.floor(xp / 500); return { n: lv + 1, rank: ranks[Math.min(lv, ranks.length - 1)], into: xp % 500, need: 500 }; };
@@ -91,11 +104,11 @@
   });
 
   /* ---------- header ---------- */
-  const NAV = [['home', 'home', 'Home'], ['map', 'map', 'Map'], ['lesson-3a', 'plane', 'Lesson'], ['passport', 'passport', 'Passport'], ['words', 'book', 'My Words'], ['profile', 'user', 'My Cabin']];
+  const NAV = () => [['home', 'home', 'Home'], ['map', 'map', 'Map'], ['lesson-' + curLesson().id, 'plane', 'Lesson'], ['passport', 'passport', 'Passport'], ['words', 'book', 'My Words'], ['profile', 'user', 'My Cabin']];
   function renderHeader() {
     const lv = level(), cur = (location.hash || '#home').slice(1), teacher = S.data.settings.teacher;
     $('#top').innerHTML = '<a class="brand" href="#home" aria-label="Home"><span class="brand-ic">' + MEA.icon('plane') + '</span><span class="brand-t">Malik\'s <b>English Adventures</b></span></a>' +
-      '<nav class="nav" aria-label="Main">' + NAV.concat(teacher ? [['teacher', 'clipboard', 'Teacher']] : []).map(([h, i, t]) =>
+      '<nav class="nav" aria-label="Main">' + NAV().concat(teacher ? [['teacher', 'clipboard', 'Teacher']] : []).map(([h, i, t]) =>
         '<a href="#' + h + '" class="' + (cur === h || (cur.startsWith('lesson') && h.startsWith('lesson')) ? 'on' : '') + '">' + MEA.icon(i) + '<span>' + t + '</span></a>').join('') + '</nav>' +
       '<div class="top-r"><span class="xp" title="Experience points">' + MEA.icon('star') + '<b>' + S.data.xp + '</b> XP</span>' +
       '<label class="tswitch" title="Режим учителя"><input type="checkbox" id="teacher-t" ' + (teacher ? 'checked' : '') + '><span></span><em>Teacher</em></label></div>';
@@ -124,13 +137,13 @@
   const main = () => $('#app');
 
   Screens.home = function () {
-    const lesson = MEA.lessons[0], nx = nextExercise(lesson), st = lessonStats(lesson), lv = level();
+    const lesson = curLesson(), nx = nextExercise(lesson), st = lessonStats(lesson), lv = level();
     const words = S.practiseList().length, stamps = Object.keys(S.data.stamps).length;
-    const assigned = S.data.assigned.map((k) => flat(lesson).find((x) => x.key === k)).filter(Boolean);
+    const assigned = S.data.assigned.map((k) => MEA.lessons.flatMap((l) => flat(l).map((x) => Object.assign({ l }, x))).find((x) => x.key === k)).filter(Boolean);
     const started = Object.keys(S.data.results).length > 0;
     main().innerHTML =
       '<section class="hero"><div class="hero-txt"><p class="eyebrow">Learn English. Explore the World.</p><h1>Welcome aboard, Malik!</h1><p class="lead">' +
-      (started ? 'Your next flight is ready. Let\'s continue where you stopped.' : 'Ready for your first adventure? Today we fly to lesson 3A: At home.') + '</p></div>' +
+      (started ? (st.done ? 'Your next flight is ready. Let\'s continue where you stopped.' : 'You\'ve unlocked a new destination: lesson ' + lesson.code + '!') : 'Ready for your first adventure? Today we fly to lesson ' + lesson.code + ': ' + esc(lesson.title) + '.') + '</p></div>' +
       '<div class="hero-chars">' + MEA.art('cat', 'char') + '<div class="bubble">' + (started ? "Let's go, Malik!" : "Hi! I'm Biscuit, your navigator.") + '</div>' + MEA.art('dog', 'char') + '</div></section>' +
       '<section class="pass" aria-label="Next lesson"><div class="pass-main"><div class="pass-row"><div><small>FLIGHT</small><b>' + lesson.code + '</b></div><div><small>DESTINATION</small><b>' + esc(lesson.destination.name) + '</b></div><div><small>STATUS</small><b class="status">' + (st.done ? (st.done === st.total ? 'LANDED' : 'IN FLIGHT') : 'BOARDING') + '</b></div></div>' +
       '<h2>Lesson ' + lesson.code + ': ' + esc(lesson.title) + '</h2><p class="muted">' + esc(lesson.subtitle) + ' · Spotlight 5, ' + esc(lesson.pages) + '</p>' +
@@ -140,12 +153,12 @@
       '<a class="tile-s" href="#passport"><small>Passport stamps</small><b>' + stamps + ' / ' + Object.keys(STAMPS).length + '</b></a>' +
       '<a class="tile-s" href="#words"><small>Words to Practise</small><b>' + words + '</b></a>' +
       '<a class="tile-s" href="#passport"><small>Badges</small><b>' + BADGES.filter((b) => S.data.badges[b.id]).length + ' / ' + BADGES.length + '</b></a></section>' +
-      (assigned.length ? '<section class="card"><h3>' + MEA.icon('clipboard') + ' From your teacher</h3><div class="assigned">' + assigned.map((a) => '<button type="button" class="chip-l" data-go="' + a.ex.id + '">' + esc(a.ex.title) + '<small>' + esc(a.st.title) + '</small></button>').join('') + '</div></section>' : '') +
+      (assigned.length ? '<section class="card"><h3>' + MEA.icon('clipboard') + ' From your teacher</h3><div class="assigned">' + assigned.map((a) => '<button type="button" class="chip-l" data-go="' + a.ex.id + '" data-l="' + a.l.id + '">' + esc(a.ex.title) + '<small>' + a.l.code + ' · ' + esc(a.st.title) + '</small></button>').join('') + '</div></section>' : '') +
       (words ? '<section class="card row-card"><div><h3>Words to Practise</h3><p class="muted">' + words + ' word' + (words > 1 ? 's' : '') + ' need a little more practice.</p></div><a class="btn-ghost" href="#words">' + MEA.icon('retry') + '<span>Practise now</span></a></section>' : '') +
       (!S.data.settings.noticeSeen || !S.available ? '<section class="notice"><p>' + MEA.icon('bulb') + ' <b>Прогресс сохраняется в этом браузере на этом устройстве.</b> Если открыть сайт на другом устройстве или очистить данные браузера, результаты не перенесутся. Сделать копию можно в разделе <a href="#profile">My Cabin</a>.' +
         (!S.available ? ' <b>Сейчас браузер не разрешает сохранение — прогресс пропадёт после закрытия страницы.</b>' : '') + '</p><button type="button" class="btn-ghost sm" id="notice-ok">OK</button></section>' : '');
     $('#continue').addEventListener('click', () => openLesson(lesson.id, nx.ex.id));
-    $$('[data-go]').forEach((b) => b.addEventListener('click', () => openLesson(lesson.id, b.dataset.go)));
+    $$('[data-go]').forEach((b) => b.addEventListener('click', () => openLesson(b.dataset.l || lesson.id, b.dataset.go)));
     const n = $('#notice-ok'); n && n.addEventListener('click', () => { S.data.settings.noticeSeen = true; S.save(); n.closest('.notice').remove(); });
   };
 
@@ -172,18 +185,18 @@
       '<div class="pp-page pp-id"><div class="pp-photo">' + MEA.art('cat', 'char') + '</div><dl><dt>Name</dt><dd>MALIK</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
       '<p class="mrz mono">P&lt;ENG&lt;MALIK&lt;&lt;ENGLISH&lt;ADVENTURES&lt;&lt;&lt;&lt;</p></div>' +
       '<div class="pp-page"><h3>Stamps</h3><div class="stamps">' + Object.keys(STAMPS).map((id) => S.data.stamps[id] ? '<div class="stamp on">' + stampSvg(id, S.data.stamps[id]) + '</div>' : '<div class="stamp"><span>' + STAMPS[id].code + '</span><small>' + esc(STAMPS[id].title) + '</small></div>').join('') + '</div>' +
-      '<p class="muted small">Штамп «NUM» — 80% в Final Number Challenge. Штамп «3A» — 70% в Final Mission урока.</p></div></section>' +
+      '<p class="muted small">Штамп «NUM» — 80% в Final Number Challenge. Штампы уроков — 70% и больше в Final Mission урока.</p></div></section>' +
       '<section class="card"><h3>Badges</h3><div class="badges">' + BADGES.map((b) => badgeHtml(b, !!S.data.badges[b.id])).join('') + '</div></section>';
   };
 
   Screens.words = function () {
-    const list = S.practiseList(), lesson = MEA.lessons[0];
-    const learned = lesson.vocab.filter((v) => !S.data.practise[v.key] && ['3a/d6', '3a/f1'].some(doneK));
+    const list = S.practiseList();
+    const lw = MEA.lessons.flatMap((l) => learned(l));
     main().innerHTML = '<section class="page-head"><h1>My Words</h1><p class="lead">Words you find difficult come here automatically. Write them right a few times, and they leave the list.</p></section>' +
       '<section class="card"><div class="row-card"><h3>Words to Practise <span class="count">' + list.length + '</span></h3>' + (list.length ? '<button type="button" class="btn-primary" id="review">' + MEA.icon('retry') + '<span>Practise now</span></button>' : '') + '</div>' +
       (list.length ? '<ul class="wlist">' + list.map((p) => '<li><b>' + esc(p.answer) + '</b><span class="muted">' + esc(p.label) + '</span>' + (p.audio ? MEA.playBtn(p.audio) : '') + '<small>' + p.errors + ' mistake' + (p.errors > 1 ? 's' : '') + ' · ' + p.streak + '/2</small></li>').join('') + '</ul>'
         : '<p class="muted">No words to practise. Great job, Malik!</p>') + '</section>' +
-      '<section class="card"><h3>Learned words</h3>' + (learned.length ? '<div class="wcloud">' + learned.map((v) => '<span>' + MEA.playBtn(v.word, v.word) + '</span>').join('') + '</div>' : '<p class="muted">Finish “Write the rooms” or the Final Mission to see your learned words here.</p>') + '</section>' +
+      '<section class="card"><h3>Learned words <span class="count">' + lw.length + '</span></h3>' + (lw.length ? '<div class="wcloud">' + lw.map((v) => '<span>' + MEA.playBtn(v.word, v.word) + '</span>').join('') + '</div>' : '<p class="muted">Finish “Write the words” or the Final Mission of a lesson to see your learned words here.</p>') + '</section>' +
       '<div id="review-host"></div>';
     const r = $('#review'); r && r.addEventListener('click', startReview);
   };
@@ -196,19 +209,19 @@
     });
   }
   function startReview() {
-    const host = main(); const lesson = MEA.lessons[0];
+    const host = main(); const lesson = curLesson();
     host.innerHTML = '<section class="page-head"><a href="#words" class="back">' + MEA.icon('left') + ' My Words</a></section><div class="review-wrap"></div>';
     MEA.Engine.run({ lesson, stage: { title: 'Words to Practise' }, ex: { id: 'review', type: 'seq', title: 'Practise my words', task: 'Write each word without help. Two right answers in a row — and the word leaves the list.', items: reviewItems }, key: 'review/words', host: $('.review-wrap', host), review: true, restart: true, onNext: () => { location.hash = '#words'; route(); } });
   }
 
   Screens.profile = function () {
-    const lesson = MEA.lessons[0], st = lessonStats(lesson), lv = level();
-    const vocabDone = lesson.vocab.filter((v) => !S.data.practise[v.key] && ['3a/d6', '3a/f1'].some(doneK)).length;
+    const lesson = curLesson(), st = lessonStats(lesson), lv = level();
+    const vocabDone = MEA.lessons.reduce((n, l) => n + learned(l).length, 0);
     main().innerHTML = '<section class="page-head"><h1>My Cabin</h1><p class="lead">Malik · ' + lv.rank + ' · Level ' + lv.n + '</p></section>' +
       '<section class="tiles4"><div class="tile-s"><small>Current lesson</small><b>' + lesson.code + ' ' + esc(lesson.title) + '</b></div><div class="tile-s"><small>Lesson progress</small><b>' + st.pct + '%</b><span class="pbar"><i style="width:' + st.pct + '%"></i></span></div>' +
       '<div class="tile-s"><small>Average score</small><b>' + (st.avg == null ? '—' : st.avg + '%') + '</b></div><div class="tile-s"><small>Learned words / to practise</small><b>' + vocabDone + ' / ' + S.practiseList().length + '</b></div></section>' +
       '<div class="row-btns"><button type="button" class="btn-primary" id="cont">' + MEA.icon('right') + '<span>Continue Learning</span></button><a class="btn-ghost" href="#passport">' + MEA.icon('passport') + '<span>My passport</span></a><a class="btn-ghost" href="#words">' + MEA.icon('book') + '<span>My words</span></a></div>' +
-      '<section class="card"><h3>Results</h3>' + resultsTable(lesson, false) + '</section>' +
+      MEA.lessons.map((l) => '<section class="card"><h3>Results · ' + l.code + ' ' + esc(l.title) + '</h3>' + resultsTable(l, false) + '</section>').join('') +
       '<section class="card"><h3>Sound settings</h3><div class="settings"><label for="voice">Voice</label><select id="voice"></select><label for="rate">Speed <b id="rate-v"></b></label><input type="range" id="rate" min="0.6" max="1.1" step="0.05"><button type="button" class="btn-ghost sm" id="test-v">' + MEA.icon('speaker') + '<span>Test</span></button></div>' +
       '<p class="muted small">Озвучка встроена в браузер. Лучшие британские голоса обычно в Chrome («Google UK English») и Edge («Microsoft Sonia / Libby Online»). Если голос звучит плохо — выбери другой здесь.</p></section>' +
       '<section class="card"><h3>Saving progress</h3><p>Прогресс хранится <b>только в этом браузере</b>. Чтобы перенести его на другое устройство, скопируй код и вставь его там.</p>' +
@@ -250,13 +263,14 @@
   }
 
   Screens.teacher = function () {
-    const lesson = MEA.lessons[0], st = lessonStats(lesson);
+    const lesson = lessonById(Screens.teacher.sel) || curLesson(), st = lessonStats(lesson);
     const writing = Object.entries(S.data.writing).filter(([, t]) => t && t.trim());
-    main().innerHTML = '<section class="page-head"><h1>Teacher panel</h1><p class="lead">Lesson ' + lesson.code + ' · ' + st.done + '/' + st.total + ' exercises · average ' + (st.avg == null ? '—' : st.avg + '%') + '</p></section>' +
+    main().innerHTML = '<section class="page-head"><h1>Teacher panel</h1><div class="row-btns">' + MEA.lessons.map((l) => '<button type="button" class="btn-ghost sm ' + (l === lesson ? 'on' : '') + '" data-tl="' + l.id + '">' + l.code + ' ' + esc(l.title) + '</button>').join('') + '</div><p class="lead">Lesson ' + lesson.code + ' · ' + st.done + '/' + st.total + ' exercises · average ' + (st.avg == null ? '—' : st.avg + '%') + '</p></section>' +
       '<section class="card"><p class="muted small">В режиме учителя: в каждом задании видна методическая цель, кнопка <b>Show answer</b> доступна сразу, все упражнения открыты. «Assign» добавляет задание в блок «From your teacher» на главной странице Малика.</p>' + resultsTable(lesson, true) + '</section>' +
       '<section class="card"><h3>Words to Practise (' + S.practiseList().length + ')</h3>' + (S.practiseList().length ? '<p>' + S.practiseList().map((p) => '<span class="pill">' + esc(p.answer) + ' · ' + p.errors + '</span>').join(' ') + '</p><button type="button" class="btn-ghost sm" id="clear-w">Clear the list</button>' : '<p class="muted">Empty.</p>') + '</section>' +
       '<section class="card"><h3>Writing</h3>' + (writing.length ? writing.map(([k, t]) => '<div class="wtext"><small>' + esc(k) + '</small><p>' + esc(t).replace(/\n/g, '<br>') + '</p></div>').join('') : '<p class="muted">Malik has not written anything yet.</p>') + '</section>';
     $$('[data-open-ex]').forEach((b) => b.addEventListener('click', () => openLesson(lesson.id, b.dataset.openEx)));
+    $$('[data-tl]').forEach((b) => b.addEventListener('click', () => { Screens.teacher.sel = b.dataset.tl; Screens.teacher(); }));
     $$('[data-assign]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.assign, a = S.data.assigned; const i = a.indexOf(k); if (i >= 0) a.splice(i, 1); else a.push(k); S.save(); Screens.teacher(); }));
     const cw = $('#clear-w'); cw && cw.addEventListener('click', () => { S.data.practise = {}; S.save(); Screens.teacher(); });
   };
@@ -305,7 +319,7 @@
     MEA.Engine.run({ lesson, stage: st, ex, key, host, onNext });
     const sm = $('.stage-main'); if (sm && sm.getBoundingClientRect().top < 0) sm.scrollIntoView({ behavior: MEA.reduced ? 'auto' : 'smooth' });
   }
-  MEA.openEx = (exId) => openLesson(MEA.lessons[0].id, exId);
+  MEA.openEx = (exId, lessonId) => openLesson(lessonId || current.lesson || curLesson().id, exId);
 
   function reportEx(lesson, st, ex, key, host, onNext) {
     const stats = lessonStats(lesson);
@@ -317,11 +331,11 @@
     if (todo.length) recs.push('Закончи задания: ' + todo.slice(0, 3).map((x) => '«' + x.ex.title + '»').join(', ') + (todo.length > 3 ? ' и ещё ' + (todo.length - 3) : '') + '.');
     if (weak.length) recs.push('Повтори задания с результатом ниже 80% (кнопки ниже).');
     if (words.length) recs.push('Потренируй ' + words.length + ' слов(а) в разделе My Words — каждый день по 5 минут.');
-    if (!S.data.stamps.numbers) recs.push('Набери 80% в Final Number Challenge, чтобы получить штамп Numbers Airport.');
-    if (!recs.length) recs.push('Отлично! Урок 3A пройден. Повтори Words to Practise перед следующим уроком.');
+    if (lesson.id === '3a' && !S.data.stamps.numbers) recs.push('Набери 80% в Final Number Challenge, чтобы получить штамп Numbers Airport.');
+    if (!recs.length) recs.push('Отлично! Урок ' + lesson.code + ' пройден. Повтори Words to Practise перед следующим уроком.');
     host.innerHTML = '<article class="ex">' + '<header class="ex-head"><div class="ex-kicker">My Progress</div><h2 class="ex-title">Lesson ' + lesson.code + ' report</h2></header>' +
       '<div class="report"><div class="tiles4"><div class="tile-s"><small>Exercises done</small><b>' + stats.done + ' / ' + stats.total + '</b></div><div class="tile-s"><small>Average score</small><b>' + (stats.avg == null ? '—' : stats.avg + '%') + '</b></div>' +
-      '<div class="tile-s"><small>Words to Practise</small><b>' + words.length + '</b></div><div class="tile-s"><small>Stamps</small><b>' + Object.keys(S.data.stamps).length + ' / 2</b></div></div>' +
+      '<div class="tile-s"><small>Words to Practise</small><b>' + words.length + '</b></div><div class="tile-s"><small>Stamps</small><b>' + Object.keys(S.data.stamps).length + ' / ' + Object.keys(STAMPS).length + '</b></div></div>' +
       '<h4>Stages</h4><div class="stage-bars">' + lesson.stages.filter((s) => s.id !== 'progress').map((s) => {
         const xs = s.exercises.map((e) => lesson.id + '/' + e.id); const d = xs.filter(doneK).length; const scs = s.exercises.filter((e) => scored(e) && doneK(lesson.id + '/' + e.id)).map((e) => best(lesson.id + '/' + e.id));
         const avg = scs.length ? Math.round(scs.reduce((a, b) => a + b, 0) / scs.length) : null;

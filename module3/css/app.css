@@ -579,3 +579,37 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* ---------- lesson 3B additions ---------- */
+.roomkit { width: min(460px, 100%); background: #fff; border: 2px solid var(--line); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); }
+.rk-head { background: var(--navy); color: #fff; font-family: var(--display); font-size: .82rem; padding: .45rem .8rem; letter-spacing: .04em; }
+.rk-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px, 1fr)); gap: .5rem; padding: .6rem; }
+.rk-it { position: relative; }
+.rk-n { position: absolute; right: 4px; top: 4px; background: var(--orange); color: #fff; font-family: var(--mono); font-weight: 700; border-radius: 10px; padding: 0 .4rem; font-size: .85rem; }
+.bgame { display: grid; gap: 1rem; }
+.bpath { list-style: none; margin: 0; padding: .5rem .2rem 1rem; display: flex; gap: .55rem; overflow-x: auto; scroll-snap-type: x proximity; }
+.bsq { position: relative; flex: none; width: 92px; height: 92px; border-radius: 50%; background: #fff; border: 3px solid #FFD2B8; display: grid; place-items: center; scroll-snap-align: center; overflow: visible; }
+.bsq .art { width: 70px; border-radius: 50%; }
+.bsq.start, .bsq.finish { background: var(--orange); border-color: var(--orange); color: #fff; font-family: var(--display); font-size: .78rem; }
+.bsq.finish { background: var(--bad); border-color: var(--bad); }
+.bnum { position: absolute; top: -6px; left: -6px; width: 26px; height: 26px; border-radius: 50%; background: var(--bad); color: #fff; font-family: var(--mono); font-weight: 700; font-size: .8rem; display: grid; place-items: center; z-index: 1; }
+.btoken { position: absolute; bottom: -10px; right: -8px; width: 38px; height: 38px; border-radius: 50%; background: var(--navy); color: var(--gold); display: grid; place-items: center; box-shadow: var(--shadow); z-index: 2; animation: pop .35s; }
+.btoken .ic { width: 22px; height: 22px; }
+.bpanel { display: grid; gap: .6rem; justify-items: center; text-align: center; background: #FFF4EC; border-radius: 16px; padding: 1rem; }
+.coin { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #FFE7A0, #E0A82E 70%); border: 4px solid #B9861B; display: grid; place-items: center; font-family: var(--mono); font-weight: 700; color: #5A3D00; font-size: .85rem; }
+.coin.spin { animation: coin .6s ease-out; }
+@keyframes coin { from { transform: rotateY(0); } to { transform: rotateY(1080deg); } }
+.bq { display: grid; gap: .5rem; justify-items: center; width: min(420px, 100%); }
+.bq-art { width: 150px; }
+.bq .type-line { justify-content: center; }
+.ti { background: var(--navy); color: #fff; border-radius: 16px; padding: 1rem 1.2rem; display: grid; gap: .6rem; }
+.ti-ctrl { display: flex; flex-wrap: wrap; gap: .8rem; }
+.ti-ctrl label { display: grid; gap: .2rem; font-size: .8rem; color: #9FB3D6; }
+.ti-ctrl select { color: var(--ink); }
+.ti-out { font-family: var(--display); font-size: clamp(1.05rem, 2.6vw, 1.35rem); margin: 0; }
+.ti-out mark { background: var(--orange); color: #fff; }
+.ti-why { margin: 0; color: var(--gold); font-weight: 700; font-size: .92rem; }
+.ti .say { justify-self: start; background: rgba(255, 255, 255, .1); color: #fff; border-color: rgba(255, 255, 255, .3); }
+.dialog-txt p { margin: .25rem 0; }
+.dialog-txt b { display: inline-block; min-width: 3.6rem; color: var(--blue); }
+@media (max-width: 620px) { .bsq { width: 76px; height: 76px; } .bsq .art { width: 56px; } .coin { width: 96px; height: 96px; } }

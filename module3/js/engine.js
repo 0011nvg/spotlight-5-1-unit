@@ -346,7 +346,7 @@
           !settled && { label: 'Skip', icon: 'skip', on: () => { snap.log.push({ q: it.log || stripTags(it.prompt), given: '—', answer: it.answerText, result: 'skipped' }); next(); } },
           !settled && (teacher || attempts > 0) && { label: 'Show answer', icon: 'eye', on: () => reveal('') },
           settled ? { label: snap.idx + 1 < snap.items.length ? 'Next' : 'Finish', icon: 'right', primary: true, id: 'next', on: next } :
-            (it.kind === 'typing' || it.kind === 'order' || it.kind === 'builder') && { label: 'Check', icon: 'check', primary: true, id: 'check', on: submit }
+            (it.kind === 'typing' || it.kind === 'order' || it.kind === 'builder' || kind.check) && { label: 'Check', icon: 'check', primary: true, id: 'check', on: submit }
         ]);
         if (settled) setTimeout(() => { const b = $('[data-act=next]', host); b && b.focus({ preventScroll: true }); }, 30);
       }
