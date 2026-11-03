@@ -294,7 +294,7 @@
     let snap = !ctx.restart && !ctx.review && S.data.sessions[key];
     if (!snap || !snap.items) snap = { items: Engine.materialize(ex), idx: 0, log: [], points: 0, xp: 0 };
     const prog = $('.ex-progress', host); prog.hidden = false;
-    const scored = () => snap.items.filter((i) => i.kind !== 'poll').length;
+    const scored = () => snap.items.filter((i) => i.kind !== 'poll').reduce((n, i) => n + (i.w || 1), 0);
 
     function save() { if (!ctx.review) { S.data.sessions[key] = snap; S.save(); } }
     function step() {
@@ -307,7 +307,7 @@
       const body = api.body; body.innerHTML = '';
       const box = document.createElement('div'); box.className = 'item item-' + it.kind; body.appendChild(box);
       let attempts = 0, settled = false, h;
-      const max = kind.max ? kind.max(it) : 2;
+      const max = ex.test ? 1 : (kind.max ? kind.max(it) : 2);
       const submit = () => {
         if (settled) return next();
         const r = h.check(); if (!r) return;
@@ -316,7 +316,7 @@
         if (r.ok) {
           settled = true; h.lock(true);
           const first = attempts === 0;
-          snap.points += first ? 1 : 0.5; const xp = first ? 10 : 5; snap.xp += xp; S.data.xp += xp;
+          snap.points += (it.w || 1) * (first ? 1 : 0.5); const xp = first ? 10 : 5; snap.xp += xp; S.data.xp += xp;
           S.data.stats.itemsCorrect++; if (first && (it.kind === 'typing' || it.kind === 'builder')) S.data.stats.typedFirstTry++;
           if (it.pkey && S.noteCorrect(it.pkey, first, ctx.review)) MEA.toast('Removed from Words to Practise: ' + (it.plabel || it.answerText));
           api.feedback('good', praise(), (first ? '+10 XP' : '+5 XP') + (it.explain ? ' · ' + it.explain : ''));
@@ -344,7 +344,7 @@
         const teacher = S.data.settings.teacher;
         api.actions([
           !settled && { label: 'Skip', icon: 'skip', on: () => { snap.log.push({ q: it.log || stripTags(it.prompt), given: '—', answer: it.answerText, result: 'skipped' }); next(); } },
-          !settled && (teacher || attempts > 0) && { label: 'Show answer', icon: 'eye', on: () => reveal('') },
+          !settled && !ex.test && (teacher || attempts > 0) && { label: 'Show answer', icon: 'eye', on: () => reveal('') },
           settled ? { label: snap.idx + 1 < snap.items.length ? 'Next' : 'Finish', icon: 'right', primary: true, id: 'next', on: next } :
             (it.kind === 'typing' || it.kind === 'order' || it.kind === 'builder' || kind.check) && { label: 'Check', icon: 'check', primary: true, id: 'check', on: submit }
         ]);
@@ -397,7 +397,7 @@
     api.body.innerHTML = '<div class="summary">' +
       '<div class="stars">' + [1, 2, 3].map((i) => '<span class="' + (i <= stars ? 'on' : '') + '">' + MEA.icon('star') + '</span>').join('') + '</div>' +
       '<h3>' + esc(msg) + '</h3>' +
-      (pct != null ? '<p class="big-score">' + pct + '<small>%</small></p><p class="muted">' + res.firstTry + ' of ' + res.total + ' correct on the first try</p>' : '') +
+      (pct != null ? (ctx.ex.test ? '<p class="big-score">' + Math.round(res.score * res.total) + '<small> / ' + res.total + '</small></p><p class="muted">My score</p>' : '<p class="big-score">' + pct + '<small>%</small></p><p class="muted">' + res.firstTry + ' of ' + res.total + ' correct on the first try</p>') : '') +
       (res.xp ? '<p class="xp-chip">+' + res.xp + ' XP</p>' : '') +
       (mist.length ? '<div class="mistakes"><h4>Check these answers</h4><ul>' + mist.map((m) => '<li><span class="q">' + esc(m.q) + '</span>' +
         (m.given && m.given !== '—' ? '<s>' + esc(m.given) + '</s>' : '<em>skipped</em>') + MEA.icon('right') + '<b>' + esc(m.answer) + '</b></li>').join('') + '</ul></div>' : '') +

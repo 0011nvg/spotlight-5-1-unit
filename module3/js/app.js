@@ -12,7 +12,10 @@
     { id: '3a', code: '3A', title: 'At home' },
     { id: '3b', code: '3B', title: 'Move in!' },
     { id: '3c', code: '3C', title: 'My bedroom' },
-    { id: '3d', code: '3D', title: 'Culture Corner: A typical English house' }
+    { id: '3d', code: '3D', title: 'Culture Corner: A typical English house' },
+    { id: 'eu3', code: 'EiU', title: 'English in Use: Viewing a house' },
+    { id: 'er3', code: 'ER', title: 'Extensive Reading: The Taj Mahal' },
+    { id: 'pc3', code: 'PC3', title: 'Progress Check 3' }
   ];
   const lessonById = (id) => MEA.lessons.find((l) => l.id === id);
   function curLesson() {
@@ -34,7 +37,10 @@
     '3a': { title: 'Home Sweet Home', code: '3A', color: '#E5484D', line: 'Lesson 3A · At home' },
     '3b': { title: 'New Home', code: '3B', color: '#128A5C', line: 'Lesson 3B · Move in!' },
     '3c': { title: 'Dream Room', code: '3C', color: '#6D4BC4', line: 'Lesson 3C · My bedroom' },
-    '3d': { title: 'Culture Corner', code: 'UK', color: '#B5523B', line: 'Lesson 3D · A typical English house' }
+    '3d': { title: 'Culture Corner', code: 'UK', color: '#B5523B', line: 'Lesson 3D · A typical English house' },
+    eu3: { title: 'House Viewing', code: 'KEY', color: '#2F6FE4', line: 'English in Use 3' },
+    er3: { title: 'Taj Mahal', code: 'IND', color: '#E09B00', line: 'Extensive Reading 3 · Agra, India' },
+    pc3: { title: 'Module 3 Complete', code: 'M3', color: '#0F2344', line: 'Progress Check 3' }
   };
   const best = (k) => (S.result(k) || {}).best || 0;
   const doneK = (k) => (S.result(k) || {}).status === 'done';
@@ -63,6 +69,10 @@
     if (pct === 100 && res.total >= 5 && !S.data.badges.perfect) S.data.badges.perfect = Date.now();
     if (ctx.ex.stamp && pct != null && pct >= (ctx.ex.pass || 70) && !S.data.stamps[ctx.ex.stamp]) {
       S.data.stamps[ctx.ex.stamp] = Date.now(); queue.push({ stamp: ctx.ex.stamp });
+    }
+    const lsn = ctx.lesson;
+    if (STAMPS[lsn.id] && !S.data.stamps[lsn.id] && !flat(lsn).some((x) => x.ex.stamp === lsn.id) && flat(lsn).every((x) => x.ex.type === 'report' || doneK(x.key))) {
+      S.data.stamps[lsn.id] = Date.now(); queue.push({ stamp: lsn.id });
     }
     BADGES.forEach((b) => { if (b.id === 'perfect') { if (S.data.badges.perfect && !S.data.badges.perfectShown) { S.data.badges.perfectShown = 1; queue.push({ badge: b }); } return; }
       if (!S.data.badges[b.id] && b.test()) { S.data.badges[b.id] = Date.now(); queue.push({ badge: b }); } });
@@ -171,10 +181,10 @@
     main().innerHTML = '<section class="page-head"><h1>Travel map</h1><p class="lead">Module 3 · My home, my castle. Every lesson opens a new destination.</p></section>' +
       '<section class="route-map">' + ROUTE.map((r, i) => {
         const lesson = lessonById(r.id); const st = lesson ? lessonStats(lesson) : null;
-        const state = !lesson ? 'soon' : S.data.stamps[r.id] ? 'landed' : 'now';
+        const state = !lesson ? 'soon' : S.data.stamps[r.id] ? 'landed' : lesson === curLesson() ? 'now' : 'open';
         return '<div class="rnode rnode-' + state + '" style="--i:' + i + '">' + (i ? '<span class="rline" aria-hidden="true"></span>' : '') +
           '<div class="rcard"><div class="rcode">' + r.code + '</div><div class="rbody"><b>' + esc(r.title) + '</b>' +
-          (lesson ? '<div class="pbar"><i style="width:' + st.pct + '%"></i></div><small>' + (state === 'landed' ? 'Landed · stamp received' : 'Now boarding · ' + st.done + '/' + st.total) + '</small>' +
+          (lesson ? '<div class="pbar"><i style="width:' + st.pct + '%"></i></div><small>' + (state === 'landed' ? 'Landed · stamp received' : (state === 'now' ? 'Now boarding · ' : 'Open · ') + st.done + '/' + st.total) + '</small>' +
             '<div class="rsub">' + lesson.stages.map((s) => { const xs = s.exercises.map((e) => lesson.id + '/' + e.id); const d = xs.filter(doneK).length; return '<span class="' + (d === xs.length ? 'on' : d ? 'half' : '') + '" title="' + esc(s.title) + '">' + esc(s.title) + '</span>'; }).join('') + '</div>' +
             '<button type="button" class="btn-primary sm" data-open="' + r.id + '">' + MEA.icon('plane') + '<span>Fly here</span></button>'
             : '<small>' + MEA.icon('lock') + ' Coming soon</small>') + '</div>' +

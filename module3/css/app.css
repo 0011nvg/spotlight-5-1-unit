@@ -650,3 +650,5 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 .plan-room .gap { display: flex; min-width: 0; }
 .plan-room .gap sup { display: none; }
 .plan-room .gap-in { width: auto; flex: 1; min-width: 0; }
+
+.part { display: block; font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; color: var(--orange); text-transform: uppercase; margin-bottom: .2rem; }
