@@ -115,7 +115,7 @@
     [['kitchen', 'hall', 'lamp', 'bathroom'], 'lamp', 'lamp — предмет, остальное — комнаты'], [['under', 'behind', 'next to', 'carpet'], 'carpet', 'carpet — предмет, остальное — предлоги']];
   const P3Q = [['Which floor is your flat on?', "It's on the ninth floor."], ["What's your new house like?", "It's lovely!"], ['Where are my books?', "They're on the desk."], ['Which house is it?', 'This one, with the red door.'], ['Is there a garage?', 'Yes, there is.']];
   const P4 = [5, 3, 1, 9, 12, 20, 15, 2];
-  const P5 = [['The football is', 'the bed.', 'under'], ['Biscuit is', 'the bed.', 'on'], ['The books are', 'the bookcase.', 'in'], ['The poster is', 'the bed.', 'behind'], ['The chair is', 'the desk.', 'in front of'], ['The schoolbag is', 'the wardrobe.', 'in front of']];
+  const P5 = [['The football is', 'the bed.', 'under'], ['Keks is', 'the bed.', 'on'], ['The books are', 'the bookcase.', 'in'], ['The poster is', 'the bed.', 'behind'], ['The chair is', 'the desk.', 'in front of'], ['The schoolbag is', 'the wardrobe.', 'in front of']];
   const BR = () => ({ type: 'bedroom', objects: [{ name: 'football', at: 'under the bed' }, { name: 'cat', at: 'on the bed' }, { name: 'poster', at: 'behind the bed' }, { name: 'computer', at: 'on the desk' }, { name: 'books', at: 'in the bookcase' }, { name: 'lamp', at: 'on the bookcase' }, { name: 'schoolbag', at: 'in front of the wardrobe' }] });
   const CAN = ['I can talk and write about my house and my bedroom.', 'I can say where things are in a room.', 'I can talk about typical houses in my country.', 'I can talk about famous buildings.'];
 

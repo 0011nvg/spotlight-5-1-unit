@@ -159,7 +159,7 @@
     main().innerHTML =
       '<section class="hero"><div class="hero-txt"><p class="eyebrow">Learn English. Explore the World.</p><h1>Welcome aboard, Malik!</h1><p class="lead">' +
       (started ? (st.done ? 'Your next flight is ready. Let\'s continue where you stopped.' : 'You\'ve unlocked a new destination: lesson ' + lesson.code + '!') : 'Ready for your first adventure? Today we fly to lesson ' + lesson.code + ': ' + esc(lesson.title) + '.') + '</p></div>' +
-      '<div class="hero-chars">' + MEA.keks('hero-keks') + '<div class="bubble">' + (started ? "Let's fly on, Malik!" : "Hi, Malik! I'm Keks. Let's travel!") + '</div><div class="crew">' + MEA.art('cat', 'char') + MEA.art('dog', 'char') + '</div></div></section>' +
+      '<div class="hero-chars">' + MEA.keks('hero-keks') + '<div class="bubble">' + (started ? "Let's fly on, Malik!" : "Hi, Malik! I'm Keks. Let's travel!") + '</div></div></section>' +
       '<section class="pass" aria-label="Next lesson"><div class="pass-main"><div class="pass-row"><div><small>FLIGHT</small><b>' + lesson.code + '</b></div><div><small>DESTINATION</small><b>' + esc(lesson.destination.name) + '</b></div><div><small>STATUS</small><b class="status">' + (st.done ? (st.done === st.total ? 'LANDED' : 'IN FLIGHT') : 'BOARDING') + '</b></div></div>' +
       '<h2>Lesson ' + lesson.code + ': ' + esc(lesson.title) + '</h2><p class="muted">' + esc(lesson.subtitle) + ' · Spotlight 5, ' + esc(lesson.pages) + '</p>' +
       '<div class="pbar"><i style="width:' + st.pct + '%"></i></div><p class="muted small">' + st.done + ' of ' + st.total + ' exercises done</p></div>' +
@@ -200,10 +200,10 @@
   Screens.passport = function () {
     const lv = level();
     main().innerHTML = '<section class="page-head"><h1>Malik\'s Travel Passport</h1></section><section class="passport">' +
-      '<div class="pp-page pp-id"><div class="pp-photo">' + MEA.art('cat', 'char') + '</div><dl><dt>Name</dt><dd>MALIK</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
+      '<div class="pp-page pp-id"><div class="pp-photo"><span class="pp-avatar">M</span></div><dl><dt>Name</dt><dd>MALIK</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
       '<p class="mrz mono">P&lt;ENG&lt;MALIK&lt;&lt;ENGLISH&lt;ADVENTURES&lt;&lt;&lt;&lt;</p></div>' +
       '<div class="pp-page"><div class="pp-keks">' + MEA.keks() + '<small>Travel buddy: KEKS</small></div><h3>Stamps</h3><div class="stamps">' + Object.keys(STAMPS).map((id) => S.data.stamps[id] ? '<div class="stamp on">' + stampSvg(id, S.data.stamps[id]) + '</div>' : '<div class="stamp"><span>' + STAMPS[id].code + '</span><small>' + esc(STAMPS[id].title) + '</small></div>').join('') + '</div>' +
-      '<p class="muted small">Штамп «NUM» — 80% в Final Number Challenge. Штампы уроков — 70% и больше в Final Mission урока.</p></div></section>' +
+      '<p class="muted small">Штамп NUM — 80% в Final Number Challenge. Штампы 3A–3D — 70% и больше в Final Mission урока. KEY и IND — за все задания урока. M3 — 70 баллов и больше в Progress Check 3.</p></div></section>' +
       '<section class="card"><h3>Badges</h3><div class="badges">' + BADGES.map((b) => badgeHtml(b, !!S.data.badges[b.id])).join('') + '</div></section>';
   };
 

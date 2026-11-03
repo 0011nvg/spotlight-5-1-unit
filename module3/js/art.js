@@ -135,16 +135,17 @@
 
     cat: () =>
       '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +
-      '<path d="M78 84 q20 -6 12 -26" stroke="#E8873A" stroke-width="8" fill="none" stroke-linecap="round"/>' +
-      '<ellipse cx="50" cy="74" rx="28" ry="22" fill="#F29A4A"/>' +
-      '<path d="M26 30 l4 -20 l14 14z M74 30 l-4 -20 l-14 14z" fill="#F29A4A"/><path d="M30 26 l2 -10 l7 7z M70 26 l-2 -10 l-7 7z" fill="#FFC9A3"/>' +
-      '<circle cx="50" cy="40" r="25" fill="#F29A4A"/>' +
-      '<path d="M30 30 q20 -10 40 0" stroke="#E8873A" stroke-width="4" fill="none"/>' +
-      '<rect x="27" y="22" width="46" height="8" rx="4" fill="#38506F"/><circle cx="40" cy="26" r="6" fill="#8EC5FF" stroke="#38506F" stroke-width="2"/><circle cx="60" cy="26" r="6" fill="#8EC5FF" stroke="#38506F" stroke-width="2"/>' +
-      '<circle cx="41" cy="42" r="3.5" fill="#1B2B44"/><circle cx="59" cy="42" r="3.5" fill="#1B2B44"/><circle cx="42" cy="41" r="1" fill="#fff"/><circle cx="60" cy="41" r="1" fill="#fff"/>' +
-      '<path d="M47 50 h6 l-3 3z" fill="#E5484D"/><path d="M50 53 q-4 4 -8 2 M50 53 q4 4 8 2" stroke="#1B2B44" stroke-width="1.5" fill="none"/>' +
-      '<path d="M30 50 h-12 M30 54 h-11 M70 50 h12 M70 54 h11" stroke="#FFF4E6" stroke-width="1.2"/>' +
-      '<ellipse cx="50" cy="80" rx="14" ry="12" fill="#FFC9A3"/></svg>',
+      '<path d="M76 86 q22 -4 14 -28" stroke="#8E8A80" stroke-width="8" fill="none" stroke-linecap="round"/><path d="M86 62 l6 2 M88 70 l7 0 M86 78 l6 -3" stroke="#3E3B36" stroke-width="2.5"/>' +
+      '<ellipse cx="50" cy="74" rx="27" ry="22" fill="#A39E92"/>' +
+      '<path d="M30 70 q4 -6 8 0 M30 80 q4 -6 8 0 M62 70 q4 -6 8 0 M62 80 q4 -6 8 0" stroke="#3E3B36" stroke-width="2.5" fill="none"/>' +
+      '<path d="M27 30 l4 -21 l14 15z M73 30 l-4 -21 l-14 15z" fill="#A39E92"/><path d="M31 26 l2 -11 l7 7z M69 26 l-2 -11 l-7 7z" fill="#E7B9A6"/>' +
+      '<circle cx="50" cy="40" r="24" fill="#A39E92"/>' +
+      '<path d="M42 18 l2 9 M50 16 v10 M58 18 l-2 9 M28 36 l7 2 M28 44 l7 0 M72 36 l-7 2 M72 44 l-7 0" stroke="#3E3B36" stroke-width="2.5" stroke-linecap="round"/>' +
+      '<ellipse cx="41" cy="40" rx="4.5" ry="5" fill="#B8C94A"/><ellipse cx="59" cy="40" rx="4.5" ry="5" fill="#B8C94A"/><ellipse cx="41" cy="40.5" rx="1.6" ry="3.6" fill="#1B2B44"/><ellipse cx="59" cy="40.5" rx="1.6" ry="3.6" fill="#1B2B44"/>' +
+      '<path d="M47 49 h6 l-3 3z" fill="#C9786A"/><path d="M50 52 q-4 4 -8 2 M50 52 q4 4 8 2" stroke="#3E3B36" stroke-width="1.5" fill="none"/>' +
+      '<path d="M30 50 h-12 M30 54 h-11 M70 50 h12 M70 54 h11" stroke="#F4F1EA" stroke-width="1.2"/>' +
+      '<path d="M30 60 q20 10 40 0 l-4 10 q-16 12 -32 0z" fill="#2F5BE8"/><path d="M60 62 l12 -4 l-2 10z" fill="#2648C4"/>' +
+      '<ellipse cx="50" cy="84" rx="12" ry="9" fill="#C9C4B8"/></svg>',
 
     dog: () =>
       '<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">' +

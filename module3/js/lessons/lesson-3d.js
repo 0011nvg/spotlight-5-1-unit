@@ -47,7 +47,7 @@
             return [
               { kind: 'typing', art: room[1], prompt: 'What room is it?', answer: room[0], answerText: room[0], pkey: 'room:' + room[0], plabel: room[0], practiseAudio: room[0], log: room[0] },
               { kind: 'typing', art: furn[1], prompt: 'What is it?', answer: furn[0], answerText: furn[0], pkey: 'furn:' + furn[0], plabel: furn[0], practiseAudio: furn[0], log: furn[0] },
-              { kind: 'typing', art: prep[1], prompt: 'Where is Biscuit?', before: 'Biscuit is', after: prep[2] + '.', answer: prep[0], answerText: prep[0], pkey: 'prep:' + prep[0], plabel: prep[0], practiseAudio: prep[0], log: prep[0] },
+              { kind: 'typing', art: prep[1], prompt: 'Where is Keks?', before: 'Keks is', after: prep[2] + '.', answer: prep[0], answerText: prep[0], pkey: 'prep:' + prep[0], plabel: prep[0], practiseAudio: prep[0], log: prep[0] },
               { kind: 'choice', art: 'semi', prompt: 'Look at the picture and the title «A Typical English House». What is the text about?', options: ['a house in England', 'a flat in Moscow', 'a hotel near the airport'], answer: 'a house in England', answerText: 'a house in England', log: 'predict' }
             ];
           } }

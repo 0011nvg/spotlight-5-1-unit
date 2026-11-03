@@ -28,7 +28,7 @@
   // Sky Tower: our own building for floor questions
   const TOWER = [
     { n: 0, who: 'Mr Brown (reception)' }, { n: 1, who: 'Captain Lee' }, { n: 2, who: 'Mia and Tom' }, { n: 3, who: 'Ann' },
-    { n: 4, who: 'Max the dog', pet: 'dog' }, { n: 5, who: 'Lucy' }, { n: 6, who: 'Biscuit the cat', pet: 'cat' },
+    { n: 4, who: 'Mr Green' }, { n: 5, who: 'Lucy' }, { n: 6, who: 'Keks the cat', pet: 'cat' },
     { n: 7, who: 'John and Bob' }, { n: 8, who: 'Professor Hill' }, { n: 9, who: 'Sara' }, { n: 10, who: 'Helen' }
   ];
   const tower = (mark) => ({ type: 'building', title: 'SKY TOWER', floors: TOWER, mark });
@@ -136,8 +136,8 @@
           items: () => shuffle([['fiveth', 5], ['eightth', 8], ['nineth', 9], ['twelveth', 12], ['twentyth', 20], ['forth', 4], ['threeth', 3], ['fiveteenth', 15]]).slice(0, 6).map(([w, n]) => Object.assign(ordMeta(n), { kind: 'typing', sameAsWrong: w, scene: { type: 'ticket', wrong: w.toUpperCase(), digits: ordLabel(n) }, prompt: 'Find the mistake and write the word correctly.', log: w })) },
         { id: 'p5', type: 'seq', title: 'Sky Tower', task: 'Look at the building. Answer the questions.', taskRu: 'Посмотри на дом и ответь на вопросы.', goal: 'Which floor is … on? — порядковые числа в речевой конструкции.',
           items: [
-            { kind: 'choice', scene: tower(), prompt: 'Which floor is Max the dog on?', options: ['the fourth floor', 'the fourteenth floor', 'the fifth floor', 'the third floor'], answer: 'the fourth floor', answerText: 'the fourth floor', log: 'Max' },
-            Object.assign(ordMeta(6), { kind: 'typing', scene: tower(), prompt: 'Which floor is Biscuit the cat on?', before: "She's on the", after: 'floor.', log: 'Biscuit' }),
+            { kind: 'choice', scene: tower(), prompt: 'Which floor is Mr Green on?', options: ['the fourth floor', 'the fourteenth floor', 'the fifth floor', 'the third floor'], answer: 'the fourth floor', answerText: 'the fourth floor', log: 'Mr Green' },
+            Object.assign(ordMeta(6), { kind: 'typing', scene: tower(), prompt: 'Which floor is Keks the cat on?', before: "He's on the", after: 'floor.', log: 'Keks' }),
             Object.assign(ordMeta(8), { kind: 'typing', scene: tower(), prompt: 'Which floor is Professor Hill on?', before: "He's on the", after: 'floor.', log: 'Professor Hill' }),
             { kind: 'choice', scene: tower(), prompt: 'Who is on the ninth floor?', options: ['Sara', 'Helen', 'Lucy', 'Ann'], answer: 'Sara', answerText: 'Sara', log: 'ninth floor' },
             Object.assign(ordMeta(2), { kind: 'typing', scene: tower(), prompt: 'Which floor are Mia and Tom on?', before: "They're on the", after: 'floor.', log: 'Mia and Tom' }),
@@ -159,13 +159,13 @@
 
       { id: 'play', title: 'Play', sub: 'Games', icon: 'star', exercises: [
         { id: 'g1', type: 'memory', title: 'Memory flight', task: 'Find the pairs: a picture and a word.', taskRu: 'Найди пары: картинка + слово.', goal: 'Закрепление лексики в игре.', pairs: () => shuffle(ROOMS).slice(0, 6) },
-        { id: 'g2', type: 'seq', title: "Where's Biscuit?", task: 'Biscuit the cat is hiding. Read the clue and ask the right question.', taskRu: 'Прочитай подсказку и выбери правильный вопрос.', goal: 'Вопрос Are you in the …? — адаптация игры-пантомимы из учебника.',
+        { id: 'g2', type: 'seq', title: "Where's Keks?", task: 'Keks the cat is hiding. Read the clue and ask the right question.', taskRu: 'Прочитай подсказку и выбери правильный вопрос.', goal: 'Вопрос Are you in the …? — адаптация игры-пантомимы из учебника.',
           items: () => shuffle([
             ['bedroom', "I'm sleeping on a big bed. Zzz…", 58, 38], ['kitchen', "I'm next to the fridge. Is there any fish?", 62, 42], ['bathroom', "I'm next to the bath. I don't like water!", 30, 30],
             ['living room', "I'm on the sofa. I'm watching TV.", 40, 22], ['garage', "I'm next to Dad's car.", 76, 40], ['garden', "I'm under the tree. I can see flowers.", 8, 52],
             ['hall', "I'm next to the front door and the coats.", 60, 50], ['dining room', "I'm under the big table. It's lunchtime!", 38, 52]
           ]).slice(0, 6).map(([w, cap, x, y]) => { const r = ROOMS.find((q) => q.word === w); return Object.assign(roomMeta(r), { kind: 'choice', scene: { type: 'roomcat', room: r.art, caption: '«' + cap + '»', x, y },
-            prompt: 'What do you ask Biscuit?', options: shuffle([r].concat(shuffle(ROOMS.filter((q) => q !== r)).slice(0, 2))).map((q) => 'Are you in the ' + q.word + '?'), answer: 'Are you in the ' + w + '?', answerText: 'Are you in the ' + w + '?', sayAfter: 'Yes, I am!', log: cap }); }) },
+            prompt: 'What do you ask Keks?', options: shuffle([r].concat(shuffle(ROOMS.filter((q) => q !== r)).slice(0, 2))).map((q) => 'Are you in the ' + q.word + '?'), answer: 'Are you in the ' + w + '?', answerText: 'Are you in the ' + w + '?', sayAfter: 'Yes, I am!', log: cap }); }) },
         { id: 'g3', type: 'seq', title: 'Lift operator', task: 'You work in the Sky Tower lift. Listen to the passengers and press the buttons.', taskRu: 'Ты лифтёр! Послушай пассажира и нажми нужный этаж.', goal: 'Аудирование порядковых числительных; различение third / thirteenth.', items: () => liftSet(8) }
       ] },
 
@@ -224,7 +224,7 @@
             const nums = MEA.Numbers.pickNumbers(2);
             const its = [roomTyping(rooms[0]), roomTyping(rooms[1]), roomTyping(rooms[2]), roomTyping(rooms[3], true), roomListen(rooms[4])]
               .concat(ords.map(ordTyping), [liftItem(pick([13, 15, 18, 3, 12]), 0)],
-                [Object.assign(ordMeta(fl[0].n), { kind: 'typing', scene: tower(), prompt: 'Which floor is ' + fl[0].who + ' on?', before: (/ and /.test(fl[0].who) ? "They're" : /^(Ann|Lucy|Sara|Helen)$/.test(fl[0].who) ? "She's" : /dog/.test(fl[0].who) ? "He's" : "He's") + ' on the', after: 'floor.', log: fl[0].who }),
+                [Object.assign(ordMeta(fl[0].n), { kind: 'typing', scene: tower(), prompt: 'Which floor is ' + fl[0].who + ' on?', before: (/ and /.test(fl[0].who) ? "They're" : /^(Ann|Lucy|Sara|Helen)$/.test(fl[0].who) ? "She's" : "He's") + ' on the', after: 'floor.', log: fl[0].who }),
                   { kind: 'choice', scene: tower(), prompt: 'Who is on the ' + L.ordWords(fl[1].n) + ' floor?', options: shuffle([fl[1], fl[2], fl[3]]).map((f) => f.who), answer: fl[1].who, answerText: fl[1].who, log: L.ordWords(fl[1].n) + ' floor' },
                   { kind: 'order', answer: 'Which floor is the kitchen on?', answerText: 'Which floor is the kitchen on?', log: 'word order' }],
                 nums.map((n) => Object.assign({ kind: 'typing', prompt: 'Numbers check! Write in words: <b class="digits">' + n + '</b>', answer: L.numWords(n), answerText: L.numWords(n), mode: 'number', pkey: 'num:' + n, plabel: String(n), practiseAudio: L.numWords(n), log: String(n) })));

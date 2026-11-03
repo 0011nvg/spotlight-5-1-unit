@@ -8,9 +8,9 @@
   const L = MEA.lang, { shuffle, pick, esc } = MEA.util;
 
   const PREPS = [
-    { word: 'in', ru: 'в', art: 'prep-in', ex: 'Biscuit is in the box.' }, { word: 'on', ru: 'на', art: 'prep-on', ex: 'Biscuit is on the box.' },
-    { word: 'under', ru: 'под', art: 'prep-under', ex: 'Biscuit is under the table.' }, { word: 'behind', ru: 'за, позади', art: 'prep-behind', ex: 'Biscuit is behind the box.' },
-    { word: 'next to', ru: 'рядом с', art: 'prep-nextto', ex: 'Biscuit is next to the box.' }, { word: 'in front of', ru: 'перед', art: 'prep-infrontof', ex: 'Biscuit is in front of the box.' }
+    { word: 'in', ru: 'в', art: 'prep-in', ex: 'Keks is in the box.' }, { word: 'on', ru: 'на', art: 'prep-on', ex: 'Keks is on the box.' },
+    { word: 'under', ru: 'под', art: 'prep-under', ex: 'Keks is under the table.' }, { word: 'behind', ru: 'за, позади', art: 'prep-behind', ex: 'Keks is behind the box.' },
+    { word: 'next to', ru: 'рядом с', art: 'prep-nextto', ex: 'Keks is next to the box.' }, { word: 'in front of', ru: 'перед', art: 'prep-infrontof', ex: 'Keks is in front of the box.' }
   ];
   const WORDS = [
     { word: 'wall', ru: 'стена', art: 'wall', ex: 'There is a poster on the wall.' }, { word: 'floor', ru: 'пол', art: 'floor', ex: 'My football is on the floor.' },
@@ -26,13 +26,13 @@
   ];
   const scene = () => ({ type: 'bedroom', objects: ROOM });
   const FACTS = [
-    ['football', 'the football', "It's", 'under the bed'], ['books', 'the books', "They're", 'in the bookcase'], ['cat', 'Biscuit', "She's", 'on the bed'],
+    ['football', 'the football', "It's", 'under the bed'], ['books', 'the books', "They're", 'in the bookcase'], ['cat', 'Keks', "He's", 'on the bed'],
     ['poster', 'the poster', "It's", 'behind the bed'], ['computer', 'the computer', "It's", 'on the desk'], ['lamp', 'the lamp', "It's", 'on the bookcase'],
     ['schoolbag', 'the schoolbag', "It's", 'in front of the wardrobe'], ['desk', 'the desk', "It's", 'under the window'], ['chair', 'the chair', "It's", 'in front of the desk'], ['bookcase', 'the bookcase', "It's", 'next to the desk']
   ];
   const AMBIG = { 'in the bookcase': ['on'], 'on the bookcase': ['in'], 'behind the bed': ['on', 'next to'], 'under the window': ['in front of'] };
   const okWrong = (place) => PREPS.filter((p) => p.word !== prepOf(place) && !(AMBIG[place] || []).includes(p.word));
-  const where = (f) => (f[2] === "They're" ? 'Where are ' : f[1] === 'Biscuit' ? 'Where\'s ' : 'Where\'s ') + f[1] + '?';
+  const where = (f) => (f[2] === "They're" ? 'Where are ' : f[1] === 'Keks' ? 'Where\'s ' : 'Where\'s ') + f[1] + '?';
   const prepOf = (place) => PREPS.map((p) => p.word).sort((a, b) => b.length - a.length).find((p) => place.startsWith(p + ' '));
   const objOf = (place) => place.slice(prepOf(place).length + 1);
 
@@ -55,16 +55,16 @@
     return { kind: 'tf', scene: scene(), prompt: subj + ' ' + verb + ' ' + place + '.', answer: truth, answerText: truth ? 'True' : 'False — ' + f[2].toLowerCase() + ' ' + f[3] + '.', log: subj + ' ' + verb + ' ' + place };
   }
   const PLACE_OBJ = ['football', 'books', 'lamp', 'computer', 'schoolbag', 'teddy', 'cat'];
-  const NAMES = { football: 'the football', books: 'the books', lamp: 'the lamp', computer: 'the computer', schoolbag: 'the schoolbag', teddy: 'the teddy bear', cat: 'Biscuit' };
+  const NAMES = { football: 'the football', books: 'the books', lamp: 'the lamp', computer: 'the computer', schoolbag: 'the schoolbag', teddy: 'the teddy bear', cat: 'Keks' };
   function placeItem() {
     const obj = pick(PLACE_OBJ); const spots = Object.keys(MEA.bedroom.SPOTS);
     const target = pick(spots.filter((s) => !(obj === 'computer' && /under/.test(s))));
     const opts = shuffle([target].concat(shuffle(spots.filter((s) => s !== target)).slice(0, 4)));
-    const verb = obj === 'cat' ? 'Help Biscuit: go ' : 'Put ' + NAMES[obj] + ' ';
-    return { kind: 'place', obj, objects: [], spots: opts, answer: target, answerText: target, audio: (obj === 'cat' ? 'Biscuit, go ' : 'Put ' + NAMES[obj] + ' ') + target + ', please.', prompt: 'Listen and tap the right place in the room.', log: (obj === 'cat' ? 'Biscuit' : NAMES[obj]) + ' → ' + target };
+    const verb = obj === 'cat' ? 'Help Keks: go ' : 'Put ' + NAMES[obj] + ' ';
+    return { kind: 'place', obj, objects: [], spots: opts, answer: target, answerText: target, audio: (obj === 'cat' ? 'Keks, go ' : 'Put ' + NAMES[obj] + ' ') + target + ', please.', prompt: 'Listen and tap the right place in the room.', log: (obj === 'cat' ? 'Keks' : NAMES[obj]) + ' → ' + target };
   }
-  const prepPic = (p) => Object.assign(pMeta(p), { kind: 'choice', audio: p.ex, prompt: 'Listen. Where is Biscuit?', options: shuffle([p].concat(shuffle(PREPS.filter((x) => x !== p)).slice(0, 3))).map((x) => ({ value: x.word, art: x.art })), answer: p.word });
-  const prepWrite = (p) => Object.assign(pMeta(p), { kind: 'typing', art: p.art, prompt: 'Where is Biscuit? Write the preposition.', before: 'Biscuit is', after: (p.word === 'under' ? 'the table.' : 'the box.') });
+  const prepPic = (p) => Object.assign(pMeta(p), { kind: 'choice', audio: p.ex, prompt: 'Listen. Where is Keks?', options: shuffle([p].concat(shuffle(PREPS.filter((x) => x !== p)).slice(0, 3))).map((x) => ({ value: x.word, art: x.art })), answer: p.word });
+  const prepWrite = (p) => Object.assign(pMeta(p), { kind: 'typing', art: p.art, prompt: 'Where is Keks? Write the preposition.', before: 'Keks is', after: (p.word === 'under' ? 'the table.' : 'the box.') });
 
   const TEXT = "What's your bedroom like? My bedroom is small, but I love it! Everything in it is green, so I call it the jungle room. I've got a bed, a desk, a chair and a big bookcase. My bed is next to the window. My desk is in front of the bed and there's a lamp and a computer on it. My books are in the bookcase behind the door. There's a poster of a jungle on the wall behind my bed. My cat, Luna, sleeps under my desk. I haven't got a TV, but I've got a guitar. I really like my bedroom!";
   const READ = { type: 'text', art: 'bed', title: 'My bedroom', html: '<p class="muted small">by Lucy, Sky Tower, fifth floor</p><p>' + esc(TEXT).replace(/(next to|in front of|behind|under|\bon it\b|\bin the\b)/g, '<b>$1</b>') + '</p>', audio: 'My bedroom, by Lucy. ' + TEXT, glossary: {} };
@@ -90,7 +90,7 @@
           } }
       ] },
       { id: 'discover', title: 'Discover', sub: 'Prepositions of place', icon: 'home', exercises: [
-        { id: 'd1', type: 'cards', title: 'Where is Biscuit?', task: 'Look, listen and repeat. Then learn the new words for the room.', taskRu: 'Слушай и повторяй предлоги места и новые слова.', goal: 'Семантизация 6 предлогов места и слов wall, floor, poster, computer, football, schoolbag.',
+        { id: 'd1', type: 'cards', title: 'Where is Keks?', task: 'Look, listen and repeat. Then learn the new words for the room.', taskRu: 'Слушай и повторяй предлоги места и новые слова.', goal: 'Семантизация 6 предлогов места и слов wall, floor, poster, computer, football, schoolbag.',
           items: PREPS.concat(WORDS).map((p) => ({ word: p.word, ru: p.ru, art: p.art, example: p.ex })) },
         { id: 'd2', type: 'match', title: 'Picture match', task: 'Match the pictures and the prepositions.', taskRu: 'Соедини картинки и предлоги.', goal: 'Узнавание предлогов по картинке.',
           rounds: () => [{ pairs: shuffle(PREPS).map((p) => ({ l: { a: p.art }, r: { t: p.word, say: p.ex } })) }] },

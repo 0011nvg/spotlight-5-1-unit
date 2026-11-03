@@ -64,7 +64,7 @@
     ["I'm Malik. This is ___ bedroom.", ['my', 'I'], 'my'], ['Is this ___ book, Ann?', ['your', 'you'], 'your'], ['Captain Lee is a pilot. ___ car is in the garage.', ['His', 'He'], 'His'],
     ['We live in a block of flats. ___ flat is on the fifth floor.', ['Our', 'We'], 'Our'], ['Look at the sofa! ___ colour is green.', ['Its', 'It'], 'Its']
   ];
-  const POSS_T = [['(I)', 'This is ___ desk.', 'my'], ['(she)', 'Biscuit is a cat. ___ bed is under the window.', 'Her'], ['(they)', 'Mia and Tom are in ___ living room.', 'their'],
+  const POSS_T = [['(I)', 'This is ___ desk.', 'my'], ['(he)', 'Keks is a cat. ___ bed is under the window.', 'His'], ['(they)', 'Mia and Tom are in ___ living room.', 'their'],
     ['(he)', 'Malik is in ___ bedroom.', 'his'], ['(we)', '___ kitchen is very big.', 'Our'], ['(you)', 'Is that ___ wardrobe?', 'your']];
 
   const DIALOGUE = [['Ann', "Hi, Sara! What's your new flat like?"], ['Sara', "It's lovely! It's on the ninth floor of Sky Tower."], ['Ann', 'Wow! How many rooms are there?'],

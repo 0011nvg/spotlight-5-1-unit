@@ -688,3 +688,16 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 .ws-grid { display: grid; gap: .4rem; }
 .ws-row { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .45rem .6rem; background: var(--sky); border-radius: 10px; }
 @media (max-width: 620px) { .ws-pop { right: auto; left: 0; } }
+.pp-photo { display: grid; place-items: center; aspect-ratio: 3 / 4; }
+.pp-avatar { width: 70%; aspect-ratio: 1; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--display); font-size: 2.4rem; display: grid; place-items: center; }
+/* layout safety: grid children may shrink below their content width (long words, tables, selects) */
+#app { grid-template-columns: minmax(0, 1fr); }
+#app > *, .lesson > *, .pass > *, .passport > *, .settings > * { min-width: 0; }
+select, input, textarea { max-width: 100%; }
+h1, h2, h3 { overflow-wrap: anywhere; }
+.ws-menu:not([open]) .ws-pop { display: none; }
+.ws-pop { width: min(280px, 86vw); }
+@media (max-width: 620px) { .ws-pop { left: auto; right: 0; } }
+.ex, .item, .visual { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.ex > *, .item > * { min-width: 0; }
+.type-in { flex: 1 1 150px; min-width: 0; width: 100%; }

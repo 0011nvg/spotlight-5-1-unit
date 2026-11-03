@@ -84,8 +84,8 @@
   };
 
   /* ---------- shared data ---------- */
-  const TOWER = [{ n: 0, who: 'Mr Brown (reception)' }, { n: 1, who: 'Captain Lee' }, { n: 2, who: 'Mia and Tom' }, { n: 3, who: 'Ann' }, { n: 4, who: 'Max the dog', pet: 'dog' }, { n: 5, who: 'Lucy' },
-    { n: 6, who: 'Biscuit the cat', pet: 'cat' }, { n: 7, who: 'John and Bob' }, { n: 8, who: 'Professor Hill' }, { n: 9, who: 'Sara' }, { n: 10, who: 'Helen' }];
+  const TOWER = [{ n: 0, who: 'Mr Brown (reception)' }, { n: 1, who: 'Captain Lee' }, { n: 2, who: 'Mia and Tom' }, { n: 3, who: 'Ann' }, { n: 4, who: 'Mr Green' }, { n: 5, who: 'Lucy' },
+    { n: 6, who: 'Keks the cat', pet: 'cat' }, { n: 7, who: 'John and Bob' }, { n: 8, who: 'Professor Hill' }, { n: 9, who: 'Sara' }, { n: 10, who: 'Helen' }];
   const ROOMART = { 'living room': 'living', kitchen: 'kitchen', bathroom: 'bathroom', bedroom: 'bedroom', hall: 'hall', 'dining room': 'dining', garden: 'garden', garage: 'garage' };
   const room = () => MEA.bedroom.html([{ name: 'football', at: 'under the bed' }, { name: 'cat', at: 'on the bed' }, { name: 'poster', at: 'behind the bed' }, { name: 'computer', at: 'on the desk' }, { name: 'books', at: 'in the bookcase' }, { name: 'lamp', at: 'on the bookcase' }, { name: 'schoolbag', at: 'in front of the wardrobe' }]);
   const emptyRoom = () => MEA.bedroom.html([]);
@@ -98,7 +98,7 @@
         { t: 'numwords', title: 'Flight numbers. Write them in words.', ru: 'Напиши номера рейсов словами (21–99 — через дефис).', nums: [27, 43, 68, 95, 14, 40, 18, 99] },
         { t: 'match', title: 'Match.', ru: 'Соедини сокращение и слово.', pairs: [1, 2, 3, 5, 8, 9, 12, 20].map((n) => ({ l: { t: n + L.ordSuffix(n) }, r: { t: L.ordWords(n) } })) },
         { t: 'qa', title: 'Look at Sky Tower. Answer the questions.', ru: 'Посмотри на дом и ответь.', scene: () => MEA.Engine.Scenes.building({ title: 'SKY TOWER', floors: TOWER }),
-          items: [{ q: 'Which floor is Max the dog on?', b: "He's on the", e: 'floor.', a: 'fourth' }, { q: 'Which floor is Sara on?', b: "She's on the", e: 'floor.', a: 'ninth' }, { q: 'Which floor are John and Bob on?', b: "They're on the", e: 'floor.', a: 'seventh' }, { q: 'Who is on the ground floor?', a: 'Mr Brown' }] },
+          items: [{ q: 'Which floor is Mr Green on?', b: "He's on the", e: 'floor.', a: 'fourth' }, { q: 'Which floor is Sara on?', b: "She's on the", e: 'floor.', a: 'ninth' }, { q: 'Which floor are John and Bob on?', b: "They're on the", e: 'floor.', a: 'seventh' }, { q: 'Who is on the ground floor?', a: 'Mr Brown' }] },
         { t: 'write', title: 'About you.', ru: 'Ответь полными предложениями.', frames: ['Do you live in a house or a flat?', 'Which floor is your flat on?', 'How many rooms are there?'], lines: 4, check: 'I live in a …; It\'s on the … floor; There are … rooms.' }
       ] },
       home: { title: 'At home · Homework', tasks: [
@@ -130,10 +130,10 @@
     },
     '3c': {
       class: { title: 'My bedroom · Classwork', tasks: [
-        { t: 'pics', title: 'Where is Biscuit? Write the preposition.', ru: 'Где кот? Напиши предлог.', items: [['prep-in', 'in'], ['prep-on', 'on'], ['prep-under', 'under'], ['prep-behind', 'behind'], ['prep-nextto', 'next to'], ['prep-infrontof', 'in front of']].map(([art, ans]) => ({ art, ans })) },
+        { t: 'pics', title: 'Where is Keks? Write the preposition.', ru: 'Где кот? Напиши предлог.', items: [['prep-in', 'in'], ['prep-on', 'on'], ['prep-under', 'under'], ['prep-behind', 'behind'], ['prep-nextto', 'next to'], ['prep-infrontof', 'in front of']].map(([art, ans]) => ({ art, ans })) },
         { t: 'qa', title: "Look at Malik's bedroom. Complete the sentences.", ru: 'Посмотри на комнату и допиши.', scene: room,
           items: [{ q: "Where's the football?", b: "It's", e: 'the bed.', a: 'under' }, { q: 'Where are the books?', b: "They're", e: 'the bookcase.', a: 'in' }, { q: "Where's the poster?", b: "It's", e: 'the bed.', a: 'behind' }, { q: "Where's the computer?", b: "It's", e: 'the desk.', a: 'on' }, { q: "Where's the schoolbag?", b: "It's", e: 'the wardrobe.', a: 'in front of' }] },
-        { t: 'circle', title: "Circle It's or They're.", ru: 'Обведи It’s или They’re.', items: [{ s: "Where's the lamp? (It's / They're) on the bookcase.", a: "It's" }, { s: "Where are my shoes? (It's / They're) under the bed.", a: "They're" }, { s: "Where's Biscuit? (She's / They're) on the bed.", a: "She's" }, { s: "Where are the chairs? (It's / They're) in the kitchen.", a: "They're" }] },
+        { t: 'circle', title: "Circle It's or They're.", ru: 'Обведи It’s или They’re.', items: [{ s: "Where's the lamp? (It's / They're) on the bookcase.", a: "It's" }, { s: "Where are my shoes? (It's / They're) under the bed.", a: "They're" }, { s: "Where's Keks? (He's / They're) on the bed.", a: "He's" }, { s: "Where are the chairs? (It's / They're) in the kitchen.", a: "They're" }] },
         { t: 'order', title: 'Put the dialogue in order.', ru: 'Составь реплики диалога.', items: ['Is there a desk in your bedroom?', 'Where exactly is it?', "It's under the window next to my bed."] }
       ] },
       home: { title: 'My bedroom · Homework', tasks: [
@@ -185,7 +185,7 @@
         { t: 'pics', title: 'Rooms and furniture. Write.', ru: 'Подпиши.', items: [['kitchen', 'kitchen'], ['bedroom', 'bedroom'], ['wardrobe', 'wardrobe'], ['armchair', 'armchair'], ['fridge', 'fridge'], ['mirror', 'mirror']].map(([art, ans]) => ({ art, ans })) },
         { t: 'numwords', title: 'Ordinal numbers.', ru: 'Напиши порядковые числительные.', nums: [1, 2, 3, 5, 8, 9, 12, 20], ord: true },
         { t: 'gaps', title: "is, isn't, are or aren't?", ru: 'Вставь слово.', items: [{ s: 'There ___ four chairs in the kitchen. ✓', a: 'are' }, { s: 'There ___ a TV in my bedroom. ✗', a: "isn't" }, { s: 'There ___ a lamp on the desk. ✓', a: 'is' }, { s: 'There ___ any books on the sofa. ✗', a: "aren't" }] },
-        { t: 'qa', title: "Look at Malik's room. Where are the things?", ru: 'Где предметы?', scene: room, items: [{ q: 'the football', a: "It's under the bed." }, { q: 'Biscuit', a: "She's on the bed." }, { q: 'the lamp', a: "It's on the bookcase." }] }
+        { t: 'qa', title: "Look at Malik's room. Where are the things?", ru: 'Где предметы?', scene: room, items: [{ q: 'the football', a: "It's under the bed." }, { q: 'Keks', a: "He's on the bed." }, { q: 'the lamp', a: "It's on the bookcase." }] }
       ] },
       home: { title: 'Module 3 · Practice test', tasks: [
         { t: 'odd', title: 'Cross the odd word out.', ru: 'Вычеркни лишнее.', items: [{ w: ['sofa', 'armchair', 'cooker', 'coffee table'], a: 'cooker' }, { w: ['bath', 'toilet', 'washbasin', 'desk'], a: 'desk' }, { w: ['hall', 'garage', 'lamp', 'kitchen'], a: 'lamp' }, { w: ['under', 'on', 'carpet', 'behind'], a: 'carpet' }] },

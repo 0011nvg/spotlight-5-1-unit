@@ -1,4 +1,4 @@
-/* Lesson 3C: prepositions with Biscuit the cat, Malik's bedroom scene and small objects */
+/* Lesson 3C: prepositions with Keks the cat, Malik's bedroom scene and small objects */
 (function (MEA) {
   'use strict';
   const { S, add, raw } = MEA.artKit;
