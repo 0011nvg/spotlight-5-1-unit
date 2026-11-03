@@ -680,3 +680,11 @@ body.teacher .ex { box-shadow: 0 0 0 3px var(--gold), var(--shadow); }
 .cel-badge .badge { padding: .6rem; }
 @media (max-width: 620px) { .lgrid { grid-template-columns: 1fr 1fr; } .lcard { padding: .6rem; } .hero-chars { align-items: center; } .cel-keks { width: 140px; } }
 .hero-chars .bubble { order: -1; }
+.ws-menu { position: relative; }
+.ws-menu summary { list-style: none; cursor: pointer; }
+.ws-menu summary::-webkit-details-marker { display: none; }
+.ws-pop { position: absolute; right: 0; top: calc(100% + 6px); z-index: 15; width: 280px; background: #fff; border-radius: 14px; box-shadow: var(--shadow); padding: .8rem; display: grid; gap: .45rem; border: 1px solid var(--line); }
+.ws-pop p { margin: 0 0 .2rem; }
+.ws-grid { display: grid; gap: .4rem; }
+.ws-row { display: flex; justify-content: space-between; align-items: center; gap: .6rem; flex-wrap: wrap; padding: .45rem .6rem; background: var(--sky); border-radius: 10px; }
+@media (max-width: 620px) { .ws-pop { right: auto; left: 0; } }

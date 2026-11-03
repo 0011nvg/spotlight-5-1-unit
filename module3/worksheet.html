@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Worksheet · Malik's English Adventures</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    /* A4 worksheet: white paper, navy ink, orange accents; tasks flow in one column */
+    :root { --ink: #17263F; --navy: #0F2344; --muted: #5A6A84; --orange: #FF6B2C; --line: #B9C6D8; --soft: #EEF4FB;
+      --display: 'Unbounded', 'Arial Black', sans-serif; --body: 'Manrope', 'Segoe UI', Arial, sans-serif; --mono: 'IBM Plex Mono', Consolas, monospace; color-scheme: light; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #DCE5F0; color: var(--ink); font-family: var(--body); }
+    .bar { position: sticky; top: 0; z-index: 5; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; padding: .6rem 16px; background: var(--navy); color: #fff; }
+    .bar a, .bar button, .bar label { font: inherit; font-weight: 700; font-size: .9rem; color: #fff; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.25); border-radius: 10px; padding: .45rem .8rem; text-decoration: none; cursor: pointer; display: inline-flex; gap: .35rem; align-items: center; }
+    .bar a.on { background: #fff; color: var(--navy); }
+    .bar .print { background: var(--orange); border-color: var(--orange); }
+    .bar .sp { flex: 1; }
+    .note { max-width: 210mm; margin: .8rem auto 0; padding: 0 16px; font-size: .85rem; color: var(--muted); }
+    .paper { width: 210mm; min-height: 297mm; margin: 12px auto; background: #fff; padding: 12mm 13mm; box-shadow: 0 6px 24px rgba(15,35,68,.15); }
+    .head { display: grid; grid-template-columns: 34mm 1fr; gap: 5mm; align-items: center; border-bottom: 3px solid var(--navy); padding-bottom: 3mm; margin-bottom: 4mm; }
+    .head img { width: 34mm; height: auto; }
+    .tag { font-family: var(--mono); font-size: 8.5pt; letter-spacing: .12em; text-transform: uppercase; color: var(--orange); font-weight: 600; }
+    .head h1 { font-family: var(--display); font-size: 17pt; margin: 1mm 0 2mm; line-height: 1.15; }
+    .who { display: flex; gap: 6mm; font-size: 10.5pt; }
+    .who span { flex: 1; border-bottom: 1px solid var(--ink); padding-bottom: 1mm; }
+    .w-task { break-inside: avoid; margin: 0 0 5mm; }
+    .w-task h3 { font-size: 12pt; margin: 0; display: flex; gap: 2.5mm; align-items: center; }
+    .tn { width: 7mm; height: 7mm; flex: none; border-radius: 50%; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 9.5pt; }
+    .ru { margin: .5mm 0 2.5mm 9.5mm; font-size: 9pt; color: var(--muted); }
+    .ln { display: inline-block; border-bottom: 1.2px solid var(--ink); height: 1.1em; vertical-align: bottom; margin: 0 1mm; }
+    .w-pics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3mm; }
+    .w-pic { position: relative; border: 1px solid var(--line); border-radius: 3mm; padding: 2mm; }
+    .w-pic .n { position: absolute; top: 1mm; left: 1.5mm; font-weight: 800; font-size: 9pt; z-index: 1; background: #fff; border-radius: 2mm; padding: 0 1mm; }
+    .art { line-height: 0; border-radius: 2mm; overflow: hidden; }
+    .art svg { width: 100%; height: auto; }
+    .art.mini { width: 6mm; display: inline-block; vertical-align: middle; }
+    .w-write { display: flex; align-items: flex-end; margin-top: 2mm; font-size: 11pt; }
+    .w-write .ln { flex: 1; width: auto !important; }
+    ol { margin: 0; padding-left: 9.5mm; }
+    .w-list li { margin: 0 0 2.6mm; font-size: 11pt; line-height: 1.7; }
+    .w-cols2 { columns: 2; column-gap: 8mm; } .w-cols2 li { margin-bottom: 3mm; font-size: 11pt; break-inside: avoid; }
+    .dg { font-family: var(--mono); font-size: 12pt; display: inline-block; min-width: 10mm; }
+    .w-match { display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+    .w-match li { margin-bottom: 2.5mm; font-size: 11pt; } .w-match li .art { width: 26mm; display: inline-block; vertical-align: middle; margin-right: 2mm; }
+    .w-boxes { font-size: 10.5pt; margin: 1mm 0 0 9.5mm; } .bx { display: inline-block; width: 7mm; height: 6mm; border: 1.2px solid var(--ink); border-radius: 1mm; vertical-align: middle; margin-right: 3mm; }
+    .w-bank { margin: 0 0 3mm 9.5mm; padding: 2mm 3mm; border: 1.5px dashed var(--orange); border-radius: 2mm; font-weight: 700; font-size: 10.5pt; display: inline-block; }
+    .w-or i { font-style: normal; font-weight: 700; padding: 0 1mm; }
+    .w-scr { font-family: var(--mono); font-size: 10pt; color: var(--navy); }
+    .w-text { margin: 0 0 3mm 9.5mm; padding: 3mm 4mm; background: var(--soft); border-radius: 2mm; font-size: 10.5pt; line-height: 1.55; }
+    .w-text p { margin: 0; }
+    .w-tf li { display: flex; justify-content: space-between; gap: 4mm; }
+    .tfb i { font-style: normal; display: inline-block; width: 7mm; height: 6mm; border: 1.2px solid var(--ink); border-radius: 1mm; text-align: center; font-size: 9pt; margin-left: 2mm; line-height: 6mm; }
+    .w-scene { display: flex; justify-content: center; margin: 0 0 3mm; }
+    .w-scene .building { width: 64mm; font-size: 8pt; } .w-scene .bedroom { width: 105mm; } .w-scene .roomkit { width: 120mm; }
+    .w-lines { margin-left: 9.5mm; } .wl { display: block; height: 9mm; border-bottom: 1px solid var(--line); }
+    .w-draw { margin-left: 9.5mm; border: 1.5px dashed var(--line); border-radius: 3mm; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .w-draw-base { width: 100%; opacity: .55; filter: grayscale(1); } .w-draw-base .bedroom { width: 100%; box-shadow: none; }
+    .w-tbl { margin-left: 9.5mm; border-collapse: collapse; width: calc(100% - 9.5mm); font-size: 10.5pt; }
+    .w-tbl th, .w-tbl td { border: 1.2px solid var(--ink); height: 9mm; padding: 1mm 2mm; text-align: left; } .w-tbl th { background: var(--soft); }
+    .w-ws-wrap { display: flex; gap: 6mm; align-items: flex-start; margin-left: 9.5mm; }
+    .w-ws { border-collapse: collapse; font-family: var(--mono); font-weight: 600; font-size: 11pt; }
+    .w-ws td { width: 7mm; height: 7mm; text-align: center; border: 1px solid #D5DEEA; }
+    .w-ws-list { list-style: none; padding: 0; margin: 0; columns: 2; font-size: 10.5pt; } .w-ws-list li { margin-bottom: 1.5mm; }
+    .foot { display: flex; justify-content: space-between; font-size: 8pt; color: var(--muted); border-top: 1px solid var(--line); padding-top: 2mm; margin-top: 4mm; }
+    .key { break-before: page; } .key h2 { font-family: var(--display); font-size: 14pt; } .w-key li { margin-bottom: 2mm; font-size: 10.5pt; list-style: none; }
+    .building { background: #E9EEF5; border-radius: 3mm; } .bld-roof { background: var(--navy); color: #fff; text-align: center; font-weight: 700; padding: 1mm; border-radius: 3mm 3mm 0 0; }
+    .bld-row { display: flex; gap: 2mm; padding: .6mm 2mm; border-bottom: 1px solid #D3DCE8; } .bld-n { width: 9mm; font-family: var(--mono); color: var(--orange); font-weight: 600; } .bld-who { background: #fff; border-radius: 1mm; padding: 0 2mm; flex: 1; }
+    .bld-ground { text-align: center; font-size: 7pt; color: var(--muted); }
+    .bedroom { position: relative; line-height: 0; border-radius: 3mm; overflow: hidden; } .br-base svg { width: 100%; height: auto; }
+    .br-obj { position: absolute; width: 10%; transform: translate(-50%, -50%); } .br-obj svg { width: 100%; height: auto; } .br-cat { width: 13%; } .br-football { width: 8%; } .br-poster { width: 11%; }
+    .roomkit { border: 1px solid var(--line); border-radius: 3mm; overflow: hidden; } .rk-head { background: var(--navy); color: #fff; font-weight: 700; font-size: 9pt; padding: 1mm 3mm; }
+    .rk-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2mm; padding: 2mm; } .rk-it { position: relative; } .rk-n { position: absolute; right: 1mm; top: 1mm; background: var(--orange); color: #fff; font-weight: 700; border-radius: 2mm; padding: 0 1mm; font-size: 8pt; line-height: 1.4; }
+    body:not(.with-key) .key { display: none; }
+    @page { size: A4; margin: 11mm 12mm; }
+    @media print {
+      html, body { background: #fff; }
+      .bar, .note { display: none; }
+      .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    @media screen and (max-width: 820px) { .paper { width: 100%; padding: 6mm; } .w-pics { grid-template-columns: repeat(2, 1fr); } .w-match { grid-template-columns: 1fr; gap: 2mm; } }
+  </style>
+</head>
+<body>
+  <div class="bar"></div>
+  <p class="note">Нажмите <b>Print</b> → в окне печати выберите принтер или «Сохранить как PDF». Страницу с ключами можно не печатать (галочка «Answer key»).</p>
+  <main id="sheet"></main>
+  <script src="js/art.js?v=20261103f"></script>
+  <script src="js/art-home.js?v=20261103f"></script>
+  <script src="js/art-bedroom.js?v=20261103f"></script>
+  <script src="js/art-culture.js?v=20261103f"></script>
+  <script src="js/art-taj.js?v=20261103f"></script>
+  <script src="js/lang.js?v=20261103f"></script>
+  <script src="js/engine.js?v=20261103f"></script>
+  <script src="js/activities.js?v=20261103f"></script>
+  <script src="js/activities-2.js?v=20261103f"></script>
+  <script src="js/activities-3.js?v=20261103f"></script>
+  <script src="js/worksheets.js?v=20261103f"></script>
+  <script>
+    (function () {
+      var NAMES = { '3a': '3A At home', '3b': '3B Move in!', '3c': '3C My bedroom', '3d': '3D A typical English house', eu3: 'English in Use 3', er3: 'Extensive Reading 3', pc3: 'Progress Check 3' };
+      var q = new URLSearchParams(location.search), l = q.get('l') || '3a', t = q.get('t') === 'home' ? 'home' : 'class';
+      if (!NAMES[l]) l = '3a';
+      var w = MEA.Worksheets.render(l, t);
+      document.title = (t === 'home' ? 'Homework' : 'Classwork') + ' ' + NAMES[l] + ' · Malik';
+      var link = function (lid, typ, txt) { return '<a href="?l=' + lid + '&t=' + typ + '"' + (lid === l && typ === t ? ' class="on"' : '') + '>' + txt + '</a>'; };
+      document.querySelector('.bar').innerHTML = '<a href="./">← Back</a><b style="margin:0 .4rem">' + NAMES[l] + '</b>' + link(l, 'class', 'Classwork') + link(l, 'home', 'Homework') +
+        '<span class="sp"></span><label><input type="checkbox" id="k"> Answer key</label><button type="button" class="print" id="p">Print</button>';
+      document.getElementById('sheet').innerHTML = '<div class="paper"><header class="head"><img src="img/keks.webp" alt="Keks"><div><div class="tag">' + (t === 'home' ? 'Homework' : 'Classwork') + ' · Spotlight 5 · Module 3 · ' + NAMES[l] + '</div><h1>' + w.title + '</h1>' +
+        '<div class="who"><span>Name:</span><span>Date:</span><span>Mark:</span></div></div></header>' + w.body +
+        '<div class="foot"><span>Malik\'s English Adventures</span><span>' + (t === 'home' ? 'Good luck! — Keks' : 'Work in class with your teacher') + '</span></div>' +
+        '<section class="key"><h2>Answer key · ' + w.title + '</h2>' + w.key + '</section></div>';
+      var k = document.getElementById('k');
+      k.addEventListener('change', function () { document.body.classList.toggle('with-key', k.checked); });
+      document.getElementById('p').addEventListener('click', function () { try { window.print(); } catch (e) { /* use Ctrl+P */ } });
+    })();
+  </script>
+</body>
+</html>

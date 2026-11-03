@@ -285,6 +285,8 @@
     const writing = Object.entries(S.data.writing).filter(([, t]) => t && t.trim());
     main().innerHTML = '<section class="page-head"><h1>Teacher panel</h1><div class="row-btns">' + MEA.lessons.map((l) => '<button type="button" class="btn-ghost sm ' + (l === lesson ? 'on' : '') + '" data-tl="' + l.id + '">' + l.code + ' ' + esc(l.title) + '</button>').join('') + '</div><p class="lead">Lesson ' + lesson.code + ' · ' + st.done + '/' + st.total + ' exercises · average ' + (st.avg == null ? '—' : st.avg + '%') + '</p></section>' +
       '<section class="card"><p class="muted small">В режиме учителя: в каждом задании видна методическая цель, кнопка <b>Show answer</b> доступна сразу, все упражнения открыты. «Assign» добавляет задание в блок «From your teacher» на главной странице Малика.</p>' + resultsTable(lesson, true) + '</section>' +
+      '<section class="card"><h3>' + MEA.icon('clipboard') + ' Printable worksheets</h3><p class="muted small">Для каждого урока: Classwork (на урок) и Homework (на дом). Откроется страница А4 с кнопкой Print; ключи печатаются по галочке.</p><div class="ws-grid">' +
+      MEA.lessons.map((l) => '<div class="ws-row"><b>' + l.code + ' ' + esc(l.title) + '</b><span class="row-btns">' + wsLinks(l.id) + '</span></div>').join('') + '</div></section>' +
       '<section class="card"><h3>Words to Practise (' + S.practiseList().length + ')</h3>' + (S.practiseList().length ? '<p>' + S.practiseList().map((p) => '<span class="pill">' + esc(p.answer) + ' · ' + p.errors + '</span>').join(' ') + '</p><button type="button" class="btn-ghost sm" id="clear-w">Clear the list</button>' : '<p class="muted">Empty.</p>') + '</section>' +
       '<section class="card"><h3>Writing</h3>' + (writing.length ? writing.map(([k, t]) => '<div class="wtext"><small>' + esc(k) + '</small><p>' + esc(t).replace(/\n/g, '<br>') + '</p></div>').join('') : '<p class="muted">Malik has not written anything yet.</p>') + '</section>';
     $$('[data-open-ex]').forEach((b) => b.addEventListener('click', () => openLesson(lesson.id, b.dataset.openEx)));
@@ -292,6 +294,13 @@
     $$('[data-assign]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.assign, a = S.data.assigned; const i = a.indexOf(k); if (i >= 0) a.splice(i, 1); else a.push(k); S.save(); Screens.teacher(); }));
     const cw = $('#clear-w'); cw && cw.addEventListener('click', () => { S.data.practise = {}; S.save(); Screens.teacher(); });
   };
+
+  /* ---------- printable worksheets ---------- */
+  const PAGES = 'https://0011nvg.github.io/spotlight-5-1-unit/module3/';
+  const wsUrl = (l, t) => (/github\.io$|^localhost$|^127\./.test(location.hostname) ? '' : PAGES) + 'worksheet.html?l=' + l + '&t=' + t;
+  const wsLinks = (l) => '<a class="btn-ghost sm" target="_blank" rel="noopener" href="' + wsUrl(l, 'class') + '">' + MEA.icon('clipboard') + '<span>Classwork</span></a>' +
+    '<a class="btn-ghost sm" target="_blank" rel="noopener" href="' + wsUrl(l, 'home') + '">' + MEA.icon('book') + '<span>Homework</span></a>';
+  MEA.wsLinks = wsLinks;
 
   /* ---------- lesson view ---------- */
   let current = { lesson: null, ex: null };
@@ -304,7 +313,7 @@
     let exId = current.lesson === lesson.id && current.ex ? current.ex : nextExercise(lesson).ex.id;
     current = { lesson: lesson.id, ex: exId };
     main().innerHTML = '<div class="lesson"><aside class="route" aria-label="Lesson route"><details class="route-d" open><summary><span><small>Spotlight 5 · Module ' + lesson.module + '</small><b>' + lesson.code + ' ' + esc(lesson.title) + '</b></span><span class="route-pct"></span></summary><div class="route-list"></div></details></aside>' +
-      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div><div id="ex-host"></div></section></div>';
+      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><div class="row-btns"><details class="ws-menu"><summary class="btn-ghost sm">' + MEA.icon('clipboard') + '<span>Worksheets</span></summary><div class="ws-pop"><p class="small"><b>Рабочие листы для печати (А4)</b><br>Лист для урока и лист для домашней работы, ключи — на отдельной странице.</p>' + wsLinks(lesson.id) + '</div></details><button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div></div><div id="ex-host"></div></section></div>';
     if (window.innerWidth < 860) $('.route-d').open = false;
     drawRoute(lesson); openEx(lesson, exId);
     $('#skip-ex').addEventListener('click', () => {
