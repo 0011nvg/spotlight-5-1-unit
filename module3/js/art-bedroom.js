@@ -1,4 +1,4 @@
-/* Lesson 3C: prepositions with Keks the cat, Malik's bedroom scene and small objects */
+/* Lesson 3C: prepositions with Keks the cat, a bedroom scene and small objects */
 (function (MEA) {
   'use strict';
   const { S, add, raw } = MEA.artKit;
@@ -29,7 +29,7 @@
     schoolbag: () => S(FL + '<path d="M58 36 q22 -22 44 0" stroke="#1E3566" stroke-width="6" fill="none"/><rect x="46" y="34" width="68" height="70" rx="12" fill="#2F7BF6"/><rect x="56" y="64" width="48" height="30" rx="6" fill="#2667D6"/><rect x="74" y="62" width="12" height="8" rx="2" fill="#FFC23D"/>', BG)
   });
 
-  /* ---------- Malik's bedroom: furniture base + objects placed at named spots ---------- */
+  /* ---------- a bedroom: furniture base + objects placed at named spots ---------- */
   const SPOTS = {
     'under the bed': [20, 71], 'on the bed': [24, 43], 'behind the bed': [16, 25], 'in front of the bed': [30, 89],
     'on the desk': [47, 47], 'under the desk': [45, 72], 'in the bookcase': [74, 45], 'on the bookcase': [74, 22], 'in front of the wardrobe': [91, 85], 'on the wardrobe': [91, 12]

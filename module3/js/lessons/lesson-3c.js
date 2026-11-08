@@ -19,7 +19,7 @@
   ];
   const pMeta = (p) => ({ answer: p.word, answerText: p.word, mode: 'word', pkey: 'prep:' + p.word, plabel: p.ru, ru: p.ru, part: p.art, practiseAudio: p.word, log: p.ex });
 
-  // Malik's bedroom (fixed scene)
+  // a bedroom (fixed scene)
   const ROOM = [
     { name: 'football', at: 'under the bed' }, { name: 'cat', at: 'on the bed' }, { name: 'poster', at: 'behind the bed' }, { name: 'computer', at: 'on the desk' },
     { name: 'books', at: 'in the bookcase' }, { name: 'lamp', at: 'on the bookcase' }, { name: 'schoolbag', at: 'in front of the wardrobe' }
@@ -68,7 +68,7 @@
 
   const TEXT = "What's your bedroom like? My bedroom is small, but I love it! Everything in it is green, so I call it the jungle room. I've got a bed, a desk, a chair and a big bookcase. My bed is next to the window. My desk is in front of the bed and there's a lamp and a computer on it. My books are in the bookcase behind the door. There's a poster of a jungle on the wall behind my bed. My cat, Luna, sleeps under my desk. I haven't got a TV, but I've got a guitar. I really like my bedroom!";
   const READ = { type: 'text', art: 'bed', title: 'My bedroom', html: '<p class="muted small">by Lucy, Sky Tower, fifth floor</p><p>' + esc(TEXT).replace(/(next to|in front of|behind|under|\bon it\b|\bin the\b)/g, '<b>$1</b>') + '</p>', audio: 'My bedroom, by Lucy. ' + TEXT, glossary: {} };
-  const DLG = [['Malik', 'Is there a bookcase in your bedroom, Ann?'], ['Ann', 'Yes, there is.'], ['Malik', 'Where exactly is it?'], ['Ann', "It's next to my desk, behind the door."], ['Malik', 'Are there any posters?'], ['Ann', "Yes, there are two. They're on the wall behind my bed."]];
+  const DLG = [['Alex', 'Is there a bookcase in your bedroom, Ann?'], ['Ann', 'Yes, there is.'], ['Alex', 'Where exactly is it?'], ['Ann', "It's next to my desk, behind the door."], ['Alex', 'Are there any posters?'], ['Ann', "Yes, there are two. They're on the wall behind my bed."]];
   const LISTEN = { type: 'audio', art: 'bookcase', title: 'Everyday English: Where exactly is it?', script: DLG.map((d) => d[1]).join(' ') };
   const FURN = ['bed', 'desk', 'chair', 'wardrobe', 'bookcase', 'lamp', 'computer', 'poster', 'window', 'carpet', 'armchair', 'mirror', 'books', 'shelf', 'TV'];
 
@@ -86,7 +86,7 @@
               .concat([{ kind: 'choice', prompt: 'There <b class="blank">___</b> two armchairs in the living room.', options: ['is', 'are'], keepOrder: true, answer: 'are', answerText: 'are', log: 'there are' },
                 { kind: 'choice', prompt: 'Is there a TV in your bedroom? — No, there <b class="blank">___</b>.', options: ["isn't", "aren't"], keepOrder: true, answer: "isn't", answerText: "No, there isn't.", log: 'short answer' },
                 { kind: 'typing', prompt: 'Write in words: <b class="digits">' + n + '</b>', answer: L.numWords(n), answerText: L.numWords(n), mode: 'number', pkey: 'num:' + n, plabel: String(n), practiseAudio: L.numWords(n), log: String(n) },
-                { kind: 'poll', prompt: 'Have you got your own bedroom, Malik?', options: ['Yes, I have.', "No, I haven't. I share it."], reply: { 'Yes, I have.': "Great! Today you'll learn to describe it.", "No, I haven't. I share it.": "That's OK! Today you'll learn to describe your room." }, log: 'own bedroom' }]);
+                { kind: 'poll', prompt: 'Have you got your own bedroom, Alex?', options: ['Yes, I have.', "No, I haven't. I share it."], reply: { 'Yes, I have.': "Great! Today you'll learn to describe it.", "No, I haven't. I share it.": "That's OK! Today you'll learn to describe your room." }, log: 'own bedroom' }]);
           } }
       ] },
       { id: 'discover', title: 'Discover', sub: 'Prepositions of place', icon: 'home', exercises: [
@@ -109,19 +109,19 @@
         { id: 'l3', type: 'rule', title: 'Study skill: start with a question', task: 'How to start your writing.', goal: 'Стратегия письма: начинать текст с вопроса, чтобы заинтересовать читателя.',
           html: '<h3>Start your writing with a question</h3><p>Вопрос в начале текста делает его интересным: читателю хочется узнать ответ.</p><div class="rule-grid"><div class="rule-box"><h4>Скучно</h4><p>My bedroom is small.</p></div><div class="rule-box hot"><h4>Интересно</h4><p><b>What\'s your bedroom like?</b> My bedroom is small, but I love it!</p><p><b>Do you like green?</b> Everything in my room is green!</p></div></div>' }
       ] },
-      { id: 'practise', title: 'Practise', sub: "Malik's bedroom", icon: 'check', exercises: [
-        { id: 'p1', type: 'seq', title: "Where's the football?", task: "Look at Malik's bedroom. Choose the answer.", taskRu: 'Посмотри на комнату Малика и выбери ответ.', goal: 'Понимание предлогов в контексте комнаты.', items: () => shuffle(FACTS).slice(0, 7).map(whereChoice) },
+      { id: 'practise', title: 'Practise', sub: "a bedroom", icon: 'check', exercises: [
+        { id: 'p1', type: 'seq', title: "Where's the football?", task: "Look at a bedroom. Choose the answer.", taskRu: 'Посмотри на комнату ученик и выбери ответ.', goal: 'Понимание предлогов в контексте комнаты.', items: () => shuffle(FACTS).slice(0, 7).map(whereChoice) },
         { id: 'p2', type: 'seq', title: "It's or They're?", task: 'Choose the right start of the answer.', taskRu: 'Выбери It’s или They’re.', goal: 'Согласование: один предмет — It’s, несколько — They’re.',
           items: () => shuffle([['Where are the books?', "They're", 'in the bookcase.'], ["Where's the lamp?", "It's", 'on the bookcase.'], ['Where are my shoes?', "They're", 'under the bed.'], ["Where's the poster?", "It's", 'on the wall.'], ['Where are the chairs?', "They're", 'in the kitchen.'], ["Where's my schoolbag?", "It's", 'in front of the wardrobe.']])
             .map(([q, a, rest]) => ({ kind: 'choice', prompt: q + ' — <b class="blank">___</b> ' + rest, options: ["It's", "They're"], keepOrder: true, answer: a, answerText: a + ' ' + rest, log: q, why: { "It's": 'Вопрос Where are…? — предметов много, ответ They’re.', "They're": 'Вопрос Where’s…? — один предмет, ответ It’s.' } })) },
-        { id: 'p3', type: 'seq', title: 'Write the prepositions', task: "Look at Malik's bedroom. Write the missing words.", taskRu: 'Посмотри на комнату и впиши предлог.', goal: 'Самостоятельное употребление предлогов.', items: () => shuffle(FACTS).slice(0, 7).map(prepTyping) },
-        { id: 'p4', type: 'seq', title: 'True or false?', task: "Look at Malik's bedroom. Is it true or false?", taskRu: 'Верно или неверно?', goal: 'Контроль понимания предлогов.', items: () => Array.from({ length: 7 }, tfItem) },
+        { id: 'p3', type: 'seq', title: 'Write the prepositions', task: "Look at a bedroom. Write the missing words.", taskRu: 'Посмотри на комнату и впиши предлог.', goal: 'Самостоятельное употребление предлогов.', items: () => shuffle(FACTS).slice(0, 7).map(prepTyping) },
+        { id: 'p4', type: 'seq', title: 'True or false?', task: "Look at a bedroom. Is it true or false?", taskRu: 'Верно или неверно?', goal: 'Контроль понимания предлогов.', items: () => Array.from({ length: 7 }, tfItem) },
         { id: 'p5', type: 'seq', title: 'Make the sentences', task: 'Put the words in the right order.', taskRu: 'Составь предложение.', goal: 'Порядок слов в вопросах и ответах о местоположении.',
           items: () => shuffle(['Where exactly is it?', "It's under the window next to my bed.", 'Where are the books?', "They're in the bookcase.", 'Is there a desk in your bedroom?'])
             .map((a) => ({ kind: 'order', answer: a, answerText: a, log: a, tokens: a.replace(/([?.])/g, ' $1').split(/\s+/).filter(Boolean) })) }
       ] },
       { id: 'play', title: 'Play', sub: 'Games', icon: 'star', exercises: [
-        { id: 'g1', type: 'seq', title: 'Tidy up!', task: "Malik's room is a mess! Listen to Mum and put the things in the right places.", taskRu: 'Послушай и нажми на место в комнате, куда нужно положить предмет.', goal: 'Аудирование + понимание предлогов (TPR в цифровом формате).', items: () => Array.from({ length: 8 }, placeItem) },
+        { id: 'g1', type: 'seq', title: 'Tidy up!', task: "Alex's room is a mess! Listen to Mum and put the things in the right places.", taskRu: 'Послушай и нажми на место в комнате, куда нужно положить предмет.', goal: 'Аудирование + понимание предлогов (TPR в цифровом формате).', items: () => Array.from({ length: 8 }, placeItem) },
         { id: 'g2', type: 'memory', title: 'Memory flight', task: 'Find the pairs: a picture and a preposition.', taskRu: 'Найди пары.', goal: 'Закрепление предлогов в игре.', pairs: () => PREPS.map((p) => ({ word: p.word, art: p.art })) }
       ] },
       { id: 'challenge', title: 'Challenge', sub: 'Read · Listen · Speak · Write', icon: 'star', exercises: [
@@ -144,8 +144,8 @@
             { kind: 'typing', prompt: 'Where does Luna sleep?', before: 'She sleeps', after: 'the desk.', answer: 'under', answerText: 'under', log: 'Luna' },
             { kind: 'typing', prompt: 'What does Lucy call her bedroom?', before: 'the', after: 'room', answer: 'jungle', answerText: 'jungle', log: 'name' }
           ] },
-        { id: 'c4', type: 'gapfill', title: 'Listening: Where exactly is it?', task: 'Listen to Malik and Ann. Fill in the gaps.', taskRu: 'Послушай диалог и заполни пропуски.', goal: 'Аудирование: речевые формулы Everyday English.', panel: LISTEN, revealScript: true,
-          template: '<div class="advert dialog-txt"><div class="adv-tag">DIALOGUE</div><p><b>Malik:</b> Is [[there]] a bookcase in your bedroom, Ann?</p><p><b>Ann:</b> Yes, there is.</p><p><b>Malik:</b> Where [[exactly]] is it?</p><p><b>Ann:</b> It\'s [[next to]] my desk, [[behind]] the door.</p><p><b>Malik:</b> Are there any posters?</p><p><b>Ann:</b> Yes, there are two. They\'re on the [[wall]] behind my bed.</p></div>' },
+        { id: 'c4', type: 'gapfill', title: 'Listening: Where exactly is it?', task: 'Listen to Alex and Ann. Fill in the gaps.', taskRu: 'Послушай диалог и заполни пропуски.', goal: 'Аудирование: речевые формулы Everyday English.', panel: LISTEN, revealScript: true,
+          template: '<div class="advert dialog-txt"><div class="adv-tag">DIALOGUE</div><p><b>Alex:</b> Is [[there]] a bookcase in your bedroom, Ann?</p><p><b>Ann:</b> Yes, there is.</p><p><b>Alex:</b> Where [[exactly]] is it?</p><p><b>Ann:</b> It\'s [[next to]] my desk, [[behind]] the door.</p><p><b>Alex:</b> Are there any posters?</p><p><b>Ann:</b> Yes, there are two. They\'re on the [[wall]] behind my bed.</p></div>' },
         { id: 'c5', type: 'speak', title: 'Ask about your partner\'s bedroom', task: 'Read the dialogue in roles. Then ask your teacher about their bedroom.', taskRu: 'Прочитай диалог по ролям, потом расспроси учителя о его комнате.', goal: 'Диалог-расспрос о местоположении предметов.',
           notes: '<div class="rule-box"><h4>Ask</h4><ul><li>Is there a … in your bedroom?</li><li>Where exactly is it?</li><li>Are there any … ?</li></ul></div>',
           lines: DLG.map(([w, t]) => ({ text: t, ru: w })).concat([{ text: 'Ask your teacher three questions about their bedroom.', model: false }]) },

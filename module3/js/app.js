@@ -97,8 +97,8 @@
     if (item.stamp) {
       const s = STAMPS[item.stamp];
       inner = '<div class="cel-stamp">' + stampSvg(item.stamp, Date.now()) + '</div><h3>' + (item.stamp === '3a' ? "You've unlocked a new destination!" : 'New stamp in your passport!') + '</h3><p>' + esc(s.title) + ' · ' + esc(s.line) + '</p>';
-    } else inner = '<div class="cel-badge">' + badgeHtml(item.badge, true) + '</div><h3>New badge, Malik!</h3><p>' + esc(item.badge.desc) + '</p>';
-    ov.innerHTML = '<div class="cel-card">' + inner + '<div class="cel-chars">' + MEA.keks('cel-keks') + '<p class="keks-says"><b>Keks:</b> ' + (item.stamp ? 'Pack your bag, we fly on!' : 'Purr-fect, Malik!') + '</p></div><button type="button" class="btn-primary">Awesome!</button></div>';
+    } else inner = '<div class="cel-badge">' + badgeHtml(item.badge, true) + '</div><h3>New badge!</h3><p>' + esc(item.badge.desc) + '</p>';
+    ov.innerHTML = '<div class="cel-card">' + inner + '<div class="cel-chars">' + MEA.keks('cel-keks') + '<p class="keks-says"><b>Keks:</b> ' + (item.stamp ? 'Pack your bag, we fly on!' : 'Purr-fect!') + '</p></div><button type="button" class="btn-primary">Awesome!</button></div>';
     document.body.appendChild(ov);
     const btn = $('button', ov); btn.focus();
     btn.addEventListener('click', () => { ov.remove(); done && done(); });
@@ -122,13 +122,12 @@
   /* ---------- header ---------- */
   const NAV = () => [['home', 'home', 'Home'], ['map', 'map', 'Map'], ['lesson-' + curLesson().id, 'plane', 'Lesson'], ['passport', 'passport', 'Passport'], ['words', 'book', 'My Words'], ['profile', 'user', 'My Cabin']];
   function renderHeader() {
-    const lv = level(), cur = (location.hash || '#home').slice(1), teacher = S.data.settings.teacher;
-    $('#top').innerHTML = '<a class="brand" href="#home" aria-label="Home"><span class="brand-ic">' + MEA.icon('plane') + '</span><span class="brand-t">Malik\'s <b>English Adventures</b></span></a>' +
+    const lv = level(), cur = (location.hash || '#home').slice(1), teacher = S.data.settings.teacher = !!window.SpotlightMode?.isTeacher();
+    $('#top').innerHTML = '<a class="brand" href="#home" aria-label="Home"><span class="brand-ic">' + MEA.icon('plane') + '</span><span class="brand-t">Spotlight 5 <b>English Adventures</b></span></a>' +
       '<nav class="nav" aria-label="Main">' + NAV().concat(teacher ? [['teacher', 'clipboard', 'Teacher']] : []).map(([h, i, t]) =>
         '<a href="#' + h + '" class="' + (cur === h || (cur.startsWith('lesson') && h.startsWith('lesson')) ? 'on' : '') + '">' + MEA.icon(i) + '<span>' + t + '</span></a>').join('') + '</nav>' +
       '<div class="top-r"><span class="xp" title="Experience points">' + MEA.icon('star') + '<b>' + S.data.xp + '</b> XP</span>' +
-      '<label class="tswitch" title="Режим учителя"><input type="checkbox" id="teacher-t" ' + (teacher ? 'checked' : '') + '><span></span><em>Teacher</em></label></div>';
-    $('#teacher-t').addEventListener('change', (e) => { S.data.settings.teacher = e.target.checked; S.save(); document.body.classList.toggle('teacher', e.target.checked); route(); });
+      '</div>';
     document.body.classList.toggle('teacher', teacher);
   }
 
@@ -144,6 +143,7 @@
     const last = S.data.last && S.data.last.lesson === lesson.id ? all.findIndex((x) => x.ex.id === S.data.last.ex) : -1;
     const inProg = all.find((x) => S.data.sessions[x.key]);
     if (inProg) return inProg;
+    if (last >= 0 && !doneK(all[last].key) && (S.result(all[last].key) || {}).status !== 'skipped') return all[last];
     for (let k = 1; k <= all.length; k++) { const c = all[(last + k) % all.length]; if (!doneK(c.key) && c.ex.type !== 'report') return c; }
     return all[all.length - 1];
   }
@@ -158,9 +158,9 @@
     const assigned = S.data.assigned.map((k) => MEA.lessons.flatMap((l) => flat(l).map((x) => Object.assign({ l }, x))).find((x) => x.key === k)).filter(Boolean);
     const started = Object.keys(S.data.results).length > 0;
     main().innerHTML =
-      '<section class="hero"><div class="hero-txt"><p class="eyebrow">Learn English. Explore the World.</p><h1>Welcome aboard, Malik!</h1><p class="lead">' +
+      '<section class="hero"><div class="hero-txt"><p class="eyebrow">Learn English. Explore the World.</p><h1>Welcome aboard!</h1><p class="lead">' +
       (started ? (st.done ? 'Your next flight is ready. Let\'s continue where you stopped.' : 'You\'ve unlocked a new destination: lesson ' + lesson.code + '!') : 'Ready for your first adventure? Today we fly to lesson ' + lesson.code + ': ' + esc(lesson.title) + '.') + '</p></div>' +
-      '<div class="hero-chars">' + MEA.keks('hero-keks') + '<div class="bubble">' + (started ? "Let's fly on, Malik!" : "Hi, Malik! I'm Keks. Let's travel!") + '</div></div></section>' +
+      '<div class="hero-chars">' + MEA.keks('hero-keks') + '<div class="bubble">' + (started ? "Let's fly on!" : "Hi! I'm Keks. Let's travel!") + '</div></div></section>' +
       '<section class="pass" aria-label="Next lesson"><div class="pass-main"><div class="pass-row"><div><small>FLIGHT</small><b>' + lesson.code + '</b></div><div><small>DESTINATION</small><b>' + esc(lesson.destination.name) + '</b></div><div><small>STATUS</small><b class="status">' + (st.done ? (st.done === st.total ? 'LANDED' : 'IN FLIGHT') : 'BOARDING') + '</b></div></div>' +
       '<h2>Lesson ' + lesson.code + ': ' + esc(lesson.title) + '</h2><p class="muted">' + esc(lesson.subtitle) + ' · Spotlight 5, ' + esc(lesson.pages) + '</p>' +
       '<div class="pbar"><i style="width:' + st.pct + '%"></i></div><p class="muted small">' + st.done + ' of ' + st.total + ' exercises done</p></div>' +
@@ -200,9 +200,9 @@
 
   Screens.passport = function () {
     const lv = level();
-    main().innerHTML = '<section class="page-head"><h1>Malik\'s Travel Passport</h1></section><section class="passport">' +
-      '<div class="pp-page pp-id"><div class="pp-photo"><span class="pp-avatar">M</span></div><dl><dt>Name</dt><dd>MALIK</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
-      '<p class="mrz mono">P&lt;ENG&lt;MALIK&lt;&lt;ENGLISH&lt;ADVENTURES&lt;&lt;&lt;&lt;</p></div>' +
+    main().innerHTML = '<section class="page-head"><h1>My Travel Passport</h1></section><section class="passport">' +
+      '<div class="pp-page pp-id"><div class="pp-photo"><span class="pp-avatar">S</span></div><dl><dt>Name</dt><dd>STUDENT</dd><dt>Rank</dt><dd>' + lv.rank + ' · Level ' + lv.n + '</dd><dt>Experience</dt><dd>' + S.data.xp + ' XP</dd><dt>Issued</dt><dd>' + new Date(S.data.created).toLocaleDateString('en-GB') + '</dd></dl>' +
+      '<p class="mrz mono">P&lt;ENG&lt;STUDENT&lt;&lt;ENGLISH&lt;ADVENTURES&lt;&lt;&lt;&lt;</p></div>' +
       '<div class="pp-page"><div class="pp-keks">' + MEA.keks() + '<small>Travel buddy: KEKS</small></div><h3>Stamps</h3><div class="stamps">' + Object.keys(STAMPS).map((id) => S.data.stamps[id] ? '<div class="stamp on">' + stampSvg(id, S.data.stamps[id]) + '</div>' : '<div class="stamp"><span>' + STAMPS[id].code + '</span><small>' + esc(STAMPS[id].title) + '</small></div>').join('') + '</div>' +
       '<p class="muted small">Штамп NUM — 80% в Final Number Challenge. Штампы 3A–3D — 70% и больше в Final Mission урока. KEY и IND — за все задания урока. M3 — 70 баллов и больше в Progress Check 3.</p></div></section>' +
       '<section class="card"><h3>Badges</h3><div class="badges">' + BADGES.map((b) => badgeHtml(b, !!S.data.badges[b.id])).join('') + '</div></section>';
@@ -214,7 +214,7 @@
     main().innerHTML = '<section class="page-head"><h1>My Words</h1><p class="lead">Words you find difficult come here automatically. Write them right a few times, and they leave the list.</p></section>' +
       '<section class="card"><div class="row-card"><h3>Words to Practise <span class="count">' + list.length + '</span></h3>' + (list.length ? '<button type="button" class="btn-primary" id="review">' + MEA.icon('retry') + '<span>Practise now</span></button>' : '') + '</div>' +
       (list.length ? '<ul class="wlist">' + list.map((p) => '<li><b>' + esc(p.answer) + '</b><span class="muted">' + esc(p.label) + '</span>' + (p.audio ? MEA.playBtn(p.audio) : '') + '<small>' + p.errors + ' mistake' + (p.errors > 1 ? 's' : '') + ' · ' + p.streak + '/2</small></li>').join('') + '</ul>'
-        : '<p class="muted">No words to practise. Great job, Malik!</p>') + '</section>' +
+        : '<p class="muted">No words to practise. Great job!</p>') + '</section>' +
       '<section class="card"><h3>Learned words <span class="count">' + lw.length + '</span></h3>' + (lw.length ? '<div class="wcloud">' + lw.map((v) => '<span>' + MEA.playBtn(v.word, v.word) + '</span>').join('') + '</div>' : '<p class="muted">Finish “Write the words” or the Final Mission of a lesson to see your learned words here.</p>') + '</section>' +
       '<div id="review-host"></div>';
     const r = $('#review'); r && r.addEventListener('click', startReview);
@@ -236,7 +236,7 @@
   Screens.profile = function () {
     const lesson = curLesson(), st = lessonStats(lesson), lv = level();
     const vocabDone = MEA.lessons.reduce((n, l) => n + learned(l).length, 0);
-    main().innerHTML = '<section class="page-head"><h1>My Cabin</h1><p class="lead">Malik · ' + lv.rank + ' · Level ' + lv.n + '</p></section>' +
+    main().innerHTML = '<section class="page-head"><h1>My Cabin</h1><p class="lead">Your progress · ' + lv.rank + ' · Level ' + lv.n + '</p></section>' +
       '<section class="tiles4"><div class="tile-s"><small>Current lesson</small><b>' + lesson.code + ' ' + esc(lesson.title) + '</b></div><div class="tile-s"><small>Lesson progress</small><b>' + st.pct + '%</b><span class="pbar"><i style="width:' + st.pct + '%"></i></span></div>' +
       '<div class="tile-s"><small>Average score</small><b>' + (st.avg == null ? '—' : st.avg + '%') + '</b></div><div class="tile-s"><small>Learned words / to practise</small><b>' + vocabDone + ' / ' + S.practiseList().length + '</b></div></section>' +
       '<div class="row-btns"><button type="button" class="btn-primary" id="cont">' + MEA.icon('right') + '<span>Continue Learning</span></button><a class="btn-ghost" href="#passport">' + MEA.icon('passport') + '<span>My passport</span></a><a class="btn-ghost" href="#words">' + MEA.icon('book') + '<span>My words</span></a></div>' +
@@ -253,7 +253,7 @@
     vs.addEventListener('change', () => { const v = MEA.Speech.voices[vs.selectedIndex]; if (v) { MEA.Speech.voice = v; S.data.settings.voice = v.name; S.save(); } });
     rate.value = S.data.settings.rate; $('#rate-v').textContent = S.data.settings.rate + 'x';
     rate.addEventListener('input', () => { S.data.settings.rate = +rate.value; $('#rate-v').textContent = rate.value + 'x'; S.save(); });
-    $('#test-v').addEventListener('click', () => MEA.Speech.say('Welcome aboard, Malik! The kitchen is on the twelfth floor.'));
+    $('#test-v').addEventListener('click', () => MEA.Speech.say('Welcome aboard! The kitchen is on the twelfth floor.'));
     $('#exp').addEventListener('click', () => {
       const code = S.exportJSON(); $('#data-box').innerHTML = '<textarea readonly rows="4" class="code">' + esc(code) + '</textarea><p class="muted small">Код выделен — скопируй его (Ctrl+C) и сохрани.</p>';
       const ta = $('#data-box textarea'); ta.select();
@@ -264,7 +264,7 @@
       $('#imp-go').addEventListener('click', () => { try { S.importJSON($('#imp').value.trim()); MEA.toast('Progress loaded.'); route(); renderHeader(); } catch (e) { MEA.toast('Этот код не подходит. Скопируй его ещё раз целиком.'); } });
     });
     $('#reset').addEventListener('click', () => {
-      $('#data-box').innerHTML = '<div class="confirm"><p><b>Удалить весь прогресс Малика?</b> Это нельзя отменить.</p><button type="button" class="btn-ghost danger" id="reset-y">Yes, delete</button><button type="button" class="btn-ghost" id="reset-n">Cancel</button></div>';
+      $('#data-box').innerHTML = '<div class="confirm"><p><b>Удалить весь прогресс в этом модуле?</b> Это нельзя отменить.</p><button type="button" class="btn-ghost danger" id="reset-y">Yes, delete</button><button type="button" class="btn-ghost" id="reset-n">Cancel</button></div>';
       $('#reset-y').addEventListener('click', () => { S.reset(); renderHeader(); route(); MEA.toast('Progress deleted.'); });
       $('#reset-n').addEventListener('click', () => { $('#data-box').innerHTML = ''; });
     });
@@ -285,11 +285,11 @@
     const lesson = lessonById(Screens.teacher.sel) || curLesson(), st = lessonStats(lesson);
     const writing = Object.entries(S.data.writing).filter(([, t]) => t && t.trim());
     main().innerHTML = '<section class="page-head"><h1>Teacher panel</h1><div class="row-btns">' + MEA.lessons.map((l) => '<button type="button" class="btn-ghost sm ' + (l === lesson ? 'on' : '') + '" data-tl="' + l.id + '">' + l.code + ' ' + esc(l.title) + '</button>').join('') + '</div><p class="lead">Lesson ' + lesson.code + ' · ' + st.done + '/' + st.total + ' exercises · average ' + (st.avg == null ? '—' : st.avg + '%') + '</p></section>' +
-      '<section class="card"><p class="muted small">В режиме учителя: в каждом задании видна методическая цель, кнопка <b>Show answer</b> доступна сразу, все упражнения открыты. «Assign» добавляет задание в блок «From your teacher» на главной странице Малика.</p>' + resultsTable(lesson, true) + '</section>' +
+      '<section class="card"><p class="muted small">В режиме учителя: в каждом задании видна методическая цель, кнопка <b>Show answer</b> доступна сразу, все упражнения открыты. «Assign» добавляет задание в блок «From your teacher» на главной странице ученика.</p>' + resultsTable(lesson, true) + '</section>' +
       '<section class="card"><h3>' + MEA.icon('clipboard') + ' Printable worksheets</h3><p class="muted small">Для каждого урока: Classwork (на урок) и Homework (на дом). Откроется страница А4 с кнопкой Print; ключи печатаются по галочке.</p><div class="ws-grid">' +
       MEA.lessons.map((l) => '<div class="ws-row"><b>' + l.code + ' ' + esc(l.title) + '</b><span class="row-btns">' + wsLinks(l.id) + '</span></div>').join('') + '</div></section>' +
       '<section class="card"><h3>Words to Practise (' + S.practiseList().length + ')</h3>' + (S.practiseList().length ? '<p>' + S.practiseList().map((p) => '<span class="pill">' + esc(p.answer) + ' · ' + p.errors + '</span>').join(' ') + '</p><button type="button" class="btn-ghost sm" id="clear-w">Clear the list</button>' : '<p class="muted">Empty.</p>') + '</section>' +
-      '<section class="card"><h3>Writing</h3>' + (writing.length ? writing.map(([k, t]) => '<div class="wtext"><small>' + esc(k) + '</small><p>' + esc(t).replace(/\n/g, '<br>') + '</p></div>').join('') : '<p class="muted">Malik has not written anything yet.</p>') + '</section>';
+      '<section class="card"><h3>Writing</h3>' + (writing.length ? writing.map(([k, t]) => '<div class="wtext"><small>' + esc(k) + '</small><p>' + esc(t).replace(/\n/g, '<br>') + '</p></div>').join('') : '<p class="muted">No writing drafts yet.</p>') + '</section>';
     $$('[data-open-ex]').forEach((b) => b.addEventListener('click', () => openLesson(lesson.id, b.dataset.openEx)));
     $$('[data-tl]').forEach((b) => b.addEventListener('click', () => { Screens.teacher.sel = b.dataset.tl; Screens.teacher(); }));
     $$('[data-assign]').forEach((b) => b.addEventListener('click', () => { const k = b.dataset.assign, a = S.data.assigned; const i = a.indexOf(k); if (i >= 0) a.splice(i, 1); else a.push(k); S.save(); Screens.teacher(); }));
@@ -314,7 +314,7 @@
     let exId = current.lesson === lesson.id && current.ex ? current.ex : nextExercise(lesson).ex.id;
     current = { lesson: lesson.id, ex: exId };
     main().innerHTML = '<div class="lesson"><aside class="route" aria-label="Lesson route"><details class="route-d" open><summary><span><small>Spotlight 5 · Module ' + lesson.module + '</small><b>' + lesson.code + ' ' + esc(lesson.title) + '</b></span><span class="route-pct"></span></summary><div class="route-list"></div></details></aside>' +
-      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><div class="row-btns">' + (lesson.id === 'have' ? '<a class="btn-ghost sm" href="have-guide.html" target="_blank" rel="noopener">План учителю</a>' : '<details class="ws-menu"><summary class="btn-ghost sm">' + MEA.icon('clipboard') + '<span>Worksheets</span></summary><div class="ws-pop"><p class="small"><b>Рабочие листы для печати (А4)</b><br>Лист для урока и лист для домашней работы, ключи — на отдельной странице.</p>' + wsLinks(lesson.id) + '</div></details>') + '<button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div></div><div id="ex-host"></div></section></div>';
+      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><div class="row-btns">' + (lesson.id === 'have' ? '<a data-teacher-only class="btn-ghost sm" href="have-guide.html" target="_blank" rel="noopener">План учителю</a>' : '<details class="ws-menu"><summary class="btn-ghost sm">' + MEA.icon('clipboard') + '<span>Worksheets</span></summary><div class="ws-pop"><p class="small"><b>Рабочие листы для печати (А4)</b><br>Лист для урока и лист для домашней работы, ключи — на отдельной странице.</p>' + wsLinks(lesson.id) + '</div></details>') + '<button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div></div><div id="ex-host"></div></section></div>';
     if (window.innerWidth < 860) $('.route-d').open = false;
     drawRoute(lesson); openEx(lesson, exId);
     $('#skip-ex').addEventListener('click', () => {
@@ -389,5 +389,6 @@
   }
   MEA.route = route;
   window.addEventListener('hashchange', route);
+  window.addEventListener('spotlight:modechange', () => { S.data.settings.teacher = window.SpotlightMode.isTeacher(); S.save(); route(); });
   document.addEventListener('DOMContentLoaded', () => { S.load(); MEA.Speech.init(); route(); });
 })(window.MEA = window.MEA || {});

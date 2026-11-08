@@ -1,4 +1,4 @@
-/* Malik's English Adventures — illustrations (inline SVG, no external files) */
+/* English Adventures — illustrations (inline SVG, no external files) */
 (function (MEA) {
   'use strict';
   const S = (body, bg) =>

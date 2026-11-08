@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Worksheet · Malik's English Adventures</title>
+  <title>Worksheet · English Adventures</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Manrope:wght@400;600;700;800&family=Unbounded:wght@600;700&display=swap" rel="stylesheet">
@@ -83,35 +83,35 @@
     }
     @media screen and (max-width: 820px) { .paper { width: 100%; padding: 6mm; } .w-pics { grid-template-columns: repeat(2, 1fr); } .w-match { grid-template-columns: 1fr; gap: 2mm; } }
   </style>
-</head>
+<link rel="stylesheet" href="../assets/platform-mode.css?v=20261108u2"><script src="../assets/platform-mode.js?v=20261108u2"></script></head>
 <body>
   <div class="bar"></div>
-  <p class="note">Нажмите <b>Print</b> → в окне печати выберите принтер или «Сохранить как PDF». Страницу с ключами можно не печатать (галочка «Answer key»).</p>
+  <p class="note">Нажмите <b>Print</b> → в окне печати выберите принтер или «Сохранить как PDF». </p>
   <main id="sheet"></main>
-  <script src="js/art.js?v=20261103g"></script>
-  <script src="js/art-home.js?v=20261103g"></script>
-  <script src="js/art-bedroom.js?v=20261103g"></script>
-  <script src="js/art-culture.js?v=20261103g"></script>
-  <script src="js/art-taj.js?v=20261103g"></script>
-  <script src="js/lang.js?v=20261103g"></script>
-  <script src="js/engine.js?v=20261103g"></script>
-  <script src="js/activities.js?v=20261103g"></script>
-  <script src="js/activities-2.js?v=20261103g"></script>
-  <script src="js/activities-3.js?v=20261103g"></script>
-  <script src="js/worksheets.js?v=20261103g"></script>
+  <script src="js/art.js?v=20261108u2"></script>
+  <script src="js/art-home.js?v=20261108u2"></script>
+  <script src="js/art-bedroom.js?v=20261108u2"></script>
+  <script src="js/art-culture.js?v=20261108u2"></script>
+  <script src="js/art-taj.js?v=20261108u2"></script>
+  <script src="js/lang.js?v=20261108u2"></script>
+  <script src="js/engine.js?v=20261108u2"></script>
+  <script src="js/activities.js?v=20261108u2"></script>
+  <script src="js/activities-2.js?v=20261108u2"></script>
+  <script src="js/activities-3.js?v=20261108u2"></script>
+  <script src="js/worksheets.js?v=20261108u2"></script>
   <script>
     (function () {
       var NAMES = { '3a': '3A At home', '3b': '3B Move in!', '3c': '3C My bedroom', '3d': '3D A typical English house', eu3: 'English in Use 3', er3: 'Extensive Reading 3', pc3: 'Progress Check 3' };
       var q = new URLSearchParams(location.search), l = q.get('l') || '3a', t = q.get('t') === 'home' ? 'home' : 'class';
       if (!NAMES[l]) l = '3a';
       var w = MEA.Worksheets.render(l, t);
-      document.title = (t === 'home' ? 'Homework' : 'Classwork') + ' ' + NAMES[l] + ' · Malik';
+      document.title = (t === 'home' ? 'Homework' : 'Classwork') + ' ' + NAMES[l] + ' · Alex';
       var link = function (lid, typ, txt) { return '<a href="?l=' + lid + '&t=' + typ + '"' + (lid === l && typ === t ? ' class="on"' : '') + '>' + txt + '</a>'; };
       document.querySelector('.bar').innerHTML = '<a href="./">← Back</a><b style="margin:0 .4rem">' + NAMES[l] + '</b>' + link(l, 'class', 'Classwork') + link(l, 'home', 'Homework') +
-        '<span class="sp"></span><label><input type="checkbox" id="k"> Answer key</label><button type="button" class="print" id="p">Print</button>';
+        '<span class="sp"></span><label data-teacher-only><input type="checkbox" id="k"> Answer key</label><button type="button" class="print" id="p">Print</button>';
       document.getElementById('sheet').innerHTML = '<div class="paper"><header class="head"><img src="img/keks.webp" alt="Keks"><div><div class="tag">' + (t === 'home' ? 'Homework' : 'Classwork') + ' · Spotlight 5 · Module 3 · ' + NAMES[l] + '</div><h1>' + w.title + '</h1>' +
         '<div class="who"><span>Name:</span><span>Date:</span><span>Mark:</span></div></div></header>' + w.body +
-        '<div class="foot"><span>Malik\'s English Adventures</span><span>' + (t === 'home' ? 'Good luck! — Keks' : 'Work in class with your teacher') + '</span></div>' +
+        '<div class="foot"><span>English Adventures</span><span>' + (t === 'home' ? 'Good luck! — Keks' : 'Work in class with your teacher') + '</span></div>' +
         '<section class="key"><h2>Answer key · ' + w.title + '</h2>' + w.key + '</section></div>';
       var k = document.getElementById('k');
       k.addEventListener('change', function () { document.body.classList.toggle('with-key', k.checked); });

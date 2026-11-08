@@ -9,7 +9,7 @@
   MEA.util = { esc, shuffle, pick, $, $$ };
 
   const GOOD = ['Great job!', 'Excellent!', 'Well done!', 'Perfect!', 'Brilliant!', 'Nice one!'];
-  const praise = () => (Math.random() < 0.15 ? 'Great job, Malik!' : pick(GOOD));
+  const praise = () => (Math.random() < 0.15 ? 'Great job!' : pick(GOOD));
   const playBtn = (text, label, big) =>
     '<button type="button" class="say ' + (big ? 'say-big' : '') + '" data-say="' + esc(text) + '" aria-label="Listen">' + MEA.icon('speaker') + (label ? '<span>' + esc(label) + '</span>' : '') + '</button>' +
     (big ? '<button type="button" class="say say-slow" data-say="' + esc(text) + '" data-slow="1" aria-label="Listen slowly">' + MEA.icon('slow') + '<span>Slow</span></button>' : '');
@@ -247,7 +247,7 @@
     return '<header class="ex-head"><div class="ex-kicker">' + esc(stage ? stage.title : '') + (stage && stage.sub ? ' · ' + esc(stage.sub) : '') + '</div>' +
       '<h2 class="ex-title">' + esc(ex.title) + '</h2>' +
       (ex.task ? '<p class="ex-task">' + ex.task + '</p>' : '') + (ex.taskRu ? '<p class="ex-task-ru">' + esc(ex.taskRu) + '</p>' : '') +
-      (teacher && ex.goal ? '<p class="ex-goal">' + MEA.icon('clipboard') + ' <b>Цель:</b> ' + esc(ex.goal) + '</p>' : '') + '</header>';
+      (teacher ? window.SpotlightMode.notes((ex.goal ? '<p><b>Цель:</b> '+esc(ex.goal)+'</p>' : '') + (ex.teacherNotes || '')) : '') + '</header>';
   }
 
   Engine.run = function (ctx) {
@@ -363,7 +363,7 @@
       if (!ctx.review) { delete S.data.sessions[key]; S.save(); }
       finishExercise(ctx, res);
     }
-    step();
+    save(); step();
   }
   const stripTags = (s) => String(s || '').replace(/<[^>]+>/g, '').trim();
   function meta(it) {
@@ -392,7 +392,7 @@
     api.clear();
     const pct = res.score == null ? null : Math.round(res.score * 100);
     const stars = pct == null ? 3 : pct >= 90 ? 3 : pct >= 70 ? 2 : 1;
-    const msg = pct == null ? 'Mission complete!' : pct >= 90 ? 'Perfect landing, Malik!' : pct >= 70 ? 'Good flight!' : "Let's practise a bit more.";
+    const msg = pct == null ? 'Mission complete!' : pct >= 90 ? 'Perfect landing!' : pct >= 70 ? 'Good flight!' : "Let's practise a bit more.";
     const mist = (res.mistakes || []).filter((m) => m.answer);
     api.body.innerHTML = '<div class="summary">' +
       '<div class="stars">' + [1, 2, 3].map((i) => '<span class="' + (i <= stars ? 'on' : '') + '">' + MEA.icon('star') + '</span>').join('') + '</div>' +

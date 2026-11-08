@@ -85,7 +85,7 @@
     }
     function finish() {
       $('#toss', api.body).disabled = true; $('.bq', api.body).hidden = true;
-      api.feedback('good', 'FINISH! You did it, Malik!', right + ' of ' + landed + ' words spelled right.');
+      api.feedback('good', 'FINISH! You did it!', right + ' of ' + landed + ' words spelled right.');
       api.actions([{ label: 'Finish', icon: 'right', primary: true, id: 'next', on: () => api.finish({ score: landed ? right / landed : 1, total: landed, firstTry: right, mistakes }) }]);
     }
     api.actions([{ label: 'Skip', icon: 'skip', on: () => api.finish({ score: landed ? right / landed : null, total: landed, firstTry: right, mistakes }) }]);

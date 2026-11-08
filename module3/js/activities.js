@@ -168,7 +168,14 @@
       const pts = state.reduce((s, x) => s + (x || 0), 0);
       const mistakes = gaps.map((g, k) => state[k] === 1 ? null : { q: 'Gap ' + (k + 1), given: '', answer: g.answers[0], result: 'retry' }).filter(Boolean);
       api.actions([{ label: 'Finish', icon: 'right', primary: true, id: 'next', on: () => api.finish({ score: pts / gaps.length, total: gaps.length, firstTry: state.filter((x) => x === 1).length, mistakes }) }]);
-      if (ex.revealScript) { const t = $('.script-text'); t && (t.hidden = false); }
+      if (ex.revealScript) {
+        const t = $('.script-text', ctx.host);
+        if (t) t.hidden = false;
+        else if (ex.panel && ex.panel.script) {
+          const slot = $('.panel-slot', ctx.host);
+          if (slot && !$('.student-transcript', slot)) slot.insertAdjacentHTML('beforeend', '<details class="student-transcript"><summary>Transcript · after practice</summary><p>' + esc(ex.panel.script) + '</p></details>');
+        }
+      }
     }
     function bar() {
       api.actions([
@@ -274,7 +281,7 @@
   MEA.panels.audio = function (slot, p) {
     slot.innerHTML = '<section class="listening"><div class="listen-art">' + MEA.art(p.art || 'flats') + '</div><div><h3>' + esc(p.title) + '</h3><p class="muted">' + esc(p.sub || 'Listen two times. Use Slow if you need it.') + '</p>' +
       '<div class="audio-row">' + MEA.playBtn(p.script, 'Listen', true) + '</div>' +
-      '<details class="script-text"' + (MEA.Store.data.settings.teacher ? '' : ' hidden') + '><summary>Transcript (teacher)</summary><p>' + esc(p.script) + '</p></details></div></section>';
+      (MEA.Store.data.settings.teacher ? '<details data-teacher-only class="script-text"><summary>Transcript (teacher)</summary><p>' + esc(p.script) + '</p></details>' : '') + '</div></section>';
   };
 
   /* ===== Interactive rule widgets ===== */

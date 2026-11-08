@@ -86,7 +86,7 @@
           items: [
             { kind: 'choice', art: 'flats', prompt: 'Is it a house or a block of flats?', options: ['a house', 'a block of flats'], answer: 'a block of flats', answerText: 'a block of flats', keepOrder: true, log: 'block of flats' },
             { kind: 'choice', art: 'house', prompt: 'Is it a house or a block of flats?', options: ['a house', 'a block of flats'], answer: 'a house', answerText: 'a house', keepOrder: true, log: 'house' },
-            { kind: 'poll', prompt: 'And you, Malik? Where do you live?', options: ['I live in a flat.', 'I live in a house.'], reply: { 'I live in a flat.': 'Cool! Lots of people in Russia live in flats.', 'I live in a house.': 'Nice! Has it got a garden?' }, log: 'my home' }
+            { kind: 'poll', prompt: 'And you, Alex? Where do you live?', options: ['I live in a flat.', 'I live in a house.'], reply: { 'I live in a flat.': 'Cool! Lots of people in Russia live in flats.', 'I live in a house.': 'Nice! Has it got a garden?' }, log: 'my home' }
           ] },
         { id: 'w2', type: 'seq', title: 'Quick radio check: numbers', task: 'Listen and choose the number. You know these!', taskRu: 'Разминка: послушай и выбери число.', goal: 'Актуализировать числа 1–20 перед порядковыми числительными.',
           items: () => shuffle([3, 5, 8, 12, 13, 15, 20, 9]).slice(0, 4).map((n) => ({ kind: 'choice', audio: L.numWords(n), prompt: 'Which number do you hear?', mono: true,

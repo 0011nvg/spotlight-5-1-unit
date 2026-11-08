@@ -117,13 +117,13 @@
         { t: 'gaps', title: "Look at the room. Write is, are, isn't or aren't.", ru: 'Посмотри на комнату и вставь слово.', bank: ['is', 'are', "isn't", "aren't"],
           items: [{ s: 'There ___ a sofa.', a: 'is' }, { s: 'There ___ two armchairs.', a: 'are' }, { s: 'There ___ a TV.', a: "isn't" }, { s: 'There ___ three paintings.', a: 'are' }, { s: 'There ___ any chairs.', a: "aren't" }],
           scene: true },
-        { t: 'circle', title: 'Circle the correct word.', ru: 'Обведи правильное слово.', items: [{ s: 'This is Ann. That is (her / she) desk.', a: 'her' }, { s: "Mia and Tom are in (they / their) kitchen.", a: 'their' }, { s: "I'm Malik. This is (my / I) bed.", a: 'my' }, { s: 'We live in a flat. (We / Our) flat is big.', a: 'Our' }, { s: 'Is this (you / your) lamp?', a: 'your' }] },
+        { t: 'circle', title: 'Circle the correct word.', ru: 'Обведи правильное слово.', items: [{ s: 'This is Ann. That is (her / she) desk.', a: 'her' }, { s: "Mia and Tom are in (they / their) kitchen.", a: 'their' }, { s: "I'm Alex. This is (my / I) bed.", a: 'my' }, { s: 'We live in a flat. (We / Our) flat is big.', a: 'Our' }, { s: 'Is this (you / your) lamp?', a: 'your' }] },
         { t: 'order', title: 'Put the words in order.', ru: 'Составь предложения.', items: ['Is there a cooker in the kitchen?', "There aren't any chairs in the bathroom.", 'Their flat has got two bedrooms.'] }
       ] },
       home: { title: 'Move in! · Homework', tasks: [
         { t: 'wordsearch', title: 'Find the furniture.', ru: 'Найди 8 предметов мебели.', words: ['sofa', 'bed', 'desk', 'lamp', 'fridge', 'cooker', 'mirror', 'carpet'], size: 10 },
         { t: 'gaps', title: 'Complete with is or are, then answer.', ru: 'Вставь is / are и ответь о своей квартире.', items: [{ s: '___ there a fridge in your kitchen?', a: 'Is' }, { s: '___ there any armchairs in your living room?', a: 'Are' }, { s: '___ there a desk in your bedroom?', a: 'Is' }, { s: '___ there any paintings on your walls?', a: 'Are' }] },
-        { t: 'gaps', title: 'Write my, your, his, her, our or their.', ru: 'Впиши притяжательное местоимение.', bank: ['my', 'your', 'his', 'her', 'our', 'their'], items: [{ s: 'Malik is in ___ bedroom. (he)', a: 'his' }, { s: 'Sara loves ___ new flat. (she)', a: 'her' }, { s: 'We like ___ kitchen. (we)', a: 'our' }, { s: 'Is this ___ book? (you)', a: 'your' }, { s: 'Mia and Tom are in ___ garden. (they)', a: 'their' }, { s: 'This is ___ sofa. (I)', a: 'my' }] },
+        { t: 'gaps', title: 'Write my, your, his, her, our or their.', ru: 'Впиши притяжательное местоимение.', bank: ['my', 'your', 'his', 'her', 'our', 'their'], items: [{ s: 'Alex is in ___ bedroom. (he)', a: 'his' }, { s: 'Sara loves ___ new flat. (she)', a: 'her' }, { s: 'We like ___ kitchen. (we)', a: 'our' }, { s: 'Is this ___ book? (you)', a: 'your' }, { s: 'Mia and Tom are in ___ garden. (they)', a: 'their' }, { s: 'This is ___ sofa. (I)', a: 'my' }] },
         { t: 'draw', title: 'Draw your dream living room.', ru: 'Нарисуй гостиную своей мечты.', h: 60 },
         { t: 'write', title: 'Describe it: 4 sentences with there is / there are.', ru: 'Опиши её: 4 предложения с there is / there are.', frames: ["There's a …", 'There are two …', "There isn't a …", "There aren't any …"], lines: 4 }
       ] }
@@ -131,7 +131,7 @@
     '3c': {
       class: { title: 'My bedroom · Classwork', tasks: [
         { t: 'pics', title: 'Where is Keks? Write the preposition.', ru: 'Где кот? Напиши предлог.', items: [['prep-in', 'in'], ['prep-on', 'on'], ['prep-under', 'under'], ['prep-behind', 'behind'], ['prep-nextto', 'next to'], ['prep-infrontof', 'in front of']].map(([art, ans]) => ({ art, ans })) },
-        { t: 'qa', title: "Look at Malik's bedroom. Complete the sentences.", ru: 'Посмотри на комнату и допиши.', scene: room,
+        { t: 'qa', title: "Look at a bedroom. Complete the sentences.", ru: 'Посмотри на комнату и допиши.', scene: room,
           items: [{ q: "Where's the football?", b: "It's", e: 'the bed.', a: 'under' }, { q: 'Where are the books?', b: "They're", e: 'the bookcase.', a: 'in' }, { q: "Where's the poster?", b: "It's", e: 'the bed.', a: 'behind' }, { q: "Where's the computer?", b: "It's", e: 'the desk.', a: 'on' }, { q: "Where's the schoolbag?", b: "It's", e: 'the wardrobe.', a: 'in front of' }] },
         { t: 'circle', title: "Circle It's or They're.", ru: 'Обведи It’s или They’re.', items: [{ s: "Where's the lamp? (It's / They're) on the bookcase.", a: "It's" }, { s: "Where are my shoes? (It's / They're) under the bed.", a: "They're" }, { s: "Where's Keks? (He's / They're) on the bed.", a: "He's" }, { s: "Where are the chairs? (It's / They're) in the kitchen.", a: "They're" }] },
         { t: 'order', title: 'Put the dialogue in order.', ru: 'Составь реплики диалога.', items: ['Is there a desk in your bedroom?', 'Where exactly is it?', "It's under the window next to my bed."] }
@@ -185,7 +185,7 @@
         { t: 'pics', title: 'Rooms and furniture. Write.', ru: 'Подпиши.', items: [['kitchen', 'kitchen'], ['bedroom', 'bedroom'], ['wardrobe', 'wardrobe'], ['armchair', 'armchair'], ['fridge', 'fridge'], ['mirror', 'mirror']].map(([art, ans]) => ({ art, ans })) },
         { t: 'numwords', title: 'Ordinal numbers.', ru: 'Напиши порядковые числительные.', nums: [1, 2, 3, 5, 8, 9, 12, 20], ord: true },
         { t: 'gaps', title: "is, isn't, are or aren't?", ru: 'Вставь слово.', items: [{ s: 'There ___ four chairs in the kitchen. ✓', a: 'are' }, { s: 'There ___ a TV in my bedroom. ✗', a: "isn't" }, { s: 'There ___ a lamp on the desk. ✓', a: 'is' }, { s: 'There ___ any books on the sofa. ✗', a: "aren't" }] },
-        { t: 'qa', title: "Look at Malik's room. Where are the things?", ru: 'Где предметы?', scene: room, items: [{ q: 'the football', a: "It's under the bed." }, { q: 'Keks', a: "He's on the bed." }, { q: 'the lamp', a: "It's on the bookcase." }] }
+        { t: 'qa', title: "Look at Alex's room. Where are the things?", ru: 'Где предметы?', scene: room, items: [{ q: 'the football', a: "It's under the bed." }, { q: 'Keks', a: "He's on the bed." }, { q: 'the lamp', a: "It's on the bookcase." }] }
       ] },
       home: { title: 'Module 3 · Practice test', tasks: [
         { t: 'odd', title: 'Cross the odd word out.', ru: 'Вычеркни лишнее.', items: [{ w: ['sofa', 'armchair', 'cooker', 'coffee table'], a: 'cooker' }, { w: ['bath', 'toilet', 'washbasin', 'desk'], a: 'desk' }, { w: ['hall', 'garage', 'lamp', 'kitchen'], a: 'lamp' }, { w: ['under', 'on', 'carpet', 'behind'], a: 'carpet' }] },

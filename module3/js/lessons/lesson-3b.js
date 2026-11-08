@@ -61,11 +61,11 @@
 
   const POSS = [
     ['This is Sara. That is ___ flat.', ['her', 'she'], 'her'], ['Mia and Tom live on the second floor. ___ flat has got a big kitchen.', ['Their', 'They'], 'Their'],
-    ["I'm Malik. This is ___ bedroom.", ['my', 'I'], 'my'], ['Is this ___ book, Ann?', ['your', 'you'], 'your'], ['Captain Lee is a pilot. ___ car is in the garage.', ['His', 'He'], 'His'],
+    ["I'm Alex. This is ___ bedroom.", ['my', 'I'], 'my'], ['Is this ___ book, Ann?', ['your', 'you'], 'your'], ['Captain Lee is a pilot. ___ car is in the garage.', ['His', 'He'], 'His'],
     ['We live in a block of flats. ___ flat is on the fifth floor.', ['Our', 'We'], 'Our'], ['Look at the sofa! ___ colour is green.', ['Its', 'It'], 'Its']
   ];
   const POSS_T = [['(I)', 'This is ___ desk.', 'my'], ['(he)', 'Keks is a cat. ___ bed is under the window.', 'His'], ['(they)', 'Mia and Tom are in ___ living room.', 'their'],
-    ['(he)', 'Malik is in ___ bedroom.', 'his'], ['(we)', '___ kitchen is very big.', 'Our'], ['(you)', 'Is that ___ wardrobe?', 'your']];
+    ['(he)', 'Alex is in ___ bedroom.', 'his'], ['(we)', '___ kitchen is very big.', 'Our'], ['(you)', 'Is that ___ wardrobe?', 'your']];
 
   const DIALOGUE = [['Ann', "Hi, Sara! What's your new flat like?"], ['Sara', "It's lovely! It's on the ninth floor of Sky Tower."], ['Ann', 'Wow! How many rooms are there?'],
     ['Sara', 'There are four rooms: a living room, a kitchen, a bedroom and a small bathroom.'], ['Ann', 'Has it got any furniture?'],
@@ -74,8 +74,8 @@
     ['Sara', "There's a bed, a wardrobe and a lamp. And my favourite thing: there's a big window with a view of the planes!"], ['Ann', 'Sounds great!']];
   const dlgHtml = (lines) => '<div class="dialog-txt">' + lines.map(([w, t]) => '<p><b>' + w + ':</b> ' + MEA.util.esc(t) + '</p>').join('') + '</div>';
   const READ = { type: 'text', art: 'sofa', title: "Sara's new flat", html: dlgHtml(DIALOGUE), audio: DIALOGUE.map((l) => l[1]).join(' ') };
-  const DREAM = "Hi, I'm Malik. This is my dream room! There's a big bed next to the window. There are two armchairs and a small coffee table. There's a desk with a computer on it, and there's a lamp too. There aren't any paintings on the walls, but there are lots of photos of planes! And there isn't a wardrobe. My clothes are in a big box under the bed!";
-  const LISTEN = { type: 'audio', art: 'bed', title: "Radio: Malik's dream room", script: DREAM };
+  const DREAM = "Hi, I'm Alex. This is my dream room! There's a big bed next to the window. There are two armchairs and a small coffee table. There's a desk with a computer on it, and there's a lamp too. There aren't any paintings on the walls, but there are lots of photos of planes! And there isn't a wardrobe. My clothes are in a big box under the bed!";
+  const LISTEN = { type: 'audio', art: 'bed', title: "Radio: Alex's dream room", script: DREAM };
   const FURN_WORDS = F.map((f) => f.word).concat(['chairs', 'paintings', 'books', 'TV', 'television']);
 
   MEA.registerLesson({
@@ -122,7 +122,7 @@
         { id: 'l2', type: 'rule', title: 'my, your, his, her…', task: 'Whose is it?', goal: 'Притяжательные местоимения my, your, his, her, its, our, their.',
           html: '<h3>Possessive adjectives</h3><p>Отвечают на вопрос «чей?» и стоят <b>перед существительным</b>: <b>my</b> room, <b>their</b> flat.</p>' +
             '<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Кто</th><th>Чей</th><th>Пример</th></tr></thead><tbody>' +
-            [['I', 'my', 'This is my bed.'], ['you', 'your', 'Is this your desk?'], ['he', 'his', 'Malik is in his bedroom.'], ['she', 'her', 'Sara likes her new flat.'], ['it', 'its', 'The sofa is nice. Its colour is green.'], ['we', 'our', 'Our kitchen is big.'], ['they', 'their', 'Mia and Tom love their flat.']]
+            [['I', 'my', 'This is my bed.'], ['you', 'your', 'Is this your desk?'], ['he', 'his', 'Alex is in his bedroom.'], ['she', 'her', 'Sara likes her new flat.'], ['it', 'its', 'The sofa is nice. Its colour is green.'], ['we', 'our', 'Our kitchen is big.'], ['they', 'their', 'Mia and Tom love their flat.']]
               .map(([a, b, c]) => '<tr><td>' + a + '</td><td><b>' + b + '</b></td><td>' + MEA.playBtn(c) + ' ' + c + '</td></tr>').join('') + '</tbody></table></div>' +
             '<div class="rule-box hot"><h4>Ловушки</h4><ul><li><b>its</b> (его/её — о предмете или животном) ≠ <b>it\'s</b> (it is)</li><li><b>their</b> (их) ≠ <b>there</b> (там / there is)</li><li>После притяжательного слова не нужен a/the: <s>the my room</s> → my room</li></ul></div>' }
       ] },
@@ -172,7 +172,7 @@
             { kind: 'typing', prompt: 'What isn\'t there in the kitchen?', before: "There aren't any", after: '.', answer: 'chairs', answerText: 'chairs', log: 'kitchen' },
             { kind: 'typing', prompt: 'What is there in the bedroom? Name one thing.', before: "There's a", after: '.', answer: ['bed', 'wardrobe', 'lamp', 'window', 'big window'], answerText: 'bed / wardrobe / lamp', log: 'bedroom' }
           ] },
-        { id: 'c4', type: 'seq', title: "Listening 1: Malik's dream room", task: 'Listen. What is there in the room? Choose five things.', taskRu: 'Послушай и выбери 5 предметов, которые есть в комнате.', goal: 'Аудирование с выборочным извлечением информации.', panel: LISTEN,
+        { id: 'c4', type: 'seq', title: "Listening 1: Alex's dream room", task: 'Listen. What is there in the room? Choose five things.', taskRu: 'Послушай и выбери 5 предметов, которые есть в комнате.', goal: 'Аудирование с выборочным извлечением информации.', panel: LISTEN,
           items: [{ kind: 'multi', autoplay: false, prompt: 'What is there in the dream room?', options: ['bed', 'armchair', 'coffee table', 'desk', 'lamp', 'wardrobe', 'painting', 'sofa'].map((w) => ({ value: w, label: w, art: byWord(w).art })), answers: ['bed', 'armchair', 'coffee table', 'desk', 'lamp'], answerText: 'bed, armchairs, coffee table, desk, lamp', log: 'dream room' }] },
         { id: 'c5', type: 'gapfill', title: 'Listening 2: Complete the text', task: 'Listen again and fill in the gaps.', taskRu: 'Послушай ещё раз и заполни пропуски.', goal: 'Аудирование: точное извлечение слов и форм there is / are.', panel: LISTEN, revealScript: true,
           template: '<div class="advert"><div class="adv-tag">MY DREAM ROOM</div><p>There\'s a big [[bed]] next to the [[window]].</p><p>There [[are]] [[n:two/2]] armchairs and a small coffee table.</p><p>There aren\'t [[any]] paintings on the walls.</p><p>There [[isn\'t/is not]] a wardrobe.</p></div>' },
@@ -192,7 +192,7 @@
             { label: 'Use my, our, his, her or their', test: (t) => /\b(my|our|his|her|their|your)\b/i.test(t) },
             { label: '5 sentences or more', test: (t) => (t.match(/[.!?](\s|$)/g) || []).length >= 5 }
           ],
-          model: "Hi Ann! My new flat is great! There are three rooms: a living room, a kitchen and my bedroom. In the living room there's a big sofa and two armchairs, but there isn't a TV. There aren't any chairs in the kitchen yet. My favourite room is my bedroom because there's a big window with a view of the planes. Bye for now! Malik" }
+          model: "Hi Ann! My new flat is great! There are three rooms: a living room, a kitchen and my bedroom. In the living room there's a big sofa and two armchairs, but there isn't a TV. There aren't any chairs in the kitchen yet. My favourite room is my bedroom because there's a big window with a view of the planes. Bye for now! Alex" }
       ] },
 
       { id: 'final', title: 'Final Mission', sub: 'Lesson check', icon: 'passport', exercises: [

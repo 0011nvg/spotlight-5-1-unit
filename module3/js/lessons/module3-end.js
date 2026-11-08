@@ -8,9 +8,9 @@
   const report = (title) => ({ id: 'progress', title: 'My Progress', sub: 'Results & tips', icon: 'user', exercises: [{ id: 'r1', type: 'report', title: title, goal: 'Рефлексия.' }] });
 
   /* ================= English in Use 3 ================= */
-  const PHRASES = [['Which house is it, Mum?', 'Malik'], ['This one. Here we are.', 'Mum'], ["Let's go in.", 'Mum'], ['The living room is very big!', 'Malik'], ["Let's go upstairs.", 'Mum'], ['Which is my bedroom?', 'Malik'], ["It's great, Mum!", 'Malik']];
-  const DLG = [['Malik', 'Which house is it, Mum?'], ['Mum', 'This one, with the red door. Here we are.'], ['Malik', "Wow! It's really nice, and look at that big tree!"], ['Mum', "I've got the keys. Let's go in."],
-    ['Malik', 'The living room is very big!'], ['Mum', "Yes, but the kitchen is quite small. Let's go upstairs."], ['Malik', 'Which is my bedroom?'], ['Mum', "This one here, next to the bathroom. It's got a big window."], ['Malik', "I can see the airport from here! It's great, Mum!"]];
+  const PHRASES = [['Which house is it, Mum?', 'Alex'], ['This one. Here we are.', 'Mum'], ["Let's go in.", 'Mum'], ['The living room is very big!', 'Alex'], ["Let's go upstairs.", 'Mum'], ['Which is my bedroom?', 'Alex'], ["It's great, Mum!", 'Alex']];
+  const DLG = [['Alex', 'Which house is it, Mum?'], ['Mum', 'This one, with the red door. Here we are.'], ['Alex', "Wow! It's really nice, and look at that big tree!"], ['Mum', "I've got the keys. Let's go in."],
+    ['Alex', 'The living room is very big!'], ['Mum', "Yes, but the kitchen is quite small. Let's go upstairs."], ['Alex', 'Which is my bedroom?'], ['Mum', "This one here, next to the bathroom. It's got a big window."], ['Alex', "I can see the airport from here! It's great, Mum!"]];
   const dlgHtml = '<div class="dialog-txt">' + DLG.map(([w, t]) => '<p><b>' + w + ':</b> ' + esc(t) + '</p>').join('') + '</div>';
   const DPANEL = { type: 'text', art: 'keys', title: 'Viewing a house', html: dlgHtml, audio: DLG.map((d) => d[1]).join(' ') };
   const OO = [['book', 'u'], ['cook', 'u'], ['look', 'u'], ['good', 'u'], ['foot', 'u'], ['wood', 'u'], ['room', 'uu'], ['food', 'uu'], ['moon', 'uu'], ['spoon', 'uu'], ['school', 'uu'], ['pool', 'uu']];
@@ -23,8 +23,8 @@
       { id: 'phrases', title: 'Listen & say', sub: 'Useful phrases', icon: 'home', exercises: [
         { id: 'e1', type: 'speak', title: 'Useful phrases', task: 'Listen and repeat the phrases. People say them when they look at a new house.', taskRu: 'Послушай и повтори фразы для осмотра дома.', goal: 'Функциональные фразы «Viewing a house».',
           lines: PHRASES.map(([t]) => ({ text: t })) },
-        { id: 'e2', type: 'seq', title: 'Who says it?', task: 'Malik and his mum are looking at a new house. Who says each sentence?', taskRu: 'Кто это говорит — Малик или мама?', goal: 'Понимание ролей в диалоге (упр. 1b).', panel: DPANEL,
-          items: () => PHRASES.map(([t, who]) => ({ kind: 'choice', prompt: '«' + esc(t) + '»', options: ['Malik', 'Mum'], keepOrder: true, answer: who, answerText: who, log: t })) }
+        { id: 'e2', type: 'seq', title: 'Who says it?', task: 'Alex and his mum are looking at a new house. Who says each sentence?', taskRu: 'Кто это говорит — ученик или мама?', goal: 'Понимание ролей в диалоге (упр. 1b).', panel: DPANEL,
+          items: () => PHRASES.map(([t, who]) => ({ kind: 'choice', prompt: '«' + esc(t) + '»', options: ['Alex', 'Mum'], keepOrder: true, answer: who, answerText: who, log: t })) }
       ] },
       { id: 'dialogue', title: 'Dialogue', sub: 'Read and understand', icon: 'book', exercises: [
         { id: 'e3', type: 'seq', title: 'What is "it"?', task: 'Read the dialogue. What do the words in bold mean?', taskRu: 'Что обозначают выделенные слова? (упр. 2a)', goal: 'Понимание местоимений-заместителей в тексте.', panel: DPANEL,
@@ -32,7 +32,7 @@
             { kind: 'choice', prompt: '<b>It</b> is quite small.', options: ['the kitchen', 'the living room', 'the tree'], answer: 'the kitchen', answerText: 'the kitchen', log: 'small' },
             { kind: 'choice', prompt: '<b>It</b>\'s got a big window.', options: ['my bedroom', 'the bathroom', 'the house'], answer: 'my bedroom', answerText: 'my bedroom', log: 'window' },
             { kind: 'choice', prompt: '<b>This one</b>, with the red door.', options: ['the house', 'the key', 'the kitchen'], answer: 'the house', answerText: 'the house', log: 'this one' },
-            { kind: 'choice', prompt: '<b>This one</b> here, next to the bathroom.', options: ["Malik's bedroom", 'the living room', 'the garden'], answer: "Malik's bedroom", answerText: "Malik's bedroom", log: 'this one here' }
+            { kind: 'choice', prompt: '<b>This one</b> here, next to the bathroom.', options: ["a bedroom", 'the living room', 'the garden'], answer: "a bedroom", answerText: "a bedroom", log: 'this one here' }
           ] },
         { id: 'e4', type: 'seq', title: 'Which is their house?', task: 'Read the dialogue again. Look at the pictures. Which is their new house?', taskRu: 'Какой дом их? Ищи подсказки в диалоге.', goal: 'Поиск деталей в тексте (упр. 2b).', panel: DPANEL,
           items: [{ kind: 'choice', prompt: 'Which is their house?', options: [{ value: 'A', art: 'houseA', label: 'A' }, { value: 'B', art: 'houseB', label: 'B' }], keepOrder: true, answer: 'B', answerText: 'B — red door and a big tree', log: 'house', explain: 'Подсказки: the red door, a big tree.' }] },
@@ -133,7 +133,7 @@
             P4.map((n, i) => ({ kind: 'typing', w: 2, prompt: '<small class="part">Part 4 · ' + (i + 1) + '/8</small> Write the ordinal number: <b class="digits">' + n + L.ordSuffix(n) + '</b>', answer: L.ordWords(n), answerText: L.ordWords(n), mode: 'ordinal', pkey: 'ord:' + n, plabel: n + L.ordSuffix(n), practiseAudio: L.ordWords(n), log: n + L.ordSuffix(n) })),
             P5.map(([b, a, ans], i) => ({ kind: 'typing', w: 3, scene: BR(), prompt: '<small class="part">Part 5 · ' + (i + 1) + '/6</small> Look at the room. Fill in: on, under, in, behind, in front of.', before: b, after: a, answer: ans, answerText: ans, log: b + ' … ' + a }))) },
         { id: 'can', type: 'seq', title: 'Now I can…', task: 'Think about Module 3. What can you do in English now?', taskRu: 'Самооценка: что ты теперь умеешь?', goal: 'Рефлексия «Now I can…» (самооценка по учебнику).',
-          items: CAN.map((c) => ({ kind: 'poll', prompt: c, options: ['Yes, I can!', 'Not yet'], reply: { 'Yes, I can!': 'Great job, Malik!', 'Not yet': 'No problem! Open My Words and repeat the lesson.' }, log: c })) }
+          items: CAN.map((c) => ({ kind: 'poll', prompt: c, options: ['Yes, I can!', 'Not yet'], reply: { 'Yes, I can!': 'Great job!', 'Not yet': 'No problem! Open My Words and repeat the lesson.' }, log: c })) }
       ] },
       report('My Progress: Module 3')
     ]

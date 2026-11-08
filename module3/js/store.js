@@ -2,11 +2,19 @@
    (implement the same load()/save(data) interface and set MEA.Store.backend). */
 (function (MEA) {
   'use strict';
-  const KEY = 'malik-english-adventures.v1';
+  const KEY = 'spotlight5.module3.progress.v1';
+  const LEGACY_KEY = 'malik-english-adventures.v1'; // Migration only; never rendered.
+  function neutralizeGeneratedData(data) {
+    const legacyName = new RegExp(LEGACY_KEY.split('-')[0], 'gi');
+    ['sessions', 'results', 'practise'].forEach((key) => {
+      if (data[key] && typeof data[key] === 'object') data[key] = JSON.parse(JSON.stringify(data[key]).replace(legacyName, 'Alex'));
+    });
+    return data; // Personal writing drafts are user data and are preserved verbatim.
+  }
 
   const LocalBackend = {
     name: 'local',
-    load() { try { const raw = localStorage.getItem(KEY); return raw ? JSON.parse(raw) : null; } catch (e) { this.broken = true; return null; } },
+    load() { try { const raw = localStorage.getItem(KEY) || localStorage.getItem(LEGACY_KEY); return raw ? JSON.parse(raw) : null; } catch (e) { this.broken = true; return null; } },
     save(data) { try { localStorage.setItem(KEY, JSON.stringify(data)); return true; } catch (e) { this.broken = true; return false; } }
   };
 
@@ -30,9 +38,10 @@
     backend: LocalBackend, data: null, available: true,
     load() {
       const d = this.backend.load();
-      this.data = Object.assign(fresh(), d || {});
+      this.data = neutralizeGeneratedData(Object.assign(fresh(), d || {}));
       this.data.settings = Object.assign(fresh().settings, (d && d.settings) || {});
       this.data.stats = Object.assign(fresh().stats, (d && d.stats) || {});
+      this.data.settings.teacher = !!window.SpotlightMode?.isTeacher();
       this.available = !this.backend.broken;
       return this.data;
     },
@@ -42,7 +51,9 @@
     importJSON(text) {
       const d = JSON.parse(text);
       if (!d || typeof d !== 'object' || !d.results) throw new Error('bad');
-      this.data = Object.assign(fresh(), d); this.save();
+      this.data = neutralizeGeneratedData(Object.assign(fresh(), d));
+      this.data.settings = Object.assign(fresh().settings, d.settings || {}, { teacher: !!window.SpotlightMode?.isTeacher() });
+      this.data.stats = Object.assign(fresh().stats, d.stats || {}); this.save();
     },
     result(key) { return this.data.results[key] || null; },
     setResult(key, patch) { this.data.results[key] = Object.assign({}, this.data.results[key] || {}, patch, { updated: Date.now() }); this.save(); },
