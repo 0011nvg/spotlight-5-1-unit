@@ -9,6 +9,7 @@
   MEA.registerLesson = (def) => { MEA.lessons.push(def); };
   // Planned lessons of Module 3 (shown on the map as "coming soon"; add a lesson file to open them)
   const ROUTE = [
+    { id: 'have', code: 'HAVE', title: 'Who has what? · Grammar bridge' },
     { id: '3a', code: '3A', title: 'At home' },
     { id: '3b', code: '3B', title: 'Move in!' },
     { id: '3c', code: '3C', title: 'My bedroom' },
@@ -29,7 +30,7 @@
   }
   const learned = (lesson) => lesson.vocab.filter((v) => !S.data.practise[v.key] && (lesson.learnedAfter || ['d6', 'f1']).some((x) => doneK(lesson.id + '/' + x)));
   const flat = (lesson) => lesson.stages.flatMap((st) => st.exercises.map((ex) => ({ st, ex, key: lesson.id + '/' + ex.id })));
-  const scored = (ex) => !['rule', 'cards', 'report', 'speak', 'writing'].includes(ex.type);
+  const scored = (ex) => !['rule', 'cards', 'report', 'speak', 'writing', 'haveProject'].includes(ex.type);
 
   /* ---------- gamification ---------- */
   const STAMPS = {
@@ -133,13 +134,13 @@
 
   /* ---------- helpers for progress ---------- */
   function lessonStats(lesson) {
-    const all = flat(lesson); const done = all.filter((x) => doneK(x.key));
+    const all = flat(lesson).filter((x) => !x.st.optional); const done = all.filter((x) => doneK(x.key));
     const sc = all.filter((x) => scored(x.ex) && doneK(x.key));
     const avg = sc.length ? Math.round(sc.reduce((s, x) => s + (best(x.key) || 0), 0) / sc.length) : null;
     return { total: all.length, done: done.length, pct: Math.round(100 * done.length / all.length), avg };
   }
   function nextExercise(lesson) {
-    const all = flat(lesson);
+    const all = flat(lesson).filter((x) => !x.st.optional);
     const last = S.data.last && S.data.last.lesson === lesson.id ? all.findIndex((x) => x.ex.id === S.data.last.ex) : -1;
     const inProg = all.find((x) => S.data.sessions[x.key]);
     if (inProg) return inProg;
@@ -313,7 +314,7 @@
     let exId = current.lesson === lesson.id && current.ex ? current.ex : nextExercise(lesson).ex.id;
     current = { lesson: lesson.id, ex: exId };
     main().innerHTML = '<div class="lesson"><aside class="route" aria-label="Lesson route"><details class="route-d" open><summary><span><small>Spotlight 5 · Module ' + lesson.module + '</small><b>' + lesson.code + ' ' + esc(lesson.title) + '</b></span><span class="route-pct"></span></summary><div class="route-list"></div></details></aside>' +
-      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><div class="row-btns"><details class="ws-menu"><summary class="btn-ghost sm">' + MEA.icon('clipboard') + '<span>Worksheets</span></summary><div class="ws-pop"><p class="small"><b>Рабочие листы для печати (А4)</b><br>Лист для урока и лист для домашней работы, ключи — на отдельной странице.</p>' + wsLinks(lesson.id) + '</div></details><button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div></div><div id="ex-host"></div></section></div>';
+      '<section class="stage-main"><div class="ex-top"><span class="crumb"></span><div class="row-btns">' + (lesson.id === 'have' ? '<a class="btn-ghost sm" href="have-guide.html" target="_blank" rel="noopener">План учителю</a>' : '<details class="ws-menu"><summary class="btn-ghost sm">' + MEA.icon('clipboard') + '<span>Worksheets</span></summary><div class="ws-pop"><p class="small"><b>Рабочие листы для печати (А4)</b><br>Лист для урока и лист для домашней работы, ключи — на отдельной странице.</p>' + wsLinks(lesson.id) + '</div></details>') + '<button type="button" class="btn-ghost sm" id="skip-ex">' + MEA.icon('skip') + '<span>Skip exercise</span></button></div></div><div id="ex-host"></div></section></div>';
     if (window.innerWidth < 860) $('.route-d').open = false;
     drawRoute(lesson); openEx(lesson, exId);
     $('#skip-ex').addEventListener('click', () => {
@@ -341,7 +342,7 @@
     $('.crumb').innerHTML = esc(lesson.code) + ' · ' + esc(st.title) + ' · ' + (st.exercises.indexOf(ex) + 1) + '/' + st.exercises.length;
     drawRoute(lesson);
     const host = $('#ex-host');
-    const onNext = () => { drawRoute(lesson); renderHeader(); if (all[i + 1]) openEx(lesson, all[i + 1].ex.id); else { location.hash = '#map'; } };
+    const onNext = () => { drawRoute(lesson); renderHeader(); if (lesson.id === 'have' && ex.id === 'project') { location.hash = '#map'; } else if (all[i + 1]) openEx(lesson, all[i + 1].ex.id); else { location.hash = '#map'; } };
     if (ex.type === 'report') return reportEx(lesson, st, ex, key, host, onNext);
     MEA.Engine.run({ lesson, stage: st, ex, key, host, onNext });
     const sm = $('.stage-main'); if (sm && sm.getBoundingClientRect().top < 0) sm.scrollIntoView({ behavior: MEA.reduced ? 'auto' : 'smooth' });
